@@ -1,96 +1,79 @@
-# Mi CV en línea
+# CV — Marco Antonio Adame Rodríguez
 
-Esta es mi hoja de vida como sitio web, en español e inglés. Está hecha en PHP y corre en Vercel.
+Sitio web personal / CV en línea, hecho en **PHP** y desplegado en **Vercel** como función serverless.
 
-Producción: `https://<tu-proyecto>.vercel.app` (actualiza esta línea cuando tengas la URL)
-
-## Por qué PHP y no un HTML suelto
-
-La primera versión la hice en HTML plano y terminé con el mismo contenido escrito dos veces, una
-por idioma. Cada vez que cambiaba algo del CV tenía que acordarme de tocar los dos archivos, y
-más de una vez se me quedó uno desactualizado.
-
-Con PHP todo el contenido vive en `src/data.php` y las páginas se arman desde ahí. Cambio un dato,
-hago push, y los dos idiomas más el JSON quedan iguales. Es un proyecto chico, pero era eso o
-seguir copiando y pegando.
-
-De paso aproveché para exponer el CV como JSON en `/api/cv.json`, porque ya que hay servidor,
-tenerlo disponible en un formato consumible no cuesta nada.
+Bilingüe (español e inglés), servido desde una única fuente de datos, con endpoint JSON público.
 
 ## Rutas
 
-| Ruta | Qué hace |
+| Ruta | Descripción |
 |---|---|
-| `/` | CV en español |
-| `/en` | CV en inglés |
-| `/api/cv.json?lang=es\|en` | El CV completo en JSON, con CORS abierto |
-| `/sitemap.xml`, `/robots.txt` | Generados por PHP, con el dominio que detecte de la petición |
-| `/health` | Responde `ok` y la versión de PHP. Lo uso para saber si el deploy quedó bien |
-| `/assets/cv-es.pdf` | El CV en PDF. También está la versión con diseño y las dos en inglés |
+| `/` | CV en español (HTML) |
+| `/en` | CV en inglés (HTML) |
+| `/api/cv.json?lang=es\|en` | CV completo en JSON (CORS abierto) |
+| `/health` | Estado del servicio y versión de PHP |
+| `/assets/cv-es.pdf` | CV en PDF, versión ATS |
+| `/assets/cv-es-diseno.pdf` | CV en PDF, versión con diseño |
 
-## Cómo está organizado
+## Estructura
 
 ```
-api/index.php        Front controller. Todo entra por aquí (así lo enruta vercel.json)
-src/data.php         Todo el contenido del CV, es y en. Es lo único que edito normalmente
-src/helpers.php      Escape de HTML y un par de utilidades
-src/views/           Las plantillas
-assets/              CSS, foto, PDFs, favicon e imagen de previsualización
-router-dev.php       Solo para desarrollo local, ver abajo
-vercel.json          Runtime de PHP y reglas de rutas
+.
+├── api/
+│   └── index.php          # front controller: enruta todas las peticiones
+├── src/
+│   ├── data.php           # FUENTE ÚNICA DE VERDAD del CV (es + en)
+│   ├── helpers.php        # utilidades de escape y formato
+│   └── views/
+│       ├── layout.php     # plantilla del CV
+│       └── 404.php
+├── assets/                # CSS, foto y PDFs (servidos estáticamente)
+├── router-dev.php         # router solo para desarrollo local
+└── vercel.json            # runtime PHP + reglas de enrutado
 ```
 
-## Correrlo en local
+**Para actualizar el CV solo se edita `src/data.php`.** El HTML de ambos idiomas y el JSON se
+regeneran solos. No hay contenido duplicado entre versiones.
 
-Necesitas PHP 8.1 o superior.
+## Desarrollo local
+
+Requiere PHP 8.1 o superior instalado.
 
 ```bash
 php -S 127.0.0.1:8080 router-dev.php
 ```
 
-`router-dev.php` existe porque el servidor embebido de PHP no sabe de `vercel.json`. Lo que hace
-es servir los archivos de `assets/` tal cual y mandar todo lo demás a `api/index.php`, que es el
-mismo comportamiento que tengo en producción. En Vercel ese archivo no se usa.
+Luego abrir http://127.0.0.1:8080
 
-## Desplegarlo
+`router-dev.php` solo existe para el servidor embebido de PHP: sirve los archivos de `assets/`
+directamente y manda el resto a `api/index.php`, imitando lo que hace Vercel en producción.
 
-1. Subir el repo a GitHub.
-2. En Vercel: Add New → Project → importar el repo.
-3. En Framework Preset elegir **Other**. Sin build command ni output directory.
-4. Deploy.
+## Despliegue en Vercel
 
-Vercel lee `vercel.json`, jala el runtime de PHP y publica. Después de eso cada push a `main`
-genera un deploy nuevo solo.
+1. Subir este repositorio a GitHub.
+2. En [vercel.com](https://vercel.com), **Add New → Project** e importar el repositorio.
+3. En *Framework Preset* elegir **Other**. No configurar comando de build ni directorio de salida.
+4. **Deploy**.
 
-### Sobre el runtime de PHP
+Vercel lee `vercel.json`, instala el runtime `vercel-php@0.9.0` (PHP 8.5) y publica el sitio.
+Cada `git push` a la rama principal genera un despliegue nuevo automáticamente.
 
-Vercel no soporta PHP oficialmente. Esto funciona con
-[`vercel-community/php`](https://github.com/vercel-community/php), que es un runtime mantenido por
-la comunidad. Va bien, pero hay que tenerlo presente:
+### Notas sobre el runtime
 
-- La versión está fijada en `vercel.json` (`vercel-php@0.9.0`, PHP 8.5). Si un día el deploy
-  truena sin que yo haya tocado nada, lo primero que reviso es si esa versión sigue publicada.
-- Son funciones serverless, así que la primera visita después de un rato inactivo tarda un poco más.
-- No hay estado ni disco persistente entre peticiones. Para esto no hace falta.
+`vercel-php` es un runtime **mantenido por la comunidad** (`vercel-community/php`), no un producto
+oficial de Vercel. Funciona bien, pero conviene tenerlo presente:
 
-Si algún día necesito PHP con estado o con base de datos, esto se va a otro lado. Para un CV
-estático servido por PHP funciona sin problema.
+- La versión está fijada en `vercel.json`. Si un despliegue empieza a fallar sin que se haya
+  cambiado el código, lo primero a revisar es si esa versión sigue publicada.
+- Las funciones serverless tienen arranque en frío: la primera visita tras un periodo de
+  inactividad puede tardar un poco más.
+- No hay estado entre peticiones ni sistema de archivos persistente. Este sitio no lo necesita.
 
-### Si algo falla
+## Dominio propio
 
-Los errores reales de PHP salen en Vercel, en Deployments → el deploy → Functions → Logs. Si
-`/health` responde pero `/` no, el problema está en las vistas. Si no responde nada, es el
-runtime o el `vercel.json`.
-
-Si el CSS no carga, casi siempre es que `assets/` no se subió a GitHub por algo en el `.gitignore`.
-
-## Pendientes
-
-- Leer mis repos en vivo desde la API de GitHub. Lo dejé fuera porque sin token son 60 peticiones
-  por hora por IP y en Vercel las IPs son compartidas, así que fallaría a ratos. Con un token en
-  variables de entorno y un caché corto se resuelve.
-- Dominio propio en lugar del subdominio de Vercel.
+En Vercel: **Settings → Domains → Add**. Si aún no hay dominio, la URL
+`nombre-del-proyecto.vercel.app` funciona perfectamente y es la que puede ir en el CV en PDF.
 
 ## Licencia
 
-El código es MIT, tómalo si te sirve. El contenido del CV es información mía y esa no.
+Código bajo licencia MIT. El contenido del CV es información personal, no reutilizable.
