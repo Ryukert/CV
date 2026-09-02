@@ -6,12 +6,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?= e($d['profile']['name']) ?> — <?= e($d['role']) ?></title>
 <meta name="description" content="<?= e($d['meta_desc']) ?>">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1b2a4a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1521" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
 <meta property="og:title" content="<?= e($d['profile']['name']) ?> — <?= e($d['role']) ?>">
 <meta property="og:description" content="<?= e($d['meta_desc']) ?>">
 <meta property="og:type" content="profile">
-<link rel="canonical" href="<?= $d['lang'] === 'en' ? '/en' : '/' ?>">
-<link rel="alternate" hreflang="es" href="/">
-<link rel="alternate" hreflang="en" href="/en">
+<meta property="og:locale" content="<?= e($d['locale']) ?>">
+<meta property="og:url" content="<?= e(site_url($d['lang'] === 'en' ? '/en' : '/')) ?>">
+<meta property="og:image" content="<?= e(site_url($d['profile']['photo'])) ?>">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="<?= e($d['profile']['name']) ?> — <?= e($d['role']) ?>">
+<meta name="twitter:description" content="<?= e($d['meta_desc']) ?>">
+<meta name="twitter:image" content="<?= e(site_url($d['profile']['photo'])) ?>">
+<link rel="canonical" href="<?= e(site_url($d['lang'] === 'en' ? '/en' : '/')) ?>">
+<link rel="alternate" hreflang="es" href="<?= e(site_url('/')) ?>">
+<link rel="alternate" hreflang="en" href="<?= e(site_url('/en')) ?>">
+<link rel="alternate" hreflang="x-default" href="<?= e(site_url('/')) ?>">
 <link rel="stylesheet" href="/assets/style.css">
 <script type="application/ld+json">
 <?= json_encode([
@@ -34,6 +46,8 @@
 </script>
 </head>
 <body>
+
+<a class="skip" href="#main"><?= $d['lang'] === 'en' ? 'Skip to content' : 'Ir al contenido' ?></a>
 
 <header class="hero">
   <div class="wrap hero-grid">
@@ -58,9 +72,17 @@
   </div>
 </header>
 
-<main class="wrap">
+<nav class="nav" aria-label="<?= $d['lang'] === 'en' ? 'Sections' : 'Secciones' ?>">
+  <div class="wrap nav-inner">
+    <?php foreach ($d['nav'] as $id => $label): ?>
+      <a href="#<?= e($id) ?>"><?= e($label) ?></a>
+    <?php endforeach; ?>
+  </div>
+</nav>
 
-  <section class="summary">
+<main class="wrap" id="main">
+
+  <section class="summary" id="about" aria-label="<?= e($d['nav']['about']) ?>">
     <p><?= e($d['summary']) ?></p>
     <div class="metrics">
       <?php foreach ($d['metrics'] as $m): ?>
@@ -136,6 +158,23 @@
         </ul>
       </div>
     <?php endforeach; ?>
+  </section>
+
+  <section id="areas">
+    <h2><?= e($d['sections']['areas']) ?></h2>
+    <p class="areas-intro"><?= e($d['areas']['intro']) ?></p>
+    <div class="areas">
+      <?php foreach ($d['areas']['items'] as $a): ?>
+        <article class="area<?= $a['applied'] ? ' is-applied' : '' ?>">
+          <h3><?= e($a['name']) ?></h3>
+          <p class="badge"><?= e($a['applied'] ? $d['areas']['legend']['applied'] : $d['areas']['legend']['coursework']) ?></p>
+          <?php if (!empty($a['evidence'])): ?>
+            <p class="evidence"><?= e($a['evidence']) ?></p>
+          <?php endif; ?>
+          <p class="area-courses"><?= e(implode(' · ', $a['courses'])) ?></p>
+        </article>
+      <?php endforeach; ?>
+    </div>
   </section>
 
   <section id="edu">

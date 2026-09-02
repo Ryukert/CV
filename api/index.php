@@ -40,6 +40,27 @@ switch ($path) {
         echo json_encode(cv_data($lang), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
         break;
 
+    case '/robots.txt':
+        header('Content-Type: text/plain; charset=utf-8');
+        header('Cache-Control: public, max-age=86400');
+        echo "User-agent: *\nAllow: /\n\nSitemap: " . site_url('/sitemap.xml') . "\n";
+        break;
+
+    case '/sitemap.xml':
+        header('Content-Type: application/xml; charset=utf-8');
+        header('Cache-Control: public, max-age=86400');
+        $today = gmdate('Y-m-d');
+        echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' . "\n";
+        foreach (['/' => 'es', '/en' => 'en'] as $loc => $hl) {
+            echo "  <url>\n    <loc>", htmlspecialchars(site_url($loc), ENT_XML1), "</loc>\n";
+            echo '    <xhtml:link rel="alternate" hreflang="es" href="', htmlspecialchars(site_url('/'), ENT_XML1), "\"/>\n";
+            echo '    <xhtml:link rel="alternate" hreflang="en" href="', htmlspecialchars(site_url('/en'), ENT_XML1), "\"/>\n";
+            echo "    <lastmod>{$today}</lastmod>\n    <changefreq>monthly</changefreq>\n  </url>\n";
+        }
+        echo "</urlset>\n";
+        break;
+
     case '/health':
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode([
