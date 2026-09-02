@@ -92,7 +92,7 @@ function cv_data(string $lang): array
         'cta_design'=> 'Versión con diseño',
         'switch'    => 'English',
         'switch_url'=> '/en',
-        'summary'   => 'Ingeniero en Computación y candidato a Maestro en Ingeniería e Innovación y Desarrollo Tecnológico (UAGro, titulación prevista noviembre 2026). Diseño sistemas IoT de extremo a extremo: sensor MEMS, firmware embebido, adquisición en tiempo real, backend en Linux, almacenamiento en la nube y dashboard de visualización. Mi trabajo de posgrado es un sistema propio de monitoreo de salud estructural de bajo costo, validado en campo contra instrumentación sísmica comercial.',
+        'summary'   => 'Ingeniero en Computación y candidato a Maestro en Ingeniería para la Innovación y Desarrollo Tecnológico, opción terminal en Tecnologías de la Información y Comunicación (UAGro, titulación prevista noviembre 2026; promedio 9.42). Diseño sistemas IoT de extremo a extremo: sensor MEMS, firmware embebido, adquisición en tiempo real, backend en Linux, almacenamiento en la nube y dashboard de visualización. Mi trabajo de posgrado es un sistema propio de monitoreo de salud estructural de bajo costo, validado en campo contra instrumentación sísmica comercial.',
         'metric_labels' => [
             'sampling'   => 'Muestreo sincronizado',
             'fft'        => 'Puntos por ventana FFT',
@@ -144,11 +144,69 @@ function cv_data(string $lang): array
         ],
         'education' => [
             ['period' => 'Ago 2024 – Nov 2026', 'org' => 'Universidad Autónoma de Guerrero',
-             'title' => 'Maestría en Ingeniería e Innovación y Desarrollo Tecnológico',
-             'note'  => 'Tesis: «Desarrollo e implementación de un sistema de bajo costo y tecnologías IoT para el monitoreo de la salud estructural en obras civiles». En etapa de culminación.'],
-            ['period' => '2018 – 2022', 'org' => 'Universidad Autónoma de Guerrero',
+             'title' => 'Maestría en Ingeniería para la Innovación y Desarrollo Tecnológico',
+             'note'  => 'Opción terminal: Tecnologías de la Información y Comunicación (Plan 2023). Tesis: «Desarrollo e implementación de un sistema de bajo costo y tecnologías IoT para el monitoreo de la salud estructural en obras civiles». En etapa de culminación.',
+             'stats' => ['Promedio general 9.42 / 10', '12 asignaturas acreditadas', 'Ninguna reprobada'],
+             'coursework' => [
+                 'label'  => 'Ver las 12 asignaturas cursadas y sus calificaciones',
+                 'note'   => 'Calificación sobre 10. Cuarto semestre (2026A) en curso: Estancia Profesional y Proyecto de Grado.',
+                 'groups' => [
+                     ['name' => 'Inteligencia artificial y datos', 'items' => [
+                         'Machine Learning (10)', 'Deep Learning (10)', 'Visión Artificial (10)', 'Análisis de Datos y Big Data (10)',
+                     ]],
+                     ['name' => 'Sistemas embebidos e IoT', 'items' => [
+                         'Temas Selectos de Sistemas Embebidos (10)', 'Diseño de Sistemas IoT (9)', 'Principios Básicos de Sistemas Electrónicos (9)',
+                     ]],
+                     ['name' => 'Núcleo del programa', 'items' => [
+                         'Tecnologías de Información y Comunicación (10)', 'Innovación y Desarrollo Tecnológico Sustentable (10)',
+                         'Trabajo de Grado I (8)', 'Trabajo de Grado II (8)', 'Trabajo de Grado III (9)',
+                     ]],
+                 ],
+             ]],
+            ['period' => '2018 – 2023', 'org' => 'Universidad Autónoma de Guerrero',
              'title' => 'Ingeniero en Computación',
-             'note'  => 'Titulado en 2023. Cédula profesional federal núm. 13426767.'],
+             'note'  => 'Unidad Académica de Ingeniería, Chilpancingo. Titulado en 2023. Cédula profesional federal núm. 13426767.',
+             'stats' => ['Promedio general 8.56 / 10', '55 asignaturas acreditadas'],
+             'coursework' => [
+                 'label'  => 'Ver las 55 asignaturas cursadas y sus calificaciones',
+                 'note'   => 'Calificación sobre 10. Escala de 0 a 10, mínima aprobatoria 6.',
+                 'groups' => [
+                     ['name' => 'Programación e ingeniería de software', 'items' => [
+                         'Fundamentos de Programación (9)', 'Programación Orientada a Objetos I (10)', 'Programación Orientada a Objetos II (8)',
+                         'Programación Avanzada (8)', 'Estructura de Datos I (10)', 'Estructura de Datos II (9)', 'Lógica Informática (8)',
+                         'Análisis y Diseño de Sistemas (10)', 'Ingeniería de Software (8)', 'Traductores e Intérpretes (8)',
+                         'Compiladores (9)', 'Desarrollo de Aplicaciones Móviles (10)', 'Interacción Humano-Computadora (9)',
+                     ]],
+                     ['name' => 'Hardware, electrónica y arquitectura', 'items' => [
+                         'Sistemas Digitales (10)', 'Organización de Computadoras (10)', 'Arquitectura de Servidores (10)',
+                         'Microcontroladores (9)', 'Microprocesadores (8)', 'Circuitos Eléctricos (9)',
+                         'Electricidad y Magnetismo (10)', 'Electrónica (7)',
+                     ]],
+                     ['name' => 'Redes, sistemas operativos y seguridad', 'items' => [
+                         'Fundamentos de Enrutamiento (10)', 'Sistemas Operativos I (10)', 'Sistemas Operativos II (8)',
+                         'Fundamentos de Redes (9)', 'Sistemas de Cableado Estructurado (9)', 'Auditoría de Recursos Informáticos (9)',
+                         'Seguridad en Redes (8)', 'Cómputo Forense (8)', 'Fundamentos de Comunicaciones (7)',
+                     ]],
+                     ['name' => 'Datos, inteligencia artificial y señales', 'items' => [
+                         'Base de Datos II (9)', 'Base de Datos I (7)', 'Fundamentos de Inteligencia Artificial (7)',
+                         'Procesamiento Digital de Imágenes (7)',
+                     ]],
+                     ['name' => 'Matemáticas y ciencias básicas', 'items' => [
+                         'Cálculo Diferencial e Integral (8)', 'Probabilidad y Estadística (8)', 'Métodos Numéricos (8)',
+                         'Geometría Analítica (8)', 'Investigación de Operaciones (8)', 'Química Básica (8)',
+                         'Cálculo Vectorial (7)', 'Ecuaciones Diferenciales (7)', 'Álgebra (7)', 'Física General (7)',
+                     ]],
+                     ['name' => 'Investigación y formación institucional', 'items' => [
+                         'Seminario de Investigación I (9)', 'Seminario de Investigación II (8)', 'Taller de Emprendurismo (10)',
+                         'Manejo de Tecnologías de la Información y Comunicación (10)', 'Pensamiento Lógico, Heurístico y Creativo (10)',
+                         'Habilidades para la Comunicación de las Ideas (10)', 'Análisis del Mundo Contemporáneo (10)',
+                         'Inglés I (7)', 'Inglés II (7)',
+                     ]],
+                     ['name' => 'Integración y vinculación', 'items' => [
+                         'Prácticas Profesionales (acreditada)', 'Servicio Social (acreditada)',
+                     ]],
+                 ],
+             ]],
         ],
         'other' => [
             ['period' => 'Jun 2023 – Jun 2024', 'org' => 'Secretaría del Trabajo y Previsión Social', 'title' => 'Jóvenes Construyendo el Futuro — Departamento de publicaciones', 'note' => 'Capacitación laboral de 12 meses en producción e impresión digital.'],
@@ -158,6 +216,7 @@ function cv_data(string $lang): array
         'skills' => [
             'Lenguajes'          => ['Python', 'C/C++ (embebidos)', 'JavaScript', 'SQL', 'PHP', 'Bash'],
             'Datos y señales'    => ['NumPy', 'Pandas', 'SciPy', 'Matplotlib', 'FFT', 'PSD/Welch', 'RMS', 'Filtros digitales', 'Series temporales'],
+            'IA y aprendizaje automático' => ['Machine Learning', 'Deep Learning', 'Visión artificial', 'Big Data', 'Selección de atributos'],
             'IoT y hardware'     => ['Raspberry Pi', 'ESP32', 'Arduino Nano RP2040', 'Sensores MEMS', 'I2C', 'SPI', 'UART'],
             'Backend y nube'     => ['FastAPI', 'APIs REST', 'Supabase', 'PostgreSQL', 'Firebase'],
             'Sistemas y DevOps'  => ['Linux / Ubuntu Server', 'Docker', 'systemd', 'SSH', 'Git', 'Vercel'],
@@ -189,7 +248,7 @@ function cv_data(string $lang): array
         'cta_design'=> 'Designed version',
         'switch'    => 'Español',
         'switch_url'=> '/',
-        'summary'   => 'Computer Engineer and MSc candidate in Engineering, Innovation and Technological Development (UAGro, expected November 2026). I build end-to-end IoT systems: MEMS sensor, embedded firmware, real-time acquisition, Linux backend, cloud storage and visualization dashboard. My graduate work is a low-cost structural health monitoring system I designed from scratch and validated in the field against commercial seismic instrumentation.',
+        'summary'   => 'Computer Engineer and MSc candidate in Engineering for Innovation and Technological Development, with a terminal specialization in Information and Communication Technologies (UAGro, expected November 2026; GPA 9.42/10). I build end-to-end IoT systems: MEMS sensor, embedded firmware, real-time acquisition, Linux backend, cloud storage and visualization dashboard. My graduate work is a low-cost structural health monitoring system I designed from scratch and validated in the field against commercial seismic instrumentation.',
         'metric_labels' => [
             'sampling'   => 'Synchronized sampling',
             'fft'        => 'Points per FFT window',
@@ -241,11 +300,69 @@ function cv_data(string $lang): array
         ],
         'education' => [
             ['period' => 'Aug 2024 – Nov 2026', 'org' => 'Universidad Autónoma de Guerrero',
-             'title' => 'MSc in Engineering, Innovation and Technological Development',
-             'note'  => 'Thesis: "Development and implementation of a low-cost IoT system for structural health monitoring in civil works". In final stage.'],
-            ['period' => '2018 – 2022', 'org' => 'Universidad Autónoma de Guerrero',
+             'title' => 'MSc in Engineering for Innovation and Technological Development',
+             'note'  => 'Terminal specialization: Information and Communication Technologies (2023 curriculum). Thesis: "Development and implementation of a low-cost IoT system for structural health monitoring in civil works". In final stage.',
+             'stats' => ['GPA 9.42 / 10', '12 courses passed', 'No failed courses'],
+             'coursework' => [
+                 'label'  => 'View all 12 graduate courses and grades',
+                 'note'   => 'Grades on a 0–10 scale. Fourth semester (2026A) in progress: Professional Residency and Graduation Project.',
+                 'groups' => [
+                     ['name' => 'Artificial intelligence and data', 'items' => [
+                         'Machine Learning (10)', 'Deep Learning (10)', 'Computer Vision (10)', 'Data Analysis and Big Data (10)',
+                     ]],
+                     ['name' => 'Embedded systems and IoT', 'items' => [
+                         'Selected Topics in Embedded Systems (10)', 'IoT Systems Design (9)', 'Fundamentals of Electronic Systems (9)',
+                     ]],
+                     ['name' => 'Programme core', 'items' => [
+                         'Information and Communication Technologies (10)', 'Sustainable Innovation and Technological Development (10)',
+                         'Graduate Research I (8)', 'Graduate Research II (8)', 'Graduate Research III (9)',
+                     ]],
+                 ],
+             ]],
+            ['period' => '2018 – 2023', 'org' => 'Universidad Autónoma de Guerrero',
              'title' => 'BSc in Computer Engineering',
-             'note'  => 'Degree awarded 2023. Federal professional license no. 13426767.'],
+             'note'  => 'School of Engineering, Chilpancingo. Degree awarded 2023. Federal professional license no. 13426767.',
+             'stats' => ['GPA 8.56 / 10', '55 courses passed'],
+             'coursework' => [
+                 'label'  => 'View all 55 undergraduate courses and grades',
+                 'note'   => 'Grades on a 0–10 scale; 6 is the minimum passing grade.',
+                 'groups' => [
+                     ['name' => 'Programming and software engineering', 'items' => [
+                         'Programming Fundamentals (9)', 'Object-Oriented Programming I (10)', 'Object-Oriented Programming II (8)',
+                         'Advanced Programming (8)', 'Data Structures I (10)', 'Data Structures II (9)', 'Computational Logic (8)',
+                         'Systems Analysis and Design (10)', 'Software Engineering (8)', 'Translators and Interpreters (8)',
+                         'Compilers (9)', 'Mobile Application Development (10)', 'Human-Computer Interaction (9)',
+                     ]],
+                     ['name' => 'Hardware, electronics and architecture', 'items' => [
+                         'Digital Systems (10)', 'Computer Organization (10)', 'Server Architecture (10)',
+                         'Microcontrollers (9)', 'Microprocessors (8)', 'Electrical Circuits (9)',
+                         'Electricity and Magnetism (10)', 'Electronics (7)',
+                     ]],
+                     ['name' => 'Networking, operating systems and security', 'items' => [
+                         'Routing Fundamentals (10)', 'Operating Systems I (10)', 'Operating Systems II (8)',
+                         'Network Fundamentals (9)', 'Structured Cabling Systems (9)', 'IT Resource Auditing (9)',
+                         'Network Security (8)', 'Computer Forensics (8)', 'Communications Fundamentals (7)',
+                     ]],
+                     ['name' => 'Data, artificial intelligence and signals', 'items' => [
+                         'Databases II (9)', 'Databases I (7)', 'Artificial Intelligence Fundamentals (7)',
+                         'Digital Image Processing (7)',
+                     ]],
+                     ['name' => 'Mathematics and basic sciences', 'items' => [
+                         'Differential and Integral Calculus (8)', 'Probability and Statistics (8)', 'Numerical Methods (8)',
+                         'Analytic Geometry (8)', 'Operations Research (8)', 'Basic Chemistry (8)',
+                         'Vector Calculus (7)', 'Differential Equations (7)', 'Algebra (7)', 'General Physics (7)',
+                     ]],
+                     ['name' => 'Research and general education', 'items' => [
+                         'Research Seminar I (9)', 'Research Seminar II (8)', 'Entrepreneurship Workshop (10)',
+                         'Information and Communication Technologies (10)', 'Logical, Heuristic and Creative Thinking (10)',
+                         'Communication Skills (10)', 'Contemporary World Analysis (10)',
+                         'English I (7)', 'English II (7)',
+                     ]],
+                     ['name' => 'Practicum', 'items' => [
+                         'Professional Internship (completed)', 'Social Service (completed)',
+                     ]],
+                 ],
+             ]],
         ],
         'other' => [
             ['period' => 'Jun 2023 – Jun 2024', 'org' => 'Ministry of Labour (Mexico)', 'title' => 'Jóvenes Construyendo el Futuro — Publishing department', 'note' => '12-month vocational training programme in digital production and printing.'],
@@ -255,6 +372,7 @@ function cv_data(string $lang): array
         'skills' => [
             'Languages'         => ['Python', 'C/C++ (embedded)', 'JavaScript', 'SQL', 'PHP', 'Bash'],
             'Data & signals'    => ['NumPy', 'Pandas', 'SciPy', 'Matplotlib', 'FFT', 'PSD/Welch', 'RMS', 'Digital filters', 'Time series'],
+            'AI & machine learning' => ['Machine Learning', 'Deep Learning', 'Computer Vision', 'Big Data', 'Feature selection'],
             'IoT & hardware'    => ['Raspberry Pi', 'ESP32', 'Arduino Nano RP2040', 'MEMS sensors', 'I2C', 'SPI', 'UART'],
             'Backend & cloud'   => ['FastAPI', 'REST APIs', 'Supabase', 'PostgreSQL', 'Firebase'],
             'Systems & DevOps'  => ['Linux / Ubuntu Server', 'Docker', 'systemd', 'SSH', 'Git', 'Vercel'],
