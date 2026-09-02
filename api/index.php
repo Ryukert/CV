@@ -40,6 +40,15 @@ switch ($path) {
         echo json_encode(cv_data($lang), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
         break;
 
+    case '/print':
+        // Hoja A4 con diseño; se convierte a PDF con Chromium (tools/build-pdf.md).
+        $lang = ($_GET['lang'] ?? 'es') === 'en' ? 'en' : 'es';
+        $d = cv_data($lang);
+        header('Content-Type: text/html; charset=utf-8');
+        header('X-Robots-Tag: noindex');
+        require __DIR__ . '/../src/views/print.php';
+        break;
+
     case '/robots.txt':
         header('Content-Type: text/plain; charset=utf-8');
         header('Cache-Control: public, max-age=86400');

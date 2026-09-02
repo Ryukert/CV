@@ -1,0 +1,164 @@
+/* =========================================================================
+   Hoja A4 con diseño. Reutiliza los tokens del sitio y conserva la banda
+   de instrumento y la traza; se genera desde src/views/print.php con
+   Chromium (ver tools/build-pdf.md).
+   ========================================================================= */
+
+@font-face { font-family:'Plex Sans'; src:url('/assets/fonts/IBMPlexSans-Regular-Latin1.woff2') format('woff2'); font-weight:400; font-style:normal; }
+@font-face { font-family:'Plex Sans'; src:url('/assets/fonts/IBMPlexSans-Medium-Latin1.woff2') format('woff2'); font-weight:500; font-style:normal; }
+@font-face { font-family:'Plex Sans'; src:url('/assets/fonts/IBMPlexSans-SemiBold-Latin1.woff2') format('woff2'); font-weight:600; font-style:normal; }
+@font-face { font-family:'Plex Mono'; src:url('/assets/fonts/IBMPlexMono-Regular-Latin1.woff2') format('woff2'); font-weight:400; font-style:normal; }
+@font-face { font-family:'Plex Mono'; src:url('/assets/fonts/IBMPlexMono-Medium-Latin1.woff2') format('woff2'); font-weight:500; font-style:normal; }
+
+:root {
+  --band:   #14171b;
+  --ink:    #16181c;
+  --ink-2:  #4d525a;
+  --ink-3:  #6b7079;
+  --rule:   #d9d7d2;
+  --rule-2: #e8e7e3;
+  --signal: #8a6014;
+  --trace:  #d99a2b;
+  --sans: 'Plex Sans', system-ui, sans-serif;
+  --mono: 'Plex Mono', monospace;
+  --pad: 15mm;
+}
+
+@page { size: A4; margin: 0; }
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 9.1pt;
+  line-height: 1.46;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.period, .stats, .stack, .cw-list, .area-courses, .tag, .stat-v, .repo, .contact-meta {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+
+h1, h2, h3, h4 { margin: 0; font-weight: 600; line-height: 1.18; }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+
+/* ---------- banda de encabezado ---------- */
+.band { background: var(--band); color: #eceae5; padding: 13mm var(--pad) 0; }
+.band-top { display: grid; grid-template-columns: 21mm 1fr; gap: 7mm; align-items: start; }
+.band img { width: 21mm; height: 21mm; object-fit: cover; border-radius: 1pt; filter: grayscale(1) contrast(1.05); }
+.band h1 { font-size: 21pt; letter-spacing: -0.02em; color: #fbfaf8; margin-top: -2pt; }
+.band .role { margin-top: 4pt; font-size: 10pt; font-weight: 500; color: #d7d3ca; }
+.band .subrole { margin-top: 1pt; font-size: 8.4pt; color: #a0a5ac; }
+.band .meta { margin-top: 6pt; font-size: 7.8pt; color: #9aa0a7; }
+.band .links { margin-top: 5pt; font-size: 7.8pt; color: #c8ccd2; display: flex; flex-wrap: wrap; gap: 0 5mm; }
+
+.trace { margin-top: 8mm; }
+.trace svg { display: block; width: 100%; height: 16mm; }
+.trace-grid { stroke: #262b31; stroke-width: 1; }
+.trace-base { stroke: #363c44; stroke-width: 1; stroke-dasharray: 2 4; }
+.trace-line { fill: none; stroke: var(--trace); stroke-width: 1.3; stroke-linejoin: round; }
+
+.axis { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #262b31; }
+.axis div { padding: 3mm 0 5mm; }
+.axis .stat-v { display: block; font-size: 9pt; font-weight: 500; color: #e6c37c; }
+.axis .stat-k { display: block; margin-top: 0.5pt; font-family: var(--sans); font-size: 6.6pt; color: #8b9199; line-height: 1.3; }
+
+/* ---------- cuerpo ---------- */
+main { padding: 0 var(--pad) 12mm; }
+
+.sec { padding-top: 5mm; margin-top: 5mm; border-top: 1px solid var(--rule); break-inside: auto; }
+.sec.first { border-top: 0; padding-top: 7mm; }
+.sec > h2 {
+  font-size: 9pt;
+  font-weight: 600;
+  color: var(--signal);
+  margin-bottom: 3mm;
+  break-after: avoid;
+}
+
+.lede { font-size: 9.6pt; line-height: 1.5; }
+
+/* entradas */
+.entry { break-inside: avoid; }
+.entry + .entry { margin-top: 3.4mm; padding-top: 3.4mm; border-top: 1px solid var(--rule-2); }
+.entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 6mm; }
+.entry h3 { font-size: 9.8pt; }
+.period { font-size: 7.4pt; color: var(--ink-3); white-space: nowrap; }
+.org { margin-top: 0.8pt; font-size: 8pt; color: var(--ink-2); }
+.intro, .note { margin-top: 2pt; }
+
+.entry h4 { margin: 3mm 0 1mm; font-size: 8.2pt; font-weight: 600; break-after: avoid; }
+.entry ul { margin: 0; padding: 0; list-style: none; }
+.entry li { position: relative; padding-left: 3.6mm; margin-bottom: 1.1mm; font-size: 8.7pt; }
+.entry li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 2mm; height: 1px; background: var(--ink-3); }
+
+/* publicaciones */
+.pubs { list-style: none; margin: 0; padding: 0; counter-reset: pub; }
+.pubs > li {
+  display: grid; grid-template-columns: 7mm 1fr; gap: 2mm;
+  padding: 2mm 0; border-bottom: 1px solid var(--rule-2); break-inside: avoid;
+}
+.pubs > li:first-child { padding-top: 0; }
+.pubs > li::before {
+  counter-increment: pub; content: '[' counter(pub) ']';
+  font-family: var(--mono); font-size: 7.4pt; color: var(--ink-3);
+}
+.ptitle { font-weight: 500; font-size: 9pt; }
+.cite { margin-top: 0.8pt; font-size: 7.8pt; color: var(--ink-2); }
+.tag { font-size: 7pt; color: var(--signal); }
+.talk { margin-top: 2.5mm; font-size: 8.2pt; color: var(--ink-2); }
+.talk b { color: var(--ink); font-weight: 500; }
+
+/* proyectos */
+.project { padding: 2mm 0; border-bottom: 1px solid var(--rule-2); break-inside: avoid; }
+.project:first-child { padding-top: 0; }
+.project h3 { font-size: 9.2pt; }
+.stack { margin-top: 0.6pt; font-size: 7.2pt; color: var(--ink-3); }
+.desc { margin-top: 1.2mm; font-size: 8.7pt; }
+.repo { display: inline-block; margin-top: 1mm; font-size: 7.2pt; color: var(--signal); }
+
+/* competencias */
+.skillrow { display: grid; grid-template-columns: 42mm 1fr; gap: 4mm; padding: 1.5mm 0; border-bottom: 1px solid var(--rule-2); break-inside: avoid; }
+.skillrow:first-of-type { padding-top: 0; }
+.skillrow dt { font-size: 8pt; font-weight: 500; color: var(--ink-2); }
+.skillrow dd { margin: 0; font-size: 8.4pt; }
+
+/* áreas */
+.areas-intro { font-size: 8.2pt; color: var(--ink-2); }
+.legend { margin-top: 2mm; display: flex; gap: 6mm; font-size: 7.4pt; color: var(--ink-3); }
+.legend span { display: flex; align-items: center; gap: 1.6mm; }
+.legend i, .dot { width: 2.1mm; height: 2.1mm; border-radius: 50%; border: 1px solid var(--ink-3); display: block; }
+.legend i.on, .is-applied .dot { background: var(--signal); border-color: var(--signal); }
+.areas { margin-top: 3mm; }
+.area { display: grid; grid-template-columns: 4mm 1fr; gap: 2.5mm; padding: 2mm 0; border-top: 1px solid var(--rule-2); break-inside: avoid; }
+.area:first-child { border-top: 1px solid var(--rule); }
+.area .dot { margin-top: 0.5em; }
+.area h3 { font-size: 8.8pt; }
+.evidence { margin-top: 0.8pt; font-size: 8.2pt; }
+.area-courses { margin-top: 1mm; font-size: 6.9pt; line-height: 1.55; color: var(--ink-3); }
+
+/* formación */
+.stats { margin-top: 1.4mm; display: flex; flex-wrap: wrap; gap: 1mm 5mm; font-size: 7.6pt; color: var(--signal); }
+.cw-note { margin-top: 1mm; font-size: 7.2pt; color: var(--ink-3); }
+.cw-group { display: grid; grid-template-columns: 44mm 1fr; gap: 3mm; padding: 1.4mm 0; border-top: 1px solid var(--rule-2); break-inside: avoid; }
+.cw-group:first-of-type { margin-top: 1.5mm; }
+.cw-group h4 { font-size: 7.6pt; font-weight: 500; color: var(--ink-2); }
+.cw-list { margin: 0; font-size: 6.9pt; line-height: 1.6; color: var(--ink-3); }
+
+.h-sub { margin: 4mm 0 2mm; font-size: 8.6pt; font-weight: 600; break-after: avoid; }
+.plain { list-style: none; margin: 0; padding: 0; }
+.plain li { padding: 1.3mm 0; border-bottom: 1px solid var(--rule-2); font-size: 8.4pt; }
+.plain li:first-child { padding-top: 0; }
+
+/* pie de página impreso */
+.foot {
+  margin-top: 6mm; padding-top: 2.5mm; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; gap: 6mm;
+  font-family: var(--mono); font-size: 7pt; color: var(--ink-3);
+}
