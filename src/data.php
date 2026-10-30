@@ -55,9 +55,24 @@ const SHARED = [
             'featured' => true,
         ],
         [
+            'key'   => 'game',
+            'stack' => 'React 18 · Vite · Claude API · Vercel',
+            'url'   => 'https://github.com/Ryukert/JUEGO-DE-GRENCITO-Y-SISMOTECNITO',
+        ],
+        [
+            'key'   => 'trading',
+            'stack' => 'Python · PySide6',
+            'url'   => 'https://github.com/Ryukert/trading-',
+        ],
+        [
             'key'   => 'gps',
             'stack' => 'JavaScript · Vercel',
             'url'   => 'https://github.com/Ryukert/SHM_GPS_NETWORK_DASH_elite',
+        ],
+        [
+            'key'   => 'attendance',
+            'stack' => 'JavaScript · Supabase · Vercel',
+            'url'   => 'https://github.com/Ryukert/SECUNDARIA-IMA',
         ],
         [
             'key'   => 'supabase',
@@ -68,6 +83,11 @@ const SHARED = [
             'key'   => 'api',
             'stack' => 'Python · FastAPI',
             'url'   => 'https://github.com/Ryukert/APIAceleraciones',
+        ],
+        [
+            'key'   => 'crm',
+            'stack' => 'JavaScript · Vercel',
+            'url'   => 'https://github.com/Ryukert/joyeria-crm',
         ],
         [
             'key'   => 'cv',
@@ -122,20 +142,20 @@ function cv_data(string $lang): array
             'intro'  => 'Diseño e implementación de extremo a extremo de una solución de bajo costo para monitoreo de salud estructural en obras civiles, validada en campo frente a los equipos comerciales GEA y P-Alert.',
             'groups' => [
                 ['name' => 'Adquisición, firmware y hardware', 'items' => [
-                    'Integré nodos sobre Arduino Nano RP2040 Connect y Raspberry Pi 4 con sensores MEMS MPU9250/MPU6050, LSM6DSOX y ADXL335 por I2C, SPI y UART.',
-                    'Implementé adquisición sincronizada en arquitectura dual-core a 200 Hz, cumpliendo el criterio de Nyquist para el rango estructural de interés.',
-                    'Validé el sistema en mesa vibradora biaxial, edificios universitarios, Jardín Botánico, COBACH y estructuras experimentales ligeras.',
+                    'Diseñé nodos de adquisición sobre Arduino Nano RP2040 Connect y Raspberry Pi 4, integrando cuatro sensores MEMS (MPU9250, MPU6050, LSM6DSOX y ADXL335) por I2C, SPI y UART.',
+                    'Implementé adquisición sincronizada a 200 Hz sobre los dos núcleos del RP2040, con margen suficiente por Nyquist para el rango de frecuencias estructurales de interés.',
+                    'Validé el sistema en cinco entornos —mesa vibradora biaxial, edificios universitarios, Jardín Botánico, COBACH y estructuras experimentales ligeras— comparando sus registros contra los equipos comerciales GEA y P-Alert.',
                 ]],
                 ['name' => 'Procesamiento de señales y software científico', 'items' => [
-                    'Construí el pipeline de DSP: RMS, FFT, densidad espectral de potencia (Welch), frecuencia dominante, coherencia, fase y correlación cruzada.',
-                    'Desarrollé aplicaciones en Python y PyQt5 para adquisición, supervisión en vivo y análisis, con control de sesiones y recuperación automática ante fallos.',
-                    'Automaticé la generación de informes técnicos y gráficas comparativas contra equipos de referencia.',
+                    'Construí en Python (NumPy/SciPy) el pipeline de DSP para identificar la respuesta dinámica de las estructuras: RMS, FFT, densidad espectral de potencia (Welch), frecuencia dominante, coherencia, fase y correlación cruzada.',
+                    'Desarrollé aplicaciones de escritorio en PyQt5 para adquisición, supervisión en vivo y análisis, con control de sesiones y recuperación automática ante fallos.',
+                    'Automaticé la generación de informes técnicos y gráficas comparativas contra los equipos de referencia; estos resultados sustentan el artículo publicado como autor principal.',
                 ]],
                 ['name' => 'Backend, nube e infraestructura', 'items' => [
-                    'Levanté un receptor centralizado multi-sede sobre HTTP/HTTPS con buffer local que evita la pérdida de datos ante caídas de conectividad.',
+                    'Diseñé un receptor centralizado multi-sede sobre HTTP/HTTPS con buffer local, de modo que una caída de conectividad no implique pérdida de datos.',
                     'Desarrollé APIs REST en FastAPI para recepción, persistencia y consulta de telemetría de nodos ESP32.',
-                    'Administré servidores Ubuntu en operación continua: systemd, SSH/VNC, Docker, respaldo y sincronización.',
-                    'Publiqué dashboards web para visualizar, filtrar y descargar datos de nodos propios y de sensores comerciales.',
+                    'Administré servidores Ubuntu en operación continua: servicios con systemd, contenedores Docker, acceso remoto SSH/VNC, respaldos y sincronización.',
+                    'Publiqué dashboards web en Vercel para visualizar, filtrar y descargar datos de nodos propios y de sensores comerciales en un mismo lugar.',
                 ]],
             ],
         ]],
@@ -148,6 +168,10 @@ function cv_data(string $lang): array
             'gps'      => ['Red de monitoreo SHM con georreferenciación', 'Dashboard web para visualizar ubicación y estado de los nodos distribuidos, con despliegue público continuo.'],
             'supabase' => ['Dashboard de sensores sobre Supabase', 'Aplicación web para envío, consulta y visualización de mediciones almacenadas en la nube.'],
             'api'      => ['APIs de telemetría para nodos ESP32', 'Servicios REST para recepción, persistencia y consulta de datos de aceleración, con graficación científica.'],
+            'game'       => ['Escuadrón Tecnito y Greencito — juego educativo con IA', 'Juego por turnos para grupos de primaria y secundaria: dos mascotas conversan con Claude para enseñar protección civil ante sismos y cuidado del medio ambiente. La API key queda en una función serverless.'],
+            'trading'    => ['Trading Fusion Pro 3.0', 'Herramienta educativa de escritorio para análisis técnico y fundamental, con backtesting con costos y validación walk-forward. Refactoricé un script de 4,363 líneas a una arquitectura modular.'],
+            'attendance' => ['Lista de asistencia escolar', 'Aplicación para pasar lista y generar reportes de asistencia por grupo, con datos en Supabase y pruebas automatizadas de la lógica.'],
+            'crm'        => ['CRM para joyería', 'Aplicación web de gestión de clientes para un negocio de joyería, desplegada en Vercel.'],
             'cv'       => ['Este CV en línea', 'Sitio bilingüe en PHP serverless sobre Vercel, generado desde una única fuente de datos, con endpoint JSON público.'],
         ],
         'areas' => [
@@ -297,7 +321,7 @@ function cv_data(string $lang): array
             ['period' => 'Feb 2022 – Jul 2022', 'org' => 'Escuela Secundaria Ignacio Manuel Altamirano', 'title' => 'Servicio social — Área de cómputo', 'note' => '500 horas acreditadas y liberadas. Apoyo técnico y acompañamiento educativo en el sector comunitario.'],
         ],
         'skills' => [
-            'Lenguajes'          => ['Python', 'C/C++ (embebidos)', 'JavaScript', 'SQL', 'PHP', 'Bash'],
+            'Lenguajes y frameworks' => ['Python', 'C/C++ (embebidos)', 'JavaScript', 'SQL', 'PHP', 'Bash', 'PyQt5 / PySide6', 'React'],
             'Datos y señales'    => ['NumPy', 'Pandas', 'SciPy', 'Matplotlib', 'FFT', 'PSD/Welch', 'RMS', 'Filtros digitales', 'Series temporales'],
             'IA y aprendizaje automático' => ['Machine Learning', 'Deep Learning', 'Visión artificial', 'Big Data', 'Selección de atributos'],
             'IoT y hardware'     => ['Raspberry Pi', 'ESP32', 'Arduino Nano RP2040', 'Sensores MEMS', 'I2C', 'SPI', 'UART'],
@@ -355,20 +379,20 @@ function cv_data(string $lang): array
             'intro'  => 'End-to-end design and implementation of a low-cost structural health monitoring solution for civil works, field-validated against commercial GEA and P-Alert equipment.',
             'groups' => [
                 ['name' => 'Acquisition, firmware and hardware', 'items' => [
-                    'Integrated acquisition nodes on Arduino Nano RP2040 Connect and Raspberry Pi 4 with MPU9250/MPU6050, LSM6DSOX and ADXL335 MEMS sensors over I2C, SPI and UART.',
-                    'Implemented synchronized dual-core acquisition at 200 Hz, satisfying the Nyquist criterion for the structural frequency range of interest.',
-                    'Validated the system on a biaxial shaking table, university buildings, a botanical garden, a high school campus and lightweight experimental structures.',
+                    'Designed acquisition nodes on Arduino Nano RP2040 Connect and Raspberry Pi 4, integrating four MEMS sensors (MPU9250, MPU6050, LSM6DSOX and ADXL335) over I2C, SPI and UART.',
+                    'Implemented synchronized 200 Hz acquisition across both RP2040 cores, with ample Nyquist margin for the structural frequency range of interest.',
+                    'Validated the system in five environments — a biaxial shaking table, university buildings, a botanical garden, a high school campus and lightweight experimental structures — comparing its records against commercial GEA and P-Alert equipment.',
                 ]],
                 ['name' => 'Signal processing and scientific software', 'items' => [
-                    'Built the DSP pipeline: RMS, FFT, power spectral density (Welch), dominant frequency, coherence, phase analysis and cross-correlation.',
-                    'Developed Python and PyQt5 applications for acquisition, live monitoring and analysis, with session control and automatic crash recovery.',
-                    'Automated the generation of technical reports and comparative plots against reference equipment.',
+                    'Built a Python (NumPy/SciPy) DSP pipeline to identify the dynamic response of structures: RMS, FFT, power spectral density (Welch), dominant frequency, coherence, phase analysis and cross-correlation.',
+                    'Developed PyQt5 desktop applications for acquisition, live monitoring and analysis, with session control and automatic crash recovery.',
+                    'Automated the generation of technical reports and comparative plots against reference equipment; these results underpin my lead-author paper.',
                 ]],
                 ['name' => 'Backend, cloud and infrastructure', 'items' => [
-                    'Stood up a centralized multi-site receiver over HTTP/HTTPS with local buffering that prevents data loss during connectivity outages.',
+                    'Designed a centralized multi-site receiver over HTTP/HTTPS with local buffering, so connectivity outages do not cause data loss.',
                     'Developed REST APIs in FastAPI for ingesting, persisting and querying ESP32 node telemetry.',
-                    'Administered continuously running Ubuntu servers: systemd, SSH/VNC, Docker, backup and synchronization.',
-                    'Published web dashboards to visualize, filter and download data from both custom nodes and commercial sensors.',
+                    'Administered continuously running Ubuntu servers: systemd services, Docker containers, SSH/VNC remote access, backups and synchronization.',
+                    'Published web dashboards on Vercel to visualize, filter and download data from both custom nodes and commercial sensors in one place.',
                 ]],
             ],
         ]],
@@ -381,6 +405,10 @@ function cv_data(string $lang): array
             'gps'      => ['Geo-referenced SHM monitoring network', 'Web dashboard showing location and status of distributed monitoring nodes, continuously deployed and public.'],
             'supabase' => ['Supabase sensor dashboard', 'Web application for submitting, querying and visualizing measurements stored in the cloud.'],
             'api'      => ['ESP32 telemetry APIs', 'REST services for receiving, persisting and querying acceleration data, plus scientific plotting tools.'],
+            'game'       => ['Tecnito & Greencito Squad — AI educational game', 'Turn-based game for primary and secondary school classes: two mascots chat through Claude to teach earthquake preparedness and environmental care. The API key stays in a serverless function.'],
+            'trading'    => ['Trading Fusion Pro 3.0', 'Educational desktop tool for technical and fundamental analysis, with cost-aware backtesting and walk-forward validation. Refactored a 4,363-line script into a modular architecture.'],
+            'attendance' => ['School attendance tracker', 'App for taking roll and generating attendance reports per class, with data in Supabase and automated tests for the core logic.'],
+            'crm'        => ['Jewelry store CRM', 'Customer management web app for a jewelry business, deployed on Vercel.'],
             'cv'       => ['This online CV', 'Bilingual serverless PHP site on Vercel, generated from a single data source, with a public JSON endpoint.'],
         ],
         'areas' => [
@@ -530,7 +558,7 @@ function cv_data(string $lang): array
             ['period' => 'Feb 2022 – Jul 2022', 'org' => 'Ignacio Manuel Altamirano Secondary School', 'title' => 'Social service — Computing area', 'note' => '500 certified hours. Technical support and community-sector educational support.'],
         ],
         'skills' => [
-            'Languages'         => ['Python', 'C/C++ (embedded)', 'JavaScript', 'SQL', 'PHP', 'Bash'],
+            'Languages & frameworks' => ['Python', 'C/C++ (embedded)', 'JavaScript', 'SQL', 'PHP', 'Bash', 'PyQt5 / PySide6', 'React'],
             'Data & signals'    => ['NumPy', 'Pandas', 'SciPy', 'Matplotlib', 'FFT', 'PSD/Welch', 'RMS', 'Digital filters', 'Time series'],
             'AI & machine learning' => ['Machine Learning', 'Deep Learning', 'Computer Vision', 'Big Data', 'Feature selection'],
             'IoT & hardware'    => ['Raspberry Pi', 'ESP32', 'Arduino Nano RP2040', 'MEMS sensors', 'I2C', 'SPI', 'UART'],
