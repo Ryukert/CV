@@ -49,9 +49,10 @@ const SHARED = [
     ],
     'projects' => [
         [
-            'key'   => 'shm',
-            'stack' => 'Python · C++ · Raspberry Pi · PyQt5',
-            'url'   => null,
+            'key'      => 'shm',
+            'stack'    => 'Python · C++ · Raspberry Pi · PyQt5',
+            'url'      => null,
+            'featured' => true,
         ],
         [
             'key'   => 'gps',
@@ -68,11 +69,16 @@ const SHARED = [
             'stack' => 'Python · FastAPI',
             'url'   => 'https://github.com/Ryukert/APIAceleraciones',
         ],
+        [
+            'key'   => 'cv',
+            'stack' => 'PHP · Vercel · JSON API',
+            'url'   => 'https://github.com/Ryukert/CV',
+        ],
     ],
     'metrics' => [
         ['value' => '200 Hz', 'key' => 'sampling'],
-        ['value' => '2048',   'key' => 'fft'],
-        ['value' => '0.98 Hz','key' => 'resolution'],
+        ['value' => '4',      'key' => 'sensors'],
+        ['value' => '5',      'key' => 'sites'],
         ['value' => '3',      'key' => 'papers'],
     ],
 ];
@@ -87,17 +93,17 @@ function cv_data(string $lang): array
         'location'  => 'Chilpancingo, Guerrero, México (GMT-6)',
         'available' => 'Disponible para trabajo remoto con horario de EE. UU. y Europa',
         'meta_desc' => 'CV de Marco Antonio Adame Rodríguez, ingeniero en sistemas IoT y embebidos, procesamiento digital de señales y monitoreo de salud estructural.',
-        'nav'       => ['about' => 'Perfil', 'exp' => 'Experiencia', 'pubs' => 'Publicaciones', 'projects' => 'Proyectos', 'skills' => 'Competencias', 'areas' => 'Áreas', 'edu' => 'Formación', 'contact' => 'Contacto'],
+        'nav'       => ['about' => 'Perfil', 'exp' => 'Experiencia', 'projects' => 'Proyectos', 'skills' => 'Competencias', 'pubs' => 'Publicaciones', 'edu' => 'Formación', 'areas' => 'Áreas', 'contact' => 'Contacto'],
         'cta_pdf'   => 'Descargar CV en PDF',
         'cta_design'=> 'Versión con diseño',
         'switch'    => 'English',
         'switch_url'=> '/en',
-        'summary'   => 'Ingeniero en Computación y egresado de la Maestría en Ingeniería para la Innovación y Desarrollo Tecnológico, opción terminal en Tecnologías de la Información y Comunicación (UAGro). Plan de estudios concluido con promedio general 9.42; en proceso de titulación, prevista para noviembre de 2026. Diseño sistemas IoT de extremo a extremo: sensor MEMS, firmware embebido, adquisición en tiempo real, backend en Linux, almacenamiento en la nube y dashboard de visualización. Mi trabajo de posgrado es un sistema propio de monitoreo de salud estructural de bajo costo, validado en campo contra instrumentación sísmica comercial.',
+        'summary'   => 'Construyo sistemas IoT de extremo a extremo: sensor MEMS, firmware embebido, adquisición en tiempo real, procesamiento de señales, backend en Linux, nube y dashboards. Diseñé desde cero un sistema de monitoreo de salud estructural de bajo costo y lo validé en campo contra instrumentación sísmica comercial (GEA y P-Alert); el trabajo derivó en tres artículos arbitrados y una ponencia internacional. Ingeniero en Computación y egresado de la Maestría en Ingeniería para la Innovación y Desarrollo Tecnológico (UAGro), con promedio de 9.42 y titulación prevista para noviembre de 2026.',
         'metric_labels' => [
-            'sampling'   => 'Muestreo sincronizado',
-            'fft'        => 'Puntos por ventana FFT',
-            'resolution' => 'Resolución frecuencial',
-            'papers'     => 'Artículos publicados',
+            'sampling' => 'Muestreo sincronizado',
+            'sensors'  => 'Sensores MEMS integrados',
+            'sites'    => 'Entornos de validación en campo',
+            'papers'   => 'Artículos arbitrados',
         ],
         'sections'  => [
             'exp'      => 'Experiencia en investigación y desarrollo',
@@ -111,7 +117,7 @@ function cv_data(string $lang): array
         ],
         'experience' => [[
             'period' => 'Ago 2024 – Actualidad',
-            'org'    => 'UAGro · Posgrado MIIDT',
+            'org'    => 'Universidad Autónoma de Guerrero (UAGro) · Maestría MIIDT',
             'title'  => 'Investigador y desarrollador principal — Sistema SHM-IoT',
             'intro'  => 'Diseño e implementación de extremo a extremo de una solución de bajo costo para monitoreo de salud estructural en obras civiles, validada en campo frente a los equipos comerciales GEA y P-Alert.',
             'groups' => [
@@ -142,8 +148,10 @@ function cv_data(string $lang): array
             'gps'      => ['Red de monitoreo SHM con georreferenciación', 'Dashboard web para visualizar ubicación y estado de los nodos distribuidos, con despliegue público continuo.'],
             'supabase' => ['Dashboard de sensores sobre Supabase', 'Aplicación web para envío, consulta y visualización de mediciones almacenadas en la nube.'],
             'api'      => ['APIs de telemetría para nodos ESP32', 'Servicios REST para recepción, persistencia y consulta de datos de aceleración, con graficación científica.'],
+            'cv'       => ['Este CV en línea', 'Sitio bilingüe en PHP serverless sobre Vercel, generado desde una única fuente de datos, con endpoint JSON público.'],
         ],
         'areas' => [
+            'toggle' => 'Ver las 17 áreas con sus 69 asignaturas',
             'intro'  => 'Las 69 asignaturas acreditadas entre licenciatura y maestría, ordenadas por área de la computación. La etiqueta «Aplicado» señala las áreas que además respaldo con trabajo real —proyectos en producción, publicaciones arbitradas o validación en campo—; «Formación» indica cobertura académica sin proyecto público asociado.',
             'legend' => ['applied' => 'Aplicado', 'coursework' => 'Formación'],
             'items'  => [
@@ -293,7 +301,7 @@ function cv_data(string $lang): array
             'Datos y señales'    => ['NumPy', 'Pandas', 'SciPy', 'Matplotlib', 'FFT', 'PSD/Welch', 'RMS', 'Filtros digitales', 'Series temporales'],
             'IA y aprendizaje automático' => ['Machine Learning', 'Deep Learning', 'Visión artificial', 'Big Data', 'Selección de atributos'],
             'IoT y hardware'     => ['Raspberry Pi', 'ESP32', 'Arduino Nano RP2040', 'Sensores MEMS', 'I2C', 'SPI', 'UART'],
-            'Backend y nube'     => ['FastAPI', 'APIs REST', 'Supabase', 'PostgreSQL', 'Firebase'],
+            'Backend y nube'     => ['FastAPI', 'APIs REST', 'Supabase', 'PostgreSQL'],
             'Sistemas y DevOps'  => ['Linux / Ubuntu Server', 'Docker', 'systemd', 'SSH', 'Git', 'Vercel'],
         ],
         'certs' => [
@@ -304,7 +312,7 @@ function cv_data(string $lang): array
         ],
         'languages' => [
             'Español: lengua materna.',
-            'Inglés: intermedio (B1), TOEFL ITP 470 puntos (2025). Lectura fluida de documentación técnica.',
+            'Inglés: intermedio (B1). Lectura fluida de documentación técnica.',
         ],
         'contact_intro' => 'Abierto a oportunidades remotas en IoT, sistemas embebidos, procesamiento de señales y desarrollo backend.',
         'footer' => 'Sitio construido con PHP sobre Vercel. Código fuente disponible en GitHub.',
@@ -318,17 +326,17 @@ function cv_data(string $lang): array
         'location'  => 'Mexico (GMT-6)',
         'available' => 'Available for remote work with US and European overlap',
         'meta_desc' => 'CV of Marco Antonio Adame Rodríguez, IoT and embedded systems engineer working on digital signal processing and structural health monitoring.',
-        'nav'       => ['about' => 'Profile', 'exp' => 'Experience', 'pubs' => 'Publications', 'projects' => 'Projects', 'skills' => 'Skills', 'areas' => 'Areas', 'edu' => 'Education', 'contact' => 'Contact'],
+        'nav'       => ['about' => 'Profile', 'exp' => 'Experience', 'projects' => 'Projects', 'skills' => 'Skills', 'pubs' => 'Publications', 'edu' => 'Education', 'areas' => 'Areas', 'contact' => 'Contact'],
         'cta_pdf'   => 'Download CV as PDF',
         'cta_design'=> 'Designed version',
         'switch'    => 'Español',
         'switch_url'=> '/',
-        'summary'   => 'Computer Engineer and graduate of the MSc in Engineering for Innovation and Technological Development, with a terminal specialization in Information and Communication Technologies (UAGro). All coursework completed with a 9.42/10 GPA; degree conferral in progress, expected November 2026. I build end-to-end IoT systems: MEMS sensor, embedded firmware, real-time acquisition, Linux backend, cloud storage and visualization dashboard. My graduate work is a low-cost structural health monitoring system I designed from scratch and validated in the field against commercial seismic instrumentation.',
+        'summary'   => 'I build end-to-end IoT systems: MEMS sensor, embedded firmware, real-time acquisition, signal processing, Linux backend, cloud and dashboards. I designed a low-cost structural health monitoring system from scratch and validated it in the field against commercial seismic instrumentation (GEA and P-Alert); the work led to three peer-reviewed papers and an international conference talk. Computer Engineer and MSc graduate in Engineering for Innovation and Technological Development (UAGro), 9.42/10 GPA, degree conferral expected November 2026.',
         'metric_labels' => [
-            'sampling'   => 'Synchronized sampling',
-            'fft'        => 'Points per FFT window',
-            'resolution' => 'Frequency resolution',
-            'papers'     => 'Published papers',
+            'sampling' => 'Synchronized sampling',
+            'sensors'  => 'MEMS sensors integrated',
+            'sites'    => 'Field validation environments',
+            'papers'   => 'Peer-reviewed papers',
         ],
         'sections'  => [
             'exp'      => 'Research & development experience',
@@ -342,7 +350,7 @@ function cv_data(string $lang): array
         ],
         'experience' => [[
             'period' => 'Aug 2024 – Present',
-            'org'    => 'UAGro · MIIDT graduate program',
+            'org'    => 'Autonomous University of Guerrero (UAGro) · MIIDT graduate program',
             'title'  => 'Lead Researcher and Developer — SHM-IoT System',
             'intro'  => 'End-to-end design and implementation of a low-cost structural health monitoring solution for civil works, field-validated against commercial GEA and P-Alert equipment.',
             'groups' => [
@@ -373,8 +381,10 @@ function cv_data(string $lang): array
             'gps'      => ['Geo-referenced SHM monitoring network', 'Web dashboard showing location and status of distributed monitoring nodes, continuously deployed and public.'],
             'supabase' => ['Supabase sensor dashboard', 'Web application for submitting, querying and visualizing measurements stored in the cloud.'],
             'api'      => ['ESP32 telemetry APIs', 'REST services for receiving, persisting and querying acceleration data, plus scientific plotting tools.'],
+            'cv'       => ['This online CV', 'Bilingual serverless PHP site on Vercel, generated from a single data source, with a public JSON endpoint.'],
         ],
         'areas' => [
+            'toggle' => 'View all 17 areas and their 69 courses',
             'intro'  => 'All 69 courses passed across both degrees, organised by computing area. "Applied" marks the areas I also back with real work — systems in production, peer-reviewed publications or field validation; "Coursework" means academic coverage without an associated public project.',
             'legend' => ['applied' => 'Applied', 'coursework' => 'Coursework'],
             'items'  => [
@@ -524,7 +534,7 @@ function cv_data(string $lang): array
             'Data & signals'    => ['NumPy', 'Pandas', 'SciPy', 'Matplotlib', 'FFT', 'PSD/Welch', 'RMS', 'Digital filters', 'Time series'],
             'AI & machine learning' => ['Machine Learning', 'Deep Learning', 'Computer Vision', 'Big Data', 'Feature selection'],
             'IoT & hardware'    => ['Raspberry Pi', 'ESP32', 'Arduino Nano RP2040', 'MEMS sensors', 'I2C', 'SPI', 'UART'],
-            'Backend & cloud'   => ['FastAPI', 'REST APIs', 'Supabase', 'PostgreSQL', 'Firebase'],
+            'Backend & cloud'   => ['FastAPI', 'REST APIs', 'Supabase', 'PostgreSQL'],
             'Systems & DevOps'  => ['Linux / Ubuntu Server', 'Docker', 'systemd', 'SSH', 'Git', 'Vercel'],
         ],
         'certs' => [
@@ -535,7 +545,7 @@ function cv_data(string $lang): array
         ],
         'languages' => [
             'Spanish: native.',
-            'English: intermediate (B1), TOEFL ITP 470 (2025). Fluent reading of technical documentation.',
+            'English: intermediate (B1). Fluent reading of technical documentation.',
         ],
         'contact_intro' => 'Open to remote opportunities in IoT, embedded systems, signal processing and backend development.',
         'footer' => 'Built with PHP on Vercel. Source code available on GitHub.',

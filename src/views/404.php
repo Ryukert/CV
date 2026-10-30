@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>404</title>
-<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="/assets/style.css?v=2">
 </head>
 <body>
 <main class="wrap notfound">

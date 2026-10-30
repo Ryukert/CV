@@ -15,16 +15,19 @@
 <meta property="og:type" content="profile">
 <meta property="og:locale" content="<?= e($d['locale']) ?>">
 <meta property="og:url" content="<?= e(site_url($d['lang'] === 'en' ? '/en' : '/')) ?>">
-<meta property="og:image" content="<?= e(site_url($d['profile']['photo'])) ?>">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="<?= e(site_url('/assets/og.jpg')) ?>">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?= e($d['profile']['name']) ?> — <?= e($d['role']) ?>">
 <meta name="twitter:description" content="<?= e($d['meta_desc']) ?>">
-<meta name="twitter:image" content="<?= e(site_url($d['profile']['photo'])) ?>">
+<meta name="twitter:image" content="<?= e(site_url('/assets/og.jpg')) ?>">
 <link rel="canonical" href="<?= e(site_url($d['lang'] === 'en' ? '/en' : '/')) ?>">
 <link rel="alternate" hreflang="es" href="<?= e(site_url('/')) ?>">
 <link rel="alternate" hreflang="en" href="<?= e(site_url('/en')) ?>">
 <link rel="alternate" hreflang="x-default" href="<?= e(site_url('/')) ?>">
-<link rel="stylesheet" href="/assets/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/assets/style.css?v=2">
 <script type="application/ld+json">
 <?= json_encode([
     '@context' => 'https://schema.org',
@@ -58,10 +61,11 @@
       <p class="subrole"><?= e($d['subrole']) ?></p>
       <p class="meta"><?= e($d['location']) ?> · <?= e($d['available']) ?></p>
       <p class="links">
-        <a href="mailto:<?= e($d['profile']['email']) ?>"><?= e($d['profile']['email']) ?></a>
-        <a href="<?= e($d['profile']['github']) ?>" rel="noopener">GitHub</a>
-        <a href="<?= e($d['profile']['linkedin']) ?>" rel="noopener">LinkedIn</a>
-        <a href="<?= e($d['profile']['orcid']) ?>" rel="noopener">ORCID</a>
+        <a href="mailto:<?= e($d['profile']['email']) ?>"><?= icon('mail') ?><?= e($d['profile']['email']) ?></a>
+        <a href="<?= e(tel_href($d['profile']['phone'])) ?>"><?= icon('phone') ?><?= e($d['profile']['phone']) ?></a>
+        <a href="<?= e($d['profile']['github']) ?>" rel="noopener"><?= icon('github') ?>GitHub</a>
+        <a href="<?= e($d['profile']['linkedin']) ?>" rel="noopener"><?= icon('linkedin') ?>LinkedIn</a>
+        <a href="<?= e($d['profile']['orcid']) ?>" rel="noopener"><?= icon('orcid') ?>ORCID</a>
       </p>
       <p class="actions">
         <a class="btn" href="<?= e($d['pdf']['plain']) ?>" download><?= e($d['cta_pdf']) ?></a>
@@ -116,27 +120,12 @@
     <?php endforeach; ?>
   </section>
 
-  <section id="pubs">
-    <h2><?= e($d['sections']['pubs']) ?></h2>
-    <ol class="pubs">
-      <?php foreach ($d['publications'] as $p): ?>
-        <li>
-          <a href="<?= e($p['url']) ?>" rel="noopener"><?= e($p['title'][$d['lang']]) ?></a>
-          <p class="cite"><?= e($p['authors']) ?> (<?= (int) $p['year'] ?>). <em><?= e($p['venue']) ?></em>.
-            <span class="tag"><?= e($p['role'][$d['lang']]) ?></span>
-          </p>
-        </li>
-      <?php endforeach; ?>
-    </ol>
-    <p class="talk"><strong><?= e($d['talk']['label']) ?>:</strong> <?= e($d['talk']['text']) ?></p>
-  </section>
-
   <section id="projects">
     <h2><?= e($d['sections']['projects']) ?></h2>
     <div class="cards">
       <?php foreach ($d['projects'] as $pr): ?>
         <?php [$title, $desc] = $d['project_text'][$pr['key']]; ?>
-        <article class="card">
+        <article class="card<?= !empty($pr['featured']) ? ' featured' : '' ?><?= $pr['url'] ? ' has-link' : '' ?>">
           <h3><?= e($title) ?></h3>
           <p class="stack"><?= e($pr['stack']) ?></p>
           <p><?= e($desc) ?></p>
@@ -160,21 +149,19 @@
     <?php endforeach; ?>
   </section>
 
-  <section id="areas">
-    <h2><?= e($d['sections']['areas']) ?></h2>
-    <p class="areas-intro"><?= e($d['areas']['intro']) ?></p>
-    <div class="areas">
-      <?php foreach ($d['areas']['items'] as $a): ?>
-        <article class="area<?= $a['applied'] ? ' is-applied' : '' ?>">
-          <h3><?= e($a['name']) ?></h3>
-          <p class="badge"><?= e($a['applied'] ? $d['areas']['legend']['applied'] : $d['areas']['legend']['coursework']) ?></p>
-          <?php if (!empty($a['evidence'])): ?>
-            <p class="evidence"><?= e($a['evidence']) ?></p>
-          <?php endif; ?>
-          <p class="area-courses"><?= e(implode(' · ', $a['courses'])) ?></p>
-        </article>
+  <section id="pubs">
+    <h2><?= e($d['sections']['pubs']) ?></h2>
+    <ol class="pubs">
+      <?php foreach ($d['publications'] as $p): ?>
+        <li>
+          <a href="<?= e($p['url']) ?>" rel="noopener"><?= e($p['title'][$d['lang']]) ?></a>
+          <p class="cite"><?= e($p['authors']) ?> (<?= (int) $p['year'] ?>). <em><?= e($p['venue']) ?></em>.
+            <span class="tag"><?= e($p['role'][$d['lang']]) ?></span>
+          </p>
+        </li>
       <?php endforeach; ?>
-    </div>
+    </ol>
+    <p class="talk"><strong><?= e($d['talk']['label']) ?>:</strong> <?= e($d['talk']['text']) ?></p>
   </section>
 
   <section id="edu">
@@ -233,6 +220,26 @@
     </div>
   </section>
 
+  <section id="areas">
+    <h2><?= e($d['sections']['areas']) ?></h2>
+    <p class="areas-intro"><?= e($d['areas']['intro']) ?></p>
+    <details class="coursework">
+    <summary><?= e($d['areas']['toggle']) ?></summary>
+    <div class="areas">
+      <?php foreach ($d['areas']['items'] as $a): ?>
+        <article class="area<?= $a['applied'] ? ' is-applied' : '' ?>">
+          <h3><?= e($a['name']) ?></h3>
+          <p class="badge"><?= e($a['applied'] ? $d['areas']['legend']['applied'] : $d['areas']['legend']['coursework']) ?></p>
+          <?php if (!empty($a['evidence'])): ?>
+            <p class="evidence"><?= e($a['evidence']) ?></p>
+          <?php endif; ?>
+          <p class="area-courses"><?= e(implode(' · ', $a['courses'])) ?></p>
+        </article>
+      <?php endforeach; ?>
+    </div>
+    </details>
+  </section>
+
   <section id="contact" class="contact">
     <h2><?= e($d['sections']['contact']) ?></h2>
     <p><?= e($d['contact_intro']) ?></p>
@@ -248,6 +255,28 @@
     <p><a href="/api/cv.json?lang=<?= e($d['lang']) ?>">/api/cv.json</a></p>
   </div>
 </footer>
+
+<script>
+// Resalta en la barra de navegación la sección visible.
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  var links = {};
+  document.querySelectorAll('.nav-inner a').forEach(function (a) { links[a.hash.slice(1)] = a; });
+  var current = null;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting || !links[en.target.id]) return;
+      if (current) { current.classList.remove('active'); current.removeAttribute('aria-current'); }
+      current = links[en.target.id];
+      current.classList.add('active');
+      current.setAttribute('aria-current', 'true');
+      var bar = current.parentNode, r = current.getBoundingClientRect(), b = bar.getBoundingClientRect();
+      if (r.left < b.left || r.right > b.right) bar.scrollLeft += r.left - b.left - 20;
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('main section[id]').forEach(function (s) { io.observe(s); });
+})();
+</script>
 
 </body>
 </html>
