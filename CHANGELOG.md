@@ -2,6 +2,14 @@
 
 ## [Sin publicar]
 
+### Logros clave y PDF al día
+- Sección **Logros clave** en la web (estaba solo en el PDF), con un quinto logro: la plataforma
+  web de riesgo sísmico (5 ciudades, 370 establecimientos CLUES, 152 pruebas automáticas).
+- El **PDF sencillo** (`cv-es.pdf`, `cv-en.pdf`) ahora se genera desde `data.php` con RenderCV:
+  incluye los proyectos nuevos, las competencias de web y mapas, los logros y las asignaturas;
+  3 páginas. `php herramientas/rendercv.php --publicar` lo regenera.
+- Prueba que falla si el PDF quedó atrasado respecto a `data.php` (huella en `assets/cv-pdf.json`).
+
 ### Funciones con JavaScript
 - **Buscador en el CV** y **filtro por competencia**: marcan dónde aparece un término y atenúan lo
   demás; la búsqueda queda en la dirección (`?q=python`) para compartirla.

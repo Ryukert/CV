@@ -198,6 +198,25 @@ foreach (['cv-es.pdf', 'cv-en.pdf', 'cv-es-diseno.pdf', 'cv-en-design.pdf', 'og.
     }
 }
 ok(glob("$raiz/assets/foto*") === [], 'no hay archivos de foto en assets/');
+
+// ── El PDF sencillo corresponde a data.php ──
+// herramientas/rendercv.php --publicar guarda la huella de los datos con que generó
+// assets/cv-es.pdf y cv-en.pdf. Si data.php cambió y no se regeneró, falla aquí.
+require_once $raiz . '/src/rendercv.php';
+$firma = json_decode((string) @file_get_contents("$raiz/assets/cv-pdf.json"), true);
+foreach (['es', 'en'] as $l) {
+    $al_dia = is_array($firma) && ($firma['huellas'][$l] ?? '') === cv_rendercv_huella($l, $firma['sitio'] ?? '');
+    ok($al_dia, "assets/cv-$l.pdf está al día con data.php" . ($al_dia ? '' : ' — corre: php herramientas/rendercv.php --publicar'));
+}
+$web = cv_data('es');
+$pdf = cv_rendercv('es');
+$enPdf = json_encode($pdf, JSON_UNESCAPED_UNICODE);
+ok(count($web['achievements']) >= 4 && str_contains($enPdf, $web['sections']['logros']), 'los logros clave están en la web y en el PDF');
+foreach ($web['projects'] as $p) {
+    if (!empty($p['pdf']) && !str_contains($enPdf, rcv_md($web['project_text'][$p['key']][0]))) {
+        ok(false, "el PDF incluye el proyecto «{$web['project_text'][$p['key']][0]}»");
+    }
+}
 ok(!isset($j['ui']) && !isset($j['profile']['photo']), '/api/cv.json sin textos de interfaz ni foto');
 $vercel = json_decode((string) file_get_contents("$raiz/vercel.json"), true);
 ok(is_array($vercel) && !(isset($vercel['routes']) && (isset($vercel['headers']) || isset($vercel['rewrites']))), 'vercel.json no mezcla routes con headers/rewrites (Vercel lo rechaza)');
