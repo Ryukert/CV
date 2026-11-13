@@ -27,7 +27,10 @@ Cambia la URL si le pusiste otro nombre al repositorio.
 3. Busca `cv-marco-adame` e **Import**.
 4. En *Framework Preset* selecciona **Other**.
 5. Deja vacíos *Build Command* y *Output Directory*.
-6. **Deploy**.
+6. En *Environment Variables* agrega `SITE_URL` con la dirección que te dará Vercel, sin `/` al final
+   (p. ej. `https://cv-marco-adame.vercel.app`). Si aún no la sabes, despliega, cópiala, agrégala y
+   vuelve a desplegar.
+7. **Deploy**.
 
 En un minuto tendrás una URL del tipo `https://cv-marco-adame.vercel.app`.
 
@@ -37,7 +40,7 @@ Abre estas rutas en el navegador:
 
 - `/` → CV en español
 - `/en` → CV en inglés
-- `/health` → debe responder `{"status":"ok","php":"8.5..."}`
+- `/health` → debe responder `{"status":"ok","cv_updated":"AAAA-MM-DD"}`
 - `/api/cv.json` → tu CV en JSON
 - `/assets/cv-es.pdf` → descarga del PDF
 

@@ -1,0 +1,39 @@
+name: Pruebas
+
+# En cada push y Pull Request: sintaxis de PHP, pruebas de humo del sitio y
+# exportación a RenderCV. Si algo falla, GitHub lo marca en rojo antes de publicar.
+on:
+  push:
+    branches: [main, develop, 'feature/**', 'fix/**']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: dom, json, simplexml
+          coverage: none
+
+      - name: Sintaxis de PHP
+        run: find . -name '*.php' -not -path './versiones/*' -print0 | xargs -0 -n1 php -l
+
+      - name: Pruebas de humo
+        run: php tests/humo.php
+
+      - name: Exportación a RenderCV (YAML válido)
+        run: |
+          php herramientas/rendercv.php es
+          php herramientas/rendercv.php en
+          php -r 'foreach (["es","en"] as $l) { $t = file_get_contents("versiones/base/cv-$l.yaml"); $j = json_decode(preg_replace("/^#.*\n/m", "", $t), true); if (!isset($j["cv"]["sections"])) { fwrite(STDERR, "YAML $l inválido\n"); exit(1); } } echo "ok\n";'
+
+      - name: vercel.json válido
+        run: php -r 'json_decode(file_get_contents("vercel.json"), flags: JSON_THROW_ON_ERROR); echo "ok\n";'
