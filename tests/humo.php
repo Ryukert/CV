@@ -170,6 +170,11 @@ $_SERVER['HTTP_HOST'] = 'atacante.example';
 require_once $raiz . '/src/helpers.php';
 ok(site_url('/en') === 'https://cv.ejemplo.dev/en', 'con SITE_URL, las URL absolutas ignoran un Host falso');
 putenv('SITE_URL');
+putenv('VERCEL=1');
+ok(site_url('/') === SITIO_PUBLICO . '/' && str_starts_with(SITIO_PUBLICO, 'https://'), 'en Vercel sin SITE_URL se usa la dirección pública con https (' . SITIO_PUBLICO . ')');
+putenv('VERCEL');
+$_SERVER['HTTP_HOST'] = 'cv.otro-dominio.mx';
+ok(str_starts_with(site_url('/'), 'https://'), 'fuera de localhost, la URL es https aunque el servidor no lo diga');
 
 // ── Archivos ──
 foreach (['cv-es.pdf', 'cv-en.pdf', 'cv-es-diseno.pdf', 'cv-en-design.pdf', 'og.jpg', 'foto-150.webp', 'foto-300.webp', 'foto-300.jpg', 'fonts/ibm-plex-sans-400.woff2'] as $f) {

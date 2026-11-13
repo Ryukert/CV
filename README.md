@@ -93,9 +93,10 @@ adaptada a una vacante, `herramientas/rendercv.php` exporta `data.php` al format
 1. Subir este repositorio a GitHub.
 2. En [vercel.com](https://vercel.com), **Add New → Project** e importar el repositorio.
 3. En *Framework Preset* elegir **Other**. No configurar comando de build ni directorio de salida.
-4. En **Settings → Environment Variables**, agregar `SITE_URL` con la dirección pública, sin `/` al
-   final (p. ej. `https://cv-marco-adame.vercel.app`). Con ella se arman la URL canónica, el sitemap
-   y Open Graph; sin ella se usaría el encabezado `Host` de cada petición, que se puede falsificar.
+4. La dirección pública es **https://cv-coral-pi.vercel.app** (`SITIO_PUBLICO` en `src/helpers.php`);
+   con ella se arman la URL canónica, el sitemap y Open Graph, nunca con el encabezado `Host` de la
+   petición, que se puede falsificar. Con un dominio propio, se agrega en **Settings → Environment
+   Variables** la variable `SITE_URL` (sin `/` al final) o se cambia `SITIO_PUBLICO`.
 5. **Deploy**.
 
 Vercel lee `vercel.json`, instala el runtime `vercel-php@0.9.0` (PHP 8.5) y publica el sitio.
