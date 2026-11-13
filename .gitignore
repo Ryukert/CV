@@ -5,6 +5,7 @@ versiones/*
 # Salida intermedia de RenderCV
 rendercv_output/
 
+node_modules/
 .vercel
 .DS_Store
 Thumbs.db

@@ -17,7 +17,6 @@ const PROFILE = [
     'github'  => 'https://github.com/Ryukert',
     'linkedin'=> 'https://www.linkedin.com/in/marco-antonio-adame-rodr%C3%ADguez-211615227/',
     'orcid'   => 'https://orcid.org/0009-0003-2361-4945',
-    'photo'   => '/assets/foto.jpg',
 ];
 
 const SHARED = [
@@ -359,6 +358,25 @@ function cv_data(string $lang): array
         'footer' => 'Sitio construido con PHP sobre Vercel. Código fuente disponible en GitHub.',
         'updated_label' => 'Última actualización',
         'updated' => 'noviembre de 2026',
+        // Textos de las funciones con JavaScript (assets/cv.js)
+        'ui' => [
+            'buscar'        => 'Buscar en el CV',
+            'buscar_ph'     => 'Python, Supabase, sensores, FFT…',
+            'buscar_ayuda'  => 'También puedes hacer clic en una competencia para ver dónde la he usado.',
+            'limpiar'       => 'Limpiar',
+            'sin_resultados'=> 'Sin coincidencias para «%s».',
+            'resultados'    => '«%s»: %d coincidencias',
+            'secciones'     => ['exp' => 'experiencia', 'projects' => 'proyectos', 'skills' => 'competencias', 'pubs' => 'publicaciones', 'edu' => 'formación', 'areas' => 'áreas'],
+            'filtrar'       => 'Ver dónde uso %s',
+            'tema_oscuro'   => 'Cambiar a tema oscuro',
+            'tema_claro'    => 'Cambiar a tema claro',
+            'copiar'        => 'Copiar',
+            'copiar_correo' => 'Copiar correo',
+            'copiado'       => 'Correo copiado: %s',
+            'compartir'     => 'Compartir',
+            'enlace_copiado'=> 'Enlace copiado',
+            'no_copiado'    => 'No se pudo copiar; selecciónalo a mano.',
+        ],
     ];
 
     $en = [
@@ -602,6 +620,25 @@ function cv_data(string $lang): array
         'footer' => 'Built with PHP on Vercel. Source code available on GitHub.',
         'updated_label' => 'Last updated',
         'updated' => 'November 2026',
+        // Strings for the JavaScript features (assets/cv.js)
+        'ui' => [
+            'buscar'        => 'Search this CV',
+            'buscar_ph'     => 'Python, Supabase, sensors, FFT…',
+            'buscar_ayuda'  => 'You can also click a skill to see where I have used it.',
+            'limpiar'       => 'Clear',
+            'sin_resultados'=> 'No matches for "%s".',
+            'resultados'    => '"%s": %d matches',
+            'secciones'     => ['exp' => 'experience', 'projects' => 'projects', 'skills' => 'skills', 'pubs' => 'publications', 'edu' => 'education', 'areas' => 'areas'],
+            'filtrar'       => 'See where I use %s',
+            'tema_oscuro'   => 'Switch to dark theme',
+            'tema_claro'    => 'Switch to light theme',
+            'copiar'        => 'Copy',
+            'copiar_correo' => 'Copy email',
+            'copiado'       => 'Email copied: %s',
+            'compartir'     => 'Share',
+            'enlace_copiado'=> 'Link copied',
+            'no_copiado'    => 'Could not copy; please select it manually.',
+        ],
     ];
 
     $d = $lang === 'en' ? $en : $es;

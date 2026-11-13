@@ -1,0 +1,1 @@
+{"name":"cv-pruebas-navegador","private":true,"type":"module","scripts":{"test":"node navegador.mjs"},"dependencies":{"puppeteer-core":"24.43.1"}}

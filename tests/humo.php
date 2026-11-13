@@ -87,7 +87,8 @@ foreach (['/' => 'es', '/en' => 'en'] as $ruta => $lang) {
     $x = dom($r['body']);
     ok($x->query('//html[@lang="' . $lang . '"]')->length === 1, "$ruta declara lang=\"$lang\"");
     ok($x->query('//h1')->length === 1, "$ruta tiene un solo h1");
-    ok($x->query('//script[not(@src) and not(@type="application/ld+json")]')->length === 0 && $x->query('//*[@style or @onclick or @onload]')->length === 0, "$ruta sin scripts ni estilos en línea (los bloquearía la CSP)");
+    // Los bloques de datos (JSON-LD y los textos en application/json) no se ejecutan: la CSP no los afecta.
+    ok($x->query('//script[not(@src) and not(@type="application/ld+json") and not(@type="application/json")]')->length === 0 && $x->query('//*[@style or @onclick or @onload]')->length === 0, "$ruta sin scripts ni estilos en línea (los bloquearía la CSP)");
     ok($x->query('//link[contains(@href,"fonts.googleapis") or contains(@href,"gstatic")]')->length === 0, "$ruta no carga nada de Google Fonts");
     ok($x->query('//img[not(@alt) or not(@width) or not(@height)]')->length === 0, "$ruta: toda imagen tiene alt, width y height");
 
@@ -107,7 +108,21 @@ foreach (['/' => 'es', '/en' => 'en'] as $ruta => $lang) {
         }
     }
     ok($faltan === [], "$ruta: existen todos los archivos de /assets/ que enlaza" . ($faltan ? ' (faltan ' . implode(', ', $faltan) . ')' : ''));
-    ok(preg_match_all('#/assets/(style\.css|nav\.js|foto-\d+\.\w+|cv-[\w-]+\.pdf)\?v=[0-9a-f]{8}#', $r['body']) >= 5, "$ruta versiona CSS, JS, foto y PDF por contenido (?v=hash)");
+    ok(preg_match_all('#/assets/(style\.css|cv\.js|tema\.js|og\.jpg|cv-[\w-]+\.pdf)\?v=[0-9a-f]{8}#', $r['body']) >= 6, "$ruta versiona CSS, JS, imagen para redes y PDF por contenido (?v=hash)");
+    ok($x->query('//img | //picture')->length === 0 && !preg_match('#/assets/foto#', $r['body']), "$ruta no muestra foto");
+
+    // Funciones con JavaScript: ocultas de inicio (sin JS la página queda completa) y con sus textos.
+    foreach (['buscador', 'tema', 'compartir'] as $id) {
+        $n = $x->query('//*[@id="' . $id . '"]')->item(0);
+        if (!$n || !$n->hasAttribute('hidden')) {
+            ok(false, "$ruta: #$id existe y empieza oculto");
+        }
+    }
+    ok($x->query('//button[@data-copiar and @hidden]')->length === 2, "$ruta: dos botones «Copiar correo», ocultos sin JavaScript");
+    $textos = $x->query('//script[@id="cv-textos"]')->item(0);
+    $tj = $textos ? json_decode($textos->textContent, true) : null;
+    ok(is_array($tj) && isset($tj['buscar'], $tj['secciones'], $tj['url']) && str_starts_with($tj['url'], 'http'), "$ruta: textos de la interfaz en JSON válido");
+    ok(strpos($r['body'], 'tema.js') < strpos($r['body'], 'style.css') && $x->query('//script[contains(@src,"tema.js") and not(@defer)]')->length === 1, "$ruta: tema.js va antes del CSS y sin defer (no parpadea el tema)");
 
     // JSON-LD válido y con la URL del CV (no la de GitHub).
     $ld = $x->query('//script[@type="application/ld+json"]')->item(0);
@@ -177,12 +192,13 @@ $_SERVER['HTTP_HOST'] = 'cv.otro-dominio.mx';
 ok(str_starts_with(site_url('/'), 'https://'), 'fuera de localhost, la URL es https aunque el servidor no lo diga');
 
 // ── Archivos ──
-foreach (['cv-es.pdf', 'cv-en.pdf', 'cv-es-diseno.pdf', 'cv-en-design.pdf', 'og.jpg', 'foto-150.webp', 'foto-300.webp', 'foto-300.jpg', 'fonts/ibm-plex-sans-400.woff2'] as $f) {
+foreach (['cv-es.pdf', 'cv-en.pdf', 'cv-es-diseno.pdf', 'cv-en-design.pdf', 'og.jpg', 'cv.js', 'tema.js', 'fonts/ibm-plex-sans-400.woff2'] as $f) {
     if (!is_file("$raiz/assets/$f")) {
         ok(false, "existe assets/$f");
     }
 }
-ok(filesize("$raiz/assets/foto-150.webp") < 15_000, 'la foto que se muestra pesa menos de 15 KB');
+ok(glob("$raiz/assets/foto*") === [], 'no hay archivos de foto en assets/');
+ok(!isset($j['ui']) && !isset($j['profile']['photo']), '/api/cv.json sin textos de interfaz ni foto');
 $vercel = json_decode((string) file_get_contents("$raiz/vercel.json"), true);
 ok(is_array($vercel) && !(isset($vercel['routes']) && (isset($vercel['headers']) || isset($vercel['rewrites']))), 'vercel.json no mezcla routes con headers/rewrites (Vercel lo rechaza)');
 
