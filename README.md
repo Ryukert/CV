@@ -11,7 +11,7 @@ Bilingüe (español e inglés), servido desde una única fuente de datos, con en
 | `/` | CV en español (HTML) |
 | `/en` | CV en inglés (HTML) |
 | `/api/cv.json?lang=es\|en` | CV completo en JSON (CORS abierto) |
-| `/health` | Estado del servicio y versión de PHP |
+| `/health` | Estado del servicio y fecha de la última actualización del CV |
 | `/assets/cv-es.pdf` | CV en PDF, versión ATS |
 | `/assets/cv-es-diseno.pdf` | CV en PDF, versión con diseño |
 
@@ -27,9 +27,15 @@ Bilingüe (español e inglés), servido desde una única fuente de datos, con en
 │   └── views/
 │       ├── layout.php     # plantilla del CV
 │       └── 404.php
-├── assets/                # CSS, foto y PDFs (servidos estáticamente)
+├── assets/                # CSS, JS, fuente, foto y PDFs (servidos estáticamente)
+│   └── fonts/             # IBM Plex Sans (SIL OFL), servida por el sitio
+├── herramientas/
+│   └── rendercv.php       # exporta data.php a RenderCV para PDFs por vacante
+├── versiones/             # CVs adaptados a cada vacante (solo el README va a git)
+├── tests/humo.php         # pruebas de humo (sin dependencias)
+├── .github/workflows/     # pruebas en GitHub Actions
 ├── router-dev.php         # router solo para desarrollo local
-└── vercel.json            # runtime PHP + reglas de enrutado
+└── vercel.json            # runtime PHP, reescritura a api/index.php y encabezados
 ```
 
 **Para actualizar el CV solo se edita `src/data.php`.** El HTML de ambos idiomas y el JSON se
@@ -48,12 +54,49 @@ Luego abrir http://127.0.0.1:8080
 `router-dev.php` solo existe para el servidor embebido de PHP: sirve los archivos de `assets/`
 directamente y manda el resto a `api/index.php`, imitando lo que hace Vercel en producción.
 
+## Pruebas
+
+```bash
+php tests/humo.php
+```
+
+Levanta el servidor embebido y revisa cada ruta: códigos de respuesta, encabezados de seguridad
+(CSP estricta, sin scripts ni estilos en línea), que existan todos los archivos que enlaza la página,
+JSON-LD, Open Graph, la API JSON, el sitemap, el 404 y que los dos idiomas tengan la misma estructura.
+GitHub Actions las corre en cada push (`.github/workflows/pruebas.yml`).
+
+## Ramas
+
+`main` es lo publicado (Vercel lo despliega). Los cambios se hacen en `feature/…` o `fix/…`, salen de
+`develop` y regresan a ella; `develop` pasa a `main` cuando la vista previa está bien. Las ramas no
+se borran.
+
+## CV en PDF por vacante (RenderCV)
+
+Los PDF de `assets/` están curados a mano y son los que descarga el sitio. Para mandar una versión
+adaptada a una vacante, `herramientas/rendercv.php` exporta `data.php` al formato de
+[RenderCV](https://rendercv.com); los pasos están en `versiones/README.md`.
+
+## Rendimiento y seguridad
+
+- Sin recursos de terceros: la fuente, el CSS y el JS se sirven desde el sitio, así que la página no
+  espera a Google Fonts ni le envía la IP de los visitantes.
+- CSS, JS, foto y PDF llevan `?v=<hash>` según su contenido (`asset()` en `helpers.php`): se guardan un
+  año en el navegador y se renuevan solos al cambiar.
+- HTML y JSON: una hora en el navegador y un día en la CDN de Vercel, con `stale-while-revalidate`
+  para que casi ninguna visita espere el arranque en frío de PHP.
+- CSP estricta (`default-src 'self'`, sin `unsafe-inline`), `frame-ancestors 'none'`,
+  `Permissions-Policy` y solo GET/HEAD (lo demás responde 405).
+
 ## Despliegue en Vercel
 
 1. Subir este repositorio a GitHub.
 2. En [vercel.com](https://vercel.com), **Add New → Project** e importar el repositorio.
 3. En *Framework Preset* elegir **Other**. No configurar comando de build ni directorio de salida.
-4. **Deploy**.
+4. En **Settings → Environment Variables**, agregar `SITE_URL` con la dirección pública, sin `/` al
+   final (p. ej. `https://cv-marco-adame.vercel.app`). Con ella se arman la URL canónica, el sitemap
+   y Open Graph; sin ella se usaría el encabezado `Host` de cada petición, que se puede falsificar.
+5. **Deploy**.
 
 Vercel lee `vercel.json`, instala el runtime `vercel-php@0.9.0` (PHP 8.5) y publica el sitio.
 Cada `git push` a la rama principal genera un despliegue nuevo automáticamente.
