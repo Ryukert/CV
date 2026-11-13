@@ -92,11 +92,24 @@ GitHub Actions las corre en cada push (`.github/workflows/pruebas.yml`).
 `develop` y regresan a ella; `develop` pasa a `main` cuando la vista previa está bien. Las ramas no
 se borran.
 
-## CV en PDF por vacante (RenderCV)
+## CV en PDF (RenderCV)
 
-Los PDF de `assets/` están curados a mano y son los que descarga el sitio. Para mandar una versión
-adaptada a una vacante, `herramientas/rendercv.php` exporta `data.php` al formato de
-[RenderCV](https://rendercv.com); los pasos están en `versiones/README.md`.
+El **PDF sencillo** que descarga el sitio (`assets/cv-es.pdf`, `assets/cv-en.pdf`) se genera desde
+`data.php` con [RenderCV](https://rendercv.com), así que trae lo mismo que la web: logros clave,
+experiencia, competencias, los proyectos marcados con `'pdf' => true`, publicaciones y asignaturas.
+
+```bash
+pip install "rendercv[full]"            # una vez
+php herramientas/rendercv.php --publicar
+```
+
+**Cada vez que se cambia `data.php` hay que correrlo.** Guarda en `assets/cv-pdf.json` la huella de
+los datos con que se generó; si quedó atrasado, `tests/humo.php` (y GitHub Actions) falla y dice el
+comando. La conversión está en `src/rendercv.php`.
+
+Los PDF **con diseño** (`cv-es-diseno.pdf`, `cv-en-design.pdf`) están hechos a mano y no se generan.
+
+Para mandar una versión adaptada a una vacante: `versiones/README.md`.
 
 ## Rendimiento y seguridad
 
