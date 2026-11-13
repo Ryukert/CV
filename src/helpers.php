@@ -50,19 +50,27 @@ function icon(string $name): string
  * Convierte una ruta interna en URL absoluta.
  * Necesario para canonical, hreflang, sitemap y las etiquetas Open Graph.
  *
- * En producción la base sale de la variable de entorno SITE_URL (p. ej.
- * https://cv-marco-adame.vercel.app), no del encabezado Host de la petición:
- * un Host falso podría quedar guardado en la caché de Vercel y repartirse a
- * otros visitantes. Sin SITE_URL (desarrollo local) se usa el host de la petición.
+ * La base nunca sale del encabezado Host en producción: un Host falso podría
+ * quedar guardado en la caché de Vercel y repartirse a otros visitantes.
+ *   1. Variable de entorno SITE_URL, si existe (para un dominio propio).
+ *   2. En Vercel, la dirección pública del sitio (SITIO_PUBLICO).
+ *   3. En desarrollo local, el host de la petición (http en localhost).
  */
+const SITIO_PUBLICO = 'https://cv-coral-pi.vercel.app';
+
 function site_url(string $path = '/'): string
 {
     $base = rtrim((string) getenv('SITE_URL'), '/');
     if ($base === '' || !preg_match('#^https?://[A-Za-z0-9.\-]+(:\d+)?$#', $base)) {
-        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-        $host = preg_replace('/[^A-Za-z0-9\.\-:]/', '', $host);
-        $https = ($_SERVER['HTTPS'] ?? '') !== '' && ($_SERVER['HTTPS'] ?? 'off') !== 'off';
-        $base = ($https ? 'https' : 'http') . '://' . $host;
+        if (getenv('VERCEL')) {
+            $base = SITIO_PUBLICO;
+        } else {
+            $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+            $host = preg_replace('/[^A-Za-z0-9\.\-:]/', '', $host);
+            $local = (bool) preg_match('/^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/', $host);
+            $https = ($_SERVER['HTTPS'] ?? '') !== '' && ($_SERVER['HTTPS'] ?? 'off') !== 'off';
+            $base = ($https || !$local ? 'https' : 'http') . '://' . $host;
+        }
     }
 
     return $base . '/' . ltrim($path, '/');

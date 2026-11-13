@@ -25,7 +25,8 @@
 - `vercel.json` mezclaba `routes` con `headers`, que Vercel rechaza: ahora usa `rewrites`.
 - CSP estricta sin `unsafe-inline` (el script de la barra pasa a `assets/nav.js`), `X-Frame-Options`,
   `Permissions-Policy` y `Cross-Origin-Opener-Policy`.
-- `SITE_URL`: la URL canónica, el sitemap y Open Graph ya no dependen del encabezado `Host`.
+- La URL canónica, el sitemap y Open Graph ya no dependen del encabezado `Host`: usan
+  https://cv-coral-pi.vercel.app (o `SITE_URL`, para un dominio propio), siempre con https.
 - Solo GET y HEAD; lo demás responde 405. El 404 lleva `noindex`.
 - `/health` ya no anuncia la versión de PHP. El sitemap usa la fecha real de actualización.
 - HTML y JSON: un día en la CDN con `stale-while-revalidate` (casi sin arranques en frío).
