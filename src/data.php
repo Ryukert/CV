@@ -52,17 +52,20 @@ const SHARED = [
     'projects' => [
         [
             'key'      => 'shm',
+            'pdf'   => true,
             'stack'    => 'Python · C++ · Raspberry Pi · PyQt5',
             'url'      => null,
             'featured' => true,
         ],
         [
             'key'   => 'ecosistema',
+            'pdf'   => true,
             'stack' => 'JavaScript · Leaflet · Supabase · PWA · GitHub Actions',
             'url'   => 'https://ecosistemariesgosismicotijuana.vercel.app',
         ],
         [
             'key'   => 'ivbc',
+            'pdf'   => true,
             'stack' => 'JavaScript · Preact · Supabase · Vercel Functions · GeoJSON',
             'url'   => 'https://iv-bc-sitio.vercel.app',
         ],
@@ -78,6 +81,7 @@ const SHARED = [
         ],
         [
             'key'   => 'gps',
+            'pdf'   => true,
             'stack' => 'JavaScript · Vercel',
             'url'   => 'https://github.com/Ryukert/SHM_GPS_NETWORK_DASH_elite',
         ],
@@ -88,11 +92,13 @@ const SHARED = [
         ],
         [
             'key'   => 'supabase',
+            'pdf'   => true,
             'stack' => 'JavaScript · Supabase · PostgreSQL',
             'url'   => 'https://github.com/Ryukert/MIIDT_SUPABASE_DASH',
         ],
         [
             'key'   => 'api',
+            'pdf'   => true,
             'stack' => 'Python · FastAPI',
             'url'   => 'https://github.com/Ryukert/APIAceleraciones',
         ],
@@ -125,7 +131,7 @@ function cv_data(string $lang): array
         'location'  => 'Chilpancingo, Guerrero, México (GMT-6)',
         'available' => 'Disponible para trabajo remoto con horario de EE. UU. y Europa',
         'meta_desc' => 'CV de Marco Antonio Adame Rodríguez, ingeniero en sistemas IoT y embebidos, procesamiento digital de señales y monitoreo de salud estructural.',
-        'nav'       => ['about' => 'Perfil', 'exp' => 'Experiencia', 'projects' => 'Proyectos', 'skills' => 'Competencias', 'pubs' => 'Publicaciones', 'edu' => 'Formación', 'areas' => 'Áreas', 'contact' => 'Contacto'],
+        'nav'       => ['about' => 'Perfil', 'logros' => 'Logros', 'exp' => 'Experiencia', 'projects' => 'Proyectos', 'skills' => 'Competencias', 'pubs' => 'Publicaciones', 'edu' => 'Formación', 'areas' => 'Áreas', 'contact' => 'Contacto'],
         'cta_pdf'   => 'Descargar CV en PDF',
         'cta_design'=> 'Versión con diseño',
         'switch'    => 'English',
@@ -138,6 +144,7 @@ function cv_data(string $lang): array
             'papers'   => 'Artículos arbitrados',
         ],
         'sections'  => [
+            'logros'   => 'Logros clave',
             'exp'      => 'Experiencia en investigación y desarrollo',
             'pubs'     => 'Publicaciones y ponencias',
             'projects' => 'Proyectos',
@@ -146,6 +153,13 @@ function cv_data(string $lang): array
             'skills'   => 'Competencias técnicas',
             'other'    => 'Otra experiencia',
             'contact'  => 'Contacto',
+        ],
+        'achievements' => [
+            ['title' => 'Sistema SHM-IoT completo diseñado desde cero', 'text' => 'y validado en campo frente a los equipos comerciales GEA y P-Alert, a una fracción del costo de la instrumentación sísmica tradicional.'],
+            ['title' => 'Medición de vibraciones en mesa vibradora biaxial:', 'text' => 'muestreo sincronizado a 200 Hz, análisis FFT sobre ventanas de 2048 puntos y resolución frecuencial de 0.98 Hz, con cálculo automático de RPM a partir de la frecuencia dominante (publicado y arbitrado).'],
+            ['title' => 'Monitoreo multi-sede en operación continua:', 'text' => 'nodos en redes distintas, receptor centralizado sobre Ubuntu Server, buffer local contra caídas de conectividad y dashboards web publicados.'],
+            ['title' => 'Suite de análisis de vibraciones en Python/PyQt5', 'text' => 'que procesa grandes volúmenes de registros y genera informes técnicos comparativos de forma automatizada.'],
+            ['title' => 'Plataforma web de riesgo sísmico en producción:', 'text' => 'rutas por calles reales en 5 ciudades de Baja California hacia 370 establecimientos de salud del catálogo oficial CLUES, funcionamiento sin internet y 152 pruebas automáticas en cada cambio.'],
         ],
         'experience' => [[
             'period' => 'Ago 2024 – Actualidad',
@@ -366,7 +380,7 @@ function cv_data(string $lang): array
             'limpiar'       => 'Limpiar',
             'sin_resultados'=> 'Sin coincidencias para «%s».',
             'resultados'    => '«%s»: %d coincidencias',
-            'secciones'     => ['exp' => 'experiencia', 'projects' => 'proyectos', 'skills' => 'competencias', 'pubs' => 'publicaciones', 'edu' => 'formación', 'areas' => 'áreas'],
+            'secciones'     => ['logros' => 'logros', 'exp' => 'experiencia', 'projects' => 'proyectos', 'skills' => 'competencias', 'pubs' => 'publicaciones', 'edu' => 'formación', 'areas' => 'áreas'],
             'filtrar'       => 'Ver dónde uso %s',
             'tema_oscuro'   => 'Cambiar a tema oscuro',
             'tema_claro'    => 'Cambiar a tema claro',
@@ -387,7 +401,7 @@ function cv_data(string $lang): array
         'location'  => 'Mexico (GMT-6)',
         'available' => 'Available for remote work with US and European overlap',
         'meta_desc' => 'CV of Marco Antonio Adame Rodríguez, IoT and embedded systems engineer working on digital signal processing and structural health monitoring.',
-        'nav'       => ['about' => 'Profile', 'exp' => 'Experience', 'projects' => 'Projects', 'skills' => 'Skills', 'pubs' => 'Publications', 'edu' => 'Education', 'areas' => 'Areas', 'contact' => 'Contact'],
+        'nav'       => ['about' => 'Profile', 'logros' => 'Achievements', 'exp' => 'Experience', 'projects' => 'Projects', 'skills' => 'Skills', 'pubs' => 'Publications', 'edu' => 'Education', 'areas' => 'Areas', 'contact' => 'Contact'],
         'cta_pdf'   => 'Download CV as PDF',
         'cta_design'=> 'Designed version',
         'switch'    => 'Español',
@@ -400,6 +414,7 @@ function cv_data(string $lang): array
             'papers'   => 'Peer-reviewed papers',
         ],
         'sections'  => [
+            'logros'   => 'Key achievements',
             'exp'      => 'Research & development experience',
             'pubs'     => 'Publications & talks',
             'projects' => 'Projects',
@@ -408,6 +423,13 @@ function cv_data(string $lang): array
             'skills'   => 'Technical skills',
             'other'    => 'Additional experience',
             'contact'  => 'Contact',
+        ],
+        'achievements' => [
+            ['title' => 'Complete SHM-IoT system designed from the ground up', 'text' => 'and validated in the field against commercial GEA and P-Alert equipment, at a fraction of the cost of traditional seismic instrumentation.'],
+            ['title' => 'Ambient vibration measurement on a biaxial shaking table:', 'text' => 'synchronized 200 Hz sampling, FFT analysis over 2048-point windows, 0.98 Hz frequency resolution, and automatic RPM computation from the dominant frequency (peer-reviewed publication).'],
+            ['title' => 'Continuously running multi-site monitoring:', 'text' => 'nodes across separate networks, a centralized Ubuntu Server receiver, local buffering against connectivity loss, and published web dashboards.'],
+            ['title' => 'Python/PyQt5 vibration analysis suite', 'text' => 'that processes large volumes of records and generates comparative technical reports automatically.'],
+            ['title' => 'Production seismic-risk web platform:', 'text' => 'real-street routing in 5 Baja California cities to 370 health facilities from the official CLUES registry, offline support, and 152 automated tests on every change.'],
         ],
         'experience' => [[
             'period' => 'Aug 2024 – Present',
@@ -628,7 +650,7 @@ function cv_data(string $lang): array
             'limpiar'       => 'Clear',
             'sin_resultados'=> 'No matches for "%s".',
             'resultados'    => '"%s": %d matches',
-            'secciones'     => ['exp' => 'experience', 'projects' => 'projects', 'skills' => 'skills', 'pubs' => 'publications', 'edu' => 'education', 'areas' => 'areas'],
+            'secciones'     => ['logros' => 'achievements', 'exp' => 'experience', 'projects' => 'projects', 'skills' => 'skills', 'pubs' => 'publications', 'edu' => 'education', 'areas' => 'areas'],
             'filtrar'       => 'See where I use %s',
             'tema_oscuro'   => 'Switch to dark theme',
             'tema_claro'    => 'Switch to light theme',

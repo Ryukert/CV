@@ -115,6 +115,15 @@
     </div>
   </section>
 
+  <section id="logros">
+    <h2><?= e($d['sections']['logros']) ?></h2>
+    <ul class="logros">
+      <?php foreach ($d['achievements'] as $a): ?>
+        <li><strong><?= e($a['title']) ?></strong> <?= e($a['text']) ?></li>
+      <?php endforeach; ?>
+    </ul>
+  </section>
+
   <div class="buscador" id="buscador" role="search" hidden>
     <label for="q"><?= e($d['ui']['buscar']) ?></label>
     <div class="buscador-fila">

@@ -123,6 +123,7 @@
         unidades.push({ el: el, seccion: seccion, texto: norm(el.textContent) });
       });
     }
+    registrar('#logros .logros li', 'logros');
     registrar('#exp .entry li', 'exp');
     registrar('#projects .card', 'projects');
     registrar('#skills .chips li', 'skills');
