@@ -53,7 +53,9 @@ switch ($path) {
         header('Access-Control-Allow-Origin: *');
         header('Cache-Control: ' . CACHE_PAGINA);
         header('Vary: Accept-Encoding');
-        echo json_encode(cv_data($lang), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
+        $cv = cv_data($lang);
+        unset($cv['ui']); // textos de la interfaz, no son parte del CV
+        echo json_encode($cv, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
         break;
 
     case '/robots.txt':
