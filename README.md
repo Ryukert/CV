@@ -27,12 +27,13 @@ Bilingüe (español e inglés), servido desde una única fuente de datos, con en
 │   └── views/
 │       ├── layout.php     # plantilla del CV
 │       └── 404.php
-├── assets/                # CSS, JS, fuente, foto y PDFs (servidos estáticamente)
+├── assets/                # CSS, JS (cv.js, tema.js), fuente y PDFs (servidos estáticamente)
 │   └── fonts/             # IBM Plex Sans (SIL OFL), servida por el sitio
 ├── herramientas/
 │   └── rendercv.php       # exporta data.php a RenderCV para PDFs por vacante
 ├── versiones/             # CVs adaptados a cada vacante (solo el README va a git)
 ├── tests/humo.php         # pruebas de humo (sin dependencias)
+├── tests/navegador/       # pruebas en navegador de las funciones con JavaScript
 ├── .github/workflows/     # pruebas en GitHub Actions
 ├── router-dev.php         # router solo para desarrollo local
 └── vercel.json            # runtime PHP, reescritura a api/index.php y encabezados
@@ -54,11 +55,31 @@ Luego abrir http://127.0.0.1:8080
 `router-dev.php` solo existe para el servidor embebido de PHP: sirve los archivos de `assets/`
 directamente y manda el resto a `api/index.php`, imitando lo que hace Vercel en producción.
 
+## Funciones con JavaScript (`assets/cv.js`)
+
+Mejora progresiva: sin JavaScript la página queda completa y estos controles no aparecen.
+
+- **Buscador:** marca dónde aparece un término (experiencia, proyectos, competencias, publicaciones,
+  formación, áreas), atenúa lo demás, abre las asignaturas que coinciden y dice cuántas hay por
+  sección. Ignora acentos y mayúsculas. La búsqueda queda en la dirección: `/?q=python` abre ya filtrado.
+- **Filtro por competencia:** cada competencia es un botón que filtra por ella y sus variantes
+  («Linux / Ubuntu Server» encuentra «servidores Ubuntu»).
+- **Tema claro/oscuro:** botón en la barra; la elección se guarda en el navegador. `assets/tema.js` la
+  aplica antes de pintar para que no parpadee.
+- **Copiar correo** y **Compartir** (menú del sistema en el celular; en la computadora copia el enlace).
+
+Los textos de la interfaz están en `data.php` (`ui`, en los dos idiomas). Todo es JavaScript propio,
+sin bibliotecas ni scripts en línea, así que la CSP sigue estricta.
+
 ## Pruebas
 
 ```bash
-php tests/humo.php
+php tests/humo.php                                      # sin dependencias
+cd tests/navegador && npm ci && node navegador.mjs      # en Chrome o Edge sin ventana
 ```
+
+Las del navegador prueban el buscador, el filtro, el tema (y que se recuerde), copiar y compartir,
+que sin JavaScript no aparezcan controles rotos y el celular.
 
 Levanta el servidor embebido y revisa cada ruta: códigos de respuesta, encabezados de seguridad
 (CSP estricta, sin scripts ni estilos en línea), que existan todos los archivos que enlaza la página,

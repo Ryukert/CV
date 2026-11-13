@@ -2,6 +2,21 @@
 
 ## [Sin publicar]
 
+### Funciones con JavaScript
+- **Buscador en el CV** y **filtro por competencia**: marcan dónde aparece un término y atenúan lo
+  demás; la búsqueda queda en la dirección (`?q=python`) para compartirla.
+- **Tema claro/oscuro** manual, recordado en el navegador y sin parpadeo.
+- **Copiar correo** y **Compartir**.
+- Sin JavaScript la página queda completa (los controles nuevos no aparecen).
+- Pruebas en navegador (`tests/navegador`, 29) en GitHub Actions.
+
+### Sin foto
+- Se quita la foto de la página, de los datos estructurados y de la API, y sus archivos del sitio.
+- La imagen para compartir en redes (`og.jpg`) se rehízo sin foto y va versionada para que las
+  redes tomen la nueva.
+- En los PDF con diseño, la foto se cambió por un círculo con las iniciales «MA»; el texto no cambió
+  (pasan de 295 KB a 51 KB).
+
 ### Contenido
 - Dos proyectos nuevos: **Ecosistema de riesgo sísmico de Tijuana** e **Infraestructura Verde · Baja
   California**, con enlace a sus sitios publicados (los repositorios son privados).

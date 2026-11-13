@@ -29,6 +29,21 @@ jobs:
       - name: Pruebas de humo
         run: php tests/humo.php
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: tests/navegador/package-lock.json
+
+      - name: Pruebas en navegador (buscador, tema, copiar, sin JavaScript)
+        working-directory: tests/navegador
+        env:
+          CI: 'true'
+          NAVEGADOR: /usr/bin/google-chrome
+        run: |
+          npm ci --no-fund --no-audit
+          node navegador.mjs
+
       - name: Exportación a RenderCV (YAML válido)
         run: |
           php herramientas/rendercv.php es
@@ -36,4 +51,5 @@ jobs:
           php -r 'foreach (["es","en"] as $l) { $t = file_get_contents("versiones/base/cv-$l.yaml"); $j = json_decode(preg_replace("/^#.*\n/m", "", $t), true); if (!isset($j["cv"]["sections"])) { fwrite(STDERR, "YAML $l inválido\n"); exit(1); } } echo "ok\n";'
 
       - name: vercel.json válido
-        run: php -r 'json_decode(file_get_contents("vercel.json"), flags: JSON_THROW_ON_ERROR); echo "ok\n";'
+        run: |
+          php -r 'json_decode(file_get_contents("vercel.json"), flags: JSON_THROW_ON_ERROR); echo "ok\n";'
