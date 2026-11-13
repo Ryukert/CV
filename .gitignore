@@ -1,0 +1,10 @@
+# Versiones del CV por vacante (pueden llevar notas de cada empresa); solo se sube el README
+versiones/*
+!versiones/README.md
+
+# Salida intermedia de RenderCV
+rendercv_output/
+
+.vercel
+.DS_Store
+Thumbs.db

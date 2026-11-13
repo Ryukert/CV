@@ -14,8 +14,12 @@
 <meta property="og:description" content="<?= e($d['meta_desc']) ?>">
 <meta property="og:type" content="profile">
 <meta property="og:locale" content="<?= e($d['locale']) ?>">
+<meta property="og:locale:alternate" content="<?= $d['lang'] === 'en' ? 'es_MX' : 'en_US' ?>">
 <meta property="og:url" content="<?= e(site_url($d['lang'] === 'en' ? '/en' : '/')) ?>">
 <meta property="og:image" content="<?= e(site_url('/assets/og.jpg')) ?>">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="<?= e($d['profile']['name']) ?> — <?= e($d['role']) ?>">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?= e($d['profile']['name']) ?> — <?= e($d['role']) ?>">
 <meta name="twitter:description" content="<?= e($d['meta_desc']) ?>">
@@ -24,20 +28,25 @@
 <link rel="alternate" hreflang="es" href="<?= e(site_url('/')) ?>">
 <link rel="alternate" hreflang="en" href="<?= e(site_url('/en')) ?>">
 <link rel="alternate" hreflang="x-default" href="<?= e(site_url('/')) ?>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/assets/style.css?v=2">
+<link rel="icon" href="<?= e(asset('favicon.svg')) ?>" type="image/svg+xml">
+<link rel="apple-touch-icon" href="<?= e(asset('apple-touch-icon.png')) ?>">
+<link rel="preload" href="/assets/fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="<?= e(asset('style.css')) ?>">
+<script src="<?= e(asset('nav.js')) ?>" defer></script>
 <script type="application/ld+json">
 <?= json_encode([
     '@context' => 'https://schema.org',
     '@type'    => 'Person',
     'name'     => $d['profile']['name'],
     'jobTitle' => $d['role'],
+    'description' => $d['meta_desc'],
     'email'    => 'mailto:' . $d['profile']['email'],
-    'url'      => $d['profile']['github'],
+    'url'      => site_url($d['lang'] === 'en' ? '/en' : '/'),
+    'image'    => site_url('/assets/foto-300.jpg'),
     'sameAs'   => [$d['profile']['github'], $d['profile']['linkedin'], $d['profile']['orcid']],
+    'affiliation' => ['@type' => 'CollegeOrUniversity', 'name' => 'Universidad Autónoma de Guerrero'],
     'alumniOf' => ['@type' => 'CollegeOrUniversity', 'name' => 'Universidad Autónoma de Guerrero'],
+    'knowsAbout' => array_values(array_unique(array_merge(...array_values($d['skills'])))),
     'hasCredential' => array_map(static fn(array $ed): array => [
         '@type'                => 'EducationalOccupationalCredential',
         'name'                 => $ed['title'],
@@ -54,7 +63,10 @@
 
 <header class="hero">
   <div class="wrap hero-grid">
-    <img class="avatar" src="<?= e($d['profile']['photo']) ?>" alt="<?= e($d['profile']['name']) ?>" width="150" height="150">
+    <picture>
+      <source type="image/webp" srcset="<?= e(asset('foto-150.webp')) ?> 1x, <?= e(asset('foto-300.webp')) ?> 2x">
+      <img class="avatar" src="<?= e(asset('foto-300.jpg')) ?>" alt="<?= e($d['profile']['name']) ?>" width="150" height="150" fetchpriority="high" decoding="async">
+    </picture>
     <div>
       <h1><?= e($d['profile']['name']) ?></h1>
       <p class="role"><?= e($d['role']) ?></p>
@@ -63,14 +75,14 @@
       <p class="links">
         <a href="mailto:<?= e($d['profile']['email']) ?>"><?= icon('mail') ?><?= e($d['profile']['email']) ?></a>
         <a href="<?= e(tel_href($d['profile']['phone'])) ?>"><?= icon('phone') ?><?= e($d['profile']['phone']) ?></a>
-        <a href="<?= e($d['profile']['github']) ?>" rel="noopener"><?= icon('github') ?>GitHub</a>
-        <a href="<?= e($d['profile']['linkedin']) ?>" rel="noopener"><?= icon('linkedin') ?>LinkedIn</a>
-        <a href="<?= e($d['profile']['orcid']) ?>" rel="noopener"><?= icon('orcid') ?>ORCID</a>
+        <a href="<?= e($d['profile']['github']) ?>" rel="me noopener"><?= icon('github') ?>GitHub</a>
+        <a href="<?= e($d['profile']['linkedin']) ?>" rel="me noopener"><?= icon('linkedin') ?>LinkedIn</a>
+        <a href="<?= e($d['profile']['orcid']) ?>" rel="me noopener"><?= icon('orcid') ?>ORCID</a>
       </p>
       <p class="actions">
-        <a class="btn" href="<?= e($d['pdf']['plain']) ?>" download><?= e($d['cta_pdf']) ?></a>
-        <a class="btn ghost" href="<?= e($d['pdf']['design']) ?>" download><?= e($d['cta_design']) ?></a>
-        <a class="btn ghost" href="<?= e($d['switch_url']) ?>"><?= e($d['switch']) ?></a>
+        <a class="btn" href="<?= e(asset(basename($d['pdf']['plain']))) ?>" download><?= e($d['cta_pdf']) ?> <span class="btn-meta"><?= e(asset_size($d['pdf']['plain'])) ?></span></a>
+        <a class="btn ghost" href="<?= e(asset(basename($d['pdf']['design']))) ?>" download><?= e($d['cta_design']) ?> <span class="btn-meta">PDF · <?= e(asset_size($d['pdf']['design'])) ?></span></a>
+        <a class="btn ghost" href="<?= e($d['switch_url']) ?>" lang="<?= $d['lang'] === 'en' ? 'es' : 'en' ?>" hreflang="<?= $d['lang'] === 'en' ? 'es' : 'en' ?>"><?= e($d['switch']) ?></a>
       </p>
     </div>
   </div>
@@ -252,31 +264,9 @@
 <footer>
   <div class="wrap">
     <p><?= e($d['footer']) ?></p>
-    <p><a href="/api/cv.json?lang=<?= e($d['lang']) ?>">/api/cv.json</a></p>
+    <p><?= e($d['updated_label']) ?>: <time datetime="<?= e(CV_UPDATED) ?>"><?= e($d['updated']) ?></time> · <a href="/api/cv.json?lang=<?= e($d['lang']) ?>">/api/cv.json</a></p>
   </div>
 </footer>
-
-<script>
-// Resalta en la barra de navegación la sección visible.
-(function () {
-  if (!('IntersectionObserver' in window)) return;
-  var links = {};
-  document.querySelectorAll('.nav-inner a').forEach(function (a) { links[a.hash.slice(1)] = a; });
-  var current = null;
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (!en.isIntersecting || !links[en.target.id]) return;
-      if (current) { current.classList.remove('active'); current.removeAttribute('aria-current'); }
-      current = links[en.target.id];
-      current.classList.add('active');
-      current.setAttribute('aria-current', 'true');
-      var bar = current.parentNode, r = current.getBoundingClientRect(), b = bar.getBoundingClientRect();
-      if (r.left < b.left || r.right > b.right) bar.scrollLeft += r.left - b.left - 20;
-    });
-  }, { rootMargin: '-45% 0px -50% 0px' });
-  document.querySelectorAll('main section[id]').forEach(function (s) { io.observe(s); });
-})();
-</script>
 
 </body>
 </html>

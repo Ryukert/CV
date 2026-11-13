@@ -47,16 +47,66 @@ function icon(string $name): string
 }
 
 /**
- * Convierte una ruta interna en URL absoluta usando el host de la petición.
- * Necesario para canonical, hreflang y las etiquetas Open Graph.
+ * Convierte una ruta interna en URL absoluta.
+ * Necesario para canonical, hreflang, sitemap y las etiquetas Open Graph.
+ *
+ * En producción la base sale de la variable de entorno SITE_URL (p. ej.
+ * https://cv-marco-adame.vercel.app), no del encabezado Host de la petición:
+ * un Host falso podría quedar guardado en la caché de Vercel y repartirse a
+ * otros visitantes. Sin SITE_URL (desarrollo local) se usa el host de la petición.
  */
 function site_url(string $path = '/'): string
 {
-    $host = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? $_SERVER['HTTP_HOST'] ?? 'localhost';
-    $host = preg_replace('/[^A-Za-z0-9\.\-:]/', '', $host);
-    $proto = $_SERVER['HTTP_X_FORWARDED_PROTO']
-        ?? ((($_SERVER['HTTPS'] ?? '') !== '' && ($_SERVER['HTTPS'] ?? 'off') !== 'off') ? 'https' : 'http');
-    $proto = $proto === 'http' ? 'http' : 'https';
+    $base = rtrim((string) getenv('SITE_URL'), '/');
+    if ($base === '' || !preg_match('#^https?://[A-Za-z0-9.\-]+(:\d+)?$#', $base)) {
+        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+        $host = preg_replace('/[^A-Za-z0-9\.\-:]/', '', $host);
+        $https = ($_SERVER['HTTPS'] ?? '') !== '' && ($_SERVER['HTTPS'] ?? 'off') !== 'off';
+        $base = ($https ? 'https' : 'http') . '://' . $host;
+    }
 
-    return $proto . '://' . $host . '/' . ltrim($path, '/');
+    return $base . '/' . ltrim($path, '/');
+}
+
+/**
+ * Ruta de un archivo de assets/ con su versión según el contenido
+ * (?v=<hash>). Los assets se guardan un año en el navegador; al cambiar el
+ * archivo cambia el hash y el navegador lo vuelve a pedir, sin tocar nada a mano.
+ */
+function asset(string $file): string
+{
+    static $cache = [];
+    if (!isset($cache[$file])) {
+        $path = __DIR__ . '/../assets/' . $file;
+        $hash = is_file($path) ? substr(md5_file($path), 0, 8) : '0';
+        $cache[$file] = '/assets/' . $file . '?v=' . $hash;
+    }
+    return $cache[$file];
+}
+
+/** Peso legible de un archivo de assets/ (p. ej. «81 KB»), o '' si no existe. */
+function asset_size(string $file): string
+{
+    $path = __DIR__ . '/../assets/' . ltrim(preg_replace('#^/assets/#', '', $file), '/');
+    if (!is_file($path)) {
+        return '';
+    }
+    $kb = (int) round(filesize($path) / 1024);
+    return $kb >= 1024 ? number_format($kb / 1024, 1) . ' MB' : $kb . ' KB';
+}
+
+/**
+ * Encabezados de seguridad de todas las respuestas generadas por PHP.
+ * La CSP solo permite recursos del propio sitio: no hay scripts, estilos ni
+ * fuentes de terceros. El JSON-LD es un bloque de datos (no se ejecuta), así que
+ * no necesita excepción.
+ */
+function security_headers(): void
+{
+    header('X-Content-Type-Options: nosniff');
+    header('Referrer-Policy: strict-origin-when-cross-origin');
+    header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'");
+    header('X-Frame-Options: DENY');
+    header('Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()');
+    header('Cross-Origin-Opener-Policy: same-origin');
 }

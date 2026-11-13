@@ -7,6 +7,9 @@ declare(strict_types=1);
  * Para actualizar el CV en línea basta con editar aquí y hacer push.
  */
 
+/** Fecha de la última actualización del contenido (sitemap, pie de página y /health). */
+const CV_UPDATED = '2026-11-13';
+
 const PROFILE = [
     'name'    => 'Marco Antonio Adame Rodríguez',
     'email'   => 'ragnarockgames86@gmail.com',
@@ -55,6 +58,16 @@ const SHARED = [
             'featured' => true,
         ],
         [
+            'key'   => 'ecosistema',
+            'stack' => 'JavaScript · Leaflet · Supabase · PWA · GitHub Actions',
+            'url'   => 'https://ecosistemariesgosismicotijuana.vercel.app',
+        ],
+        [
+            'key'   => 'ivbc',
+            'stack' => 'JavaScript · Preact · Supabase · Vercel Functions · GeoJSON',
+            'url'   => 'https://iv-bc-sitio.vercel.app',
+        ],
+        [
             'key'   => 'game',
             'stack' => 'React 18 · Vite · Claude API · Vercel',
             'url'   => 'https://github.com/Ryukert/JUEGO-DE-GRENCITO-Y-SISMOTECNITO',
@@ -91,7 +104,7 @@ const SHARED = [
         ],
         [
             'key'   => 'cv',
-            'stack' => 'PHP · Vercel · JSON API',
+            'stack' => 'PHP · Vercel · JSON API · GitHub Actions',
             'url'   => 'https://github.com/Ryukert/CV',
         ],
     ],
@@ -118,7 +131,7 @@ function cv_data(string $lang): array
         'cta_design'=> 'Versión con diseño',
         'switch'    => 'English',
         'switch_url'=> '/en',
-        'summary'   => 'Construyo sistemas IoT de extremo a extremo: sensor MEMS, firmware embebido, adquisición en tiempo real, procesamiento de señales, backend en Linux, nube y dashboards. Diseñé desde cero un sistema de monitoreo de salud estructural de bajo costo y lo validé en campo contra instrumentación sísmica comercial (GEA y P-Alert); el trabajo derivó en tres artículos arbitrados y una ponencia internacional. Ingeniero en Computación y egresado de la Maestría en Ingeniería para la Innovación y Desarrollo Tecnológico (UAGro), con promedio de 9.42 y titulación prevista para noviembre de 2026.',
+        'summary'   => 'Construyo sistemas IoT de extremo a extremo: sensor MEMS, firmware embebido, adquisición en tiempo real, procesamiento de señales, backend en Linux, nube y dashboards. Diseñé desde cero un sistema de monitoreo de salud estructural de bajo costo y lo validé en campo contra instrumentación sísmica comercial (GEA y P-Alert); el trabajo derivó en tres artículos arbitrados y una ponencia internacional. También desarrollo aplicaciones web geoespaciales en producción (Supabase, Leaflet, funcionamiento sin internet) con pruebas automáticas y despliegue continuo. Ingeniero en Computación y egresado de la Maestría en Ingeniería para la Innovación y Desarrollo Tecnológico (UAGro), con promedio de 9.42 y titulación prevista para noviembre de 2026.',
         'metric_labels' => [
             'sampling' => 'Muestreo sincronizado',
             'sensors'  => 'Sensores MEMS integrados',
@@ -149,6 +162,7 @@ function cv_data(string $lang): array
                 ['name' => 'Procesamiento de señales y software científico', 'items' => [
                     'Construí en Python (NumPy/SciPy) el pipeline de DSP para identificar la respuesta dinámica de las estructuras: RMS, FFT, densidad espectral de potencia (Welch), frecuencia dominante, coherencia, fase y correlación cruzada.',
                     'Desarrollé aplicaciones de escritorio en PyQt5 para adquisición, supervisión en vivo y análisis, con control de sesiones y recuperación automática ante fallos.',
+                    'Construí herramientas para procesar archivos TXT, CSV, JSON y JSONL con grandes volúmenes de registros: sincronización temporal, remuestreo, detección de huecos, filtrado digital y recorte de series.',
                     'Automaticé la generación de informes técnicos y gráficas comparativas contra los equipos de referencia; estos resultados sustentan el artículo publicado como autor principal.',
                 ]],
                 ['name' => 'Backend, nube e infraestructura', 'items' => [
@@ -165,6 +179,8 @@ function cv_data(string $lang): array
         ],
         'project_text' => [
             'shm'      => ['SHM-IoT MIIDT — Monitoreo estructural de bajo costo', 'Arquitectura integral de adquisición, almacenamiento, análisis y visualización de aceleraciones en estructuras civiles, probada en campo contra sensores comerciales.'],
+            'ecosistema' => ['Ecosistema de riesgo sísmico de Tijuana', 'Tablero web que une amenaza sísmica, suelo, estaciones, mapas de aceleración, inspección y difusión sobre una sola base de datos en Supabase. Calcula rutas a hospitales y servicios de emergencia por calles reales (OpenStreetMap, Dijkstra) en cinco ciudades de Baja California con el catálogo oficial CLUES, funciona sin internet como app instalable y se publica con versiones semánticas y pruebas automáticas en cada cambio.'],
+            'ivbc'       => ['Infraestructura Verde · Baja California', 'Dashboard de 36 técnicas de infraestructura verde por municipio, con consulta por punto sobre capas GeoJSON y búsqueda de direcciones, panel de edición con inicio de sesión, reportes en PDF y CSV, modo sin conexión y contador de visitas en Supabase.'],
             'gps'      => ['Red de monitoreo SHM con georreferenciación', 'Dashboard web para visualizar ubicación y estado de los nodos distribuidos, con despliegue público continuo.'],
             'supabase' => ['Dashboard de sensores sobre Supabase', 'Aplicación web para envío, consulta y visualización de mediciones almacenadas en la nube.'],
             'api'      => ['APIs de telemetría para nodos ESP32', 'Servicios REST para recepción, persistencia y consulta de datos de aceleración, con graficación científica.'],
@@ -172,7 +188,7 @@ function cv_data(string $lang): array
             'trading'    => ['Trading Fusion Pro 3.0', 'Herramienta educativa de escritorio para análisis técnico y fundamental, con backtesting con costos y validación walk-forward. Refactoricé un script de 4,363 líneas a una arquitectura modular.'],
             'attendance' => ['Lista de asistencia escolar', 'Aplicación para pasar lista y generar reportes de asistencia por grupo, con datos en Supabase y pruebas automatizadas de la lógica.'],
             'crm'        => ['CRM para joyería', 'Aplicación web de gestión de clientes para un negocio de joyería, desplegada en Vercel.'],
-            'cv'       => ['Este CV en línea', 'Sitio bilingüe en PHP serverless sobre Vercel, generado desde una única fuente de datos, con endpoint JSON público.'],
+            'cv'       => ['Este CV en línea', 'Sitio bilingüe en PHP serverless sobre Vercel, generado desde una única fuente de datos, con endpoint JSON público, política de seguridad de contenido estricta y pruebas automáticas en GitHub Actions. Los mismos datos generan versiones del CV en PDF adaptadas a cada vacante.'],
         ],
         'areas' => [
             'toggle' => 'Ver las 17 áreas con sus 69 asignaturas',
@@ -321,12 +337,13 @@ function cv_data(string $lang): array
             ['period' => 'Feb 2022 – Jul 2022', 'org' => 'Escuela Secundaria Ignacio Manuel Altamirano', 'title' => 'Servicio social — Área de cómputo', 'note' => '500 horas acreditadas y liberadas. Apoyo técnico y acompañamiento educativo en el sector comunitario.'],
         ],
         'skills' => [
-            'Lenguajes y frameworks' => ['Python', 'C/C++ (embebidos)', 'JavaScript', 'SQL', 'PHP', 'Bash', 'PyQt5 / PySide6', 'React'],
+            'Lenguajes y frameworks' => ['Python', 'C/C++ (embebidos)', 'JavaScript', 'Node.js', 'SQL', 'PHP', 'Bash', 'PyQt5 / PySide6', 'React', 'Preact'],
+            'Web y mapas'        => ['Leaflet', 'GeoJSON', 'OpenStreetMap', 'PWA / Service Workers', 'Pruebas en navegador (Puppeteer)'],
             'Datos y señales'    => ['NumPy', 'Pandas', 'SciPy', 'Matplotlib', 'FFT', 'PSD/Welch', 'RMS', 'Filtros digitales', 'Series temporales'],
             'IA y aprendizaje automático' => ['Machine Learning', 'Deep Learning', 'Visión artificial', 'Big Data', 'Selección de atributos'],
             'IoT y hardware'     => ['Raspberry Pi', 'ESP32', 'Arduino Nano RP2040', 'Sensores MEMS', 'I2C', 'SPI', 'UART'],
-            'Backend y nube'     => ['FastAPI', 'APIs REST', 'Supabase', 'PostgreSQL'],
-            'Sistemas y DevOps'  => ['Linux / Ubuntu Server', 'Docker', 'systemd', 'SSH', 'Git', 'Vercel'],
+            'Backend y nube'     => ['FastAPI', 'APIs REST', 'Supabase', 'PostgreSQL', 'Firebase', 'Vercel Functions'],
+            'Sistemas y DevOps'  => ['Linux / Ubuntu Server', 'Docker', 'systemd', 'SSH', 'Git', 'GitHub Actions (CI)', 'Vercel'],
         ],
         'certs' => [
             'Data Science Essentials with Python — Cisco / UAGro (dic 2025)',
@@ -336,10 +353,12 @@ function cv_data(string $lang): array
         ],
         'languages' => [
             'Español: lengua materna.',
-            'Inglés: intermedio (B1). Lectura fluida de documentación técnica.',
+            'Inglés: intermedio (B1), TOEFL ITP 470 puntos (2025). Lectura fluida de documentación técnica y literatura científica.',
         ],
-        'contact_intro' => 'Abierto a oportunidades remotas en IoT, sistemas embebidos, procesamiento de señales y desarrollo backend.',
+        'contact_intro' => 'Abierto a oportunidades remotas en IoT, sistemas embebidos, procesamiento de señales, desarrollo backend y aplicaciones web.',
         'footer' => 'Sitio construido con PHP sobre Vercel. Código fuente disponible en GitHub.',
+        'updated_label' => 'Última actualización',
+        'updated' => 'noviembre de 2026',
     ];
 
     $en = [
@@ -355,7 +374,7 @@ function cv_data(string $lang): array
         'cta_design'=> 'Designed version',
         'switch'    => 'Español',
         'switch_url'=> '/',
-        'summary'   => 'I build end-to-end IoT systems: MEMS sensor, embedded firmware, real-time acquisition, signal processing, Linux backend, cloud and dashboards. I designed a low-cost structural health monitoring system from scratch and validated it in the field against commercial seismic instrumentation (GEA and P-Alert); the work led to three peer-reviewed papers and an international conference talk. Computer Engineer and MSc graduate in Engineering for Innovation and Technological Development (UAGro), 9.42/10 GPA, degree conferral expected November 2026.',
+        'summary'   => 'I build end-to-end IoT systems: MEMS sensor, embedded firmware, real-time acquisition, signal processing, Linux backend, cloud and dashboards. I designed a low-cost structural health monitoring system from scratch and validated it in the field against commercial seismic instrumentation (GEA and P-Alert); the work led to three peer-reviewed papers and an international conference talk. I also build production geospatial web applications (Supabase, Leaflet, offline-first) with automated tests and continuous deployment. Computer Engineer and MSc graduate in Engineering for Innovation and Technological Development (UAGro), 9.42/10 GPA, degree conferral expected November 2026.',
         'metric_labels' => [
             'sampling' => 'Synchronized sampling',
             'sensors'  => 'MEMS sensors integrated',
@@ -386,6 +405,7 @@ function cv_data(string $lang): array
                 ['name' => 'Signal processing and scientific software', 'items' => [
                     'Built a Python (NumPy/SciPy) DSP pipeline to identify the dynamic response of structures: RMS, FFT, power spectral density (Welch), dominant frequency, coherence, phase analysis and cross-correlation.',
                     'Developed PyQt5 desktop applications for acquisition, live monitoring and analysis, with session control and automatic crash recovery.',
+                    'Built tools to process large TXT, CSV, JSON and JSONL record sets: time synchronization, resampling, gap detection, digital filtering and series trimming.',
                     'Automated the generation of technical reports and comparative plots against reference equipment; these results underpin my lead-author paper.',
                 ]],
                 ['name' => 'Backend, cloud and infrastructure', 'items' => [
@@ -402,6 +422,8 @@ function cv_data(string $lang): array
         ],
         'project_text' => [
             'shm'      => ['SHM-IoT MIIDT — Low-cost structural monitoring', 'Full architecture for acquisition, storage, analysis and visualization of accelerations in civil structures, field-tested against commercial sensors.'],
+            'ecosistema' => ['Tijuana seismic risk ecosystem', 'Web dashboard linking seismic hazard, soil, stations, acceleration maps, inspection and outreach on a single Supabase database. Computes routes to hospitals and emergency services over real streets (OpenStreetMap, Dijkstra) in five Baja California cities using the official CLUES health registry, works offline as an installable app, and ships with semantic versioning and automated tests on every change.'],
+            'ivbc'       => ['Green Infrastructure · Baja California', 'Dashboard of 36 green-infrastructure techniques per municipality, with point queries over GeoJSON layers and address search, a login-protected editing panel, PDF and CSV reports, offline mode and a Supabase visit counter.'],
             'gps'      => ['Geo-referenced SHM monitoring network', 'Web dashboard showing location and status of distributed monitoring nodes, continuously deployed and public.'],
             'supabase' => ['Supabase sensor dashboard', 'Web application for submitting, querying and visualizing measurements stored in the cloud.'],
             'api'      => ['ESP32 telemetry APIs', 'REST services for receiving, persisting and querying acceleration data, plus scientific plotting tools.'],
@@ -409,7 +431,7 @@ function cv_data(string $lang): array
             'trading'    => ['Trading Fusion Pro 3.0', 'Educational desktop tool for technical and fundamental analysis, with cost-aware backtesting and walk-forward validation. Refactored a 4,363-line script into a modular architecture.'],
             'attendance' => ['School attendance tracker', 'App for taking roll and generating attendance reports per class, with data in Supabase and automated tests for the core logic.'],
             'crm'        => ['Jewelry store CRM', 'Customer management web app for a jewelry business, deployed on Vercel.'],
-            'cv'       => ['This online CV', 'Bilingual serverless PHP site on Vercel, generated from a single data source, with a public JSON endpoint.'],
+            'cv'       => ['This online CV', 'Bilingual serverless PHP site on Vercel, generated from a single data source, with a public JSON endpoint, a strict Content Security Policy and automated tests on GitHub Actions. The same data generates PDF versions of the CV tailored to each job posting.'],
         ],
         'areas' => [
             'toggle' => 'View all 17 areas and their 69 courses',
@@ -558,12 +580,13 @@ function cv_data(string $lang): array
             ['period' => 'Feb 2022 – Jul 2022', 'org' => 'Ignacio Manuel Altamirano Secondary School', 'title' => 'Social service — Computing area', 'note' => '500 certified hours. Technical support and community-sector educational support.'],
         ],
         'skills' => [
-            'Languages & frameworks' => ['Python', 'C/C++ (embedded)', 'JavaScript', 'SQL', 'PHP', 'Bash', 'PyQt5 / PySide6', 'React'],
+            'Languages & frameworks' => ['Python', 'C/C++ (embedded)', 'JavaScript', 'Node.js', 'SQL', 'PHP', 'Bash', 'PyQt5 / PySide6', 'React', 'Preact'],
+            'Web & mapping'     => ['Leaflet', 'GeoJSON', 'OpenStreetMap', 'PWA / Service Workers', 'Browser testing (Puppeteer)'],
             'Data & signals'    => ['NumPy', 'Pandas', 'SciPy', 'Matplotlib', 'FFT', 'PSD/Welch', 'RMS', 'Digital filters', 'Time series'],
             'AI & machine learning' => ['Machine Learning', 'Deep Learning', 'Computer Vision', 'Big Data', 'Feature selection'],
             'IoT & hardware'    => ['Raspberry Pi', 'ESP32', 'Arduino Nano RP2040', 'MEMS sensors', 'I2C', 'SPI', 'UART'],
-            'Backend & cloud'   => ['FastAPI', 'REST APIs', 'Supabase', 'PostgreSQL'],
-            'Systems & DevOps'  => ['Linux / Ubuntu Server', 'Docker', 'systemd', 'SSH', 'Git', 'Vercel'],
+            'Backend & cloud'   => ['FastAPI', 'REST APIs', 'Supabase', 'PostgreSQL', 'Firebase', 'Vercel Functions'],
+            'Systems & DevOps'  => ['Linux / Ubuntu Server', 'Docker', 'systemd', 'SSH', 'Git', 'GitHub Actions (CI)', 'Vercel'],
         ],
         'certs' => [
             'Data Science Essentials with Python — Cisco / UAGro (Dec 2025)',
@@ -573,10 +596,12 @@ function cv_data(string $lang): array
         ],
         'languages' => [
             'Spanish: native.',
-            'English: intermediate (B1). Fluent reading of technical documentation.',
+            'English: intermediate (B1), TOEFL ITP 470 (2025). Fluent reading of technical documentation and scientific literature.',
         ],
-        'contact_intro' => 'Open to remote opportunities in IoT, embedded systems, signal processing and backend development.',
+        'contact_intro' => 'Open to remote opportunities in IoT, embedded systems, signal processing, backend development and web applications.',
         'footer' => 'Built with PHP on Vercel. Source code available on GitHub.',
+        'updated_label' => 'Last updated',
+        'updated' => 'November 2026',
     ];
 
     $d = $lang === 'en' ? $en : $es;
