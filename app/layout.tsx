@@ -12,8 +12,8 @@ export default async function Layout({ children }: { children: ReactNode }) {
     // tema.js pone data-theme en <html> antes de hidratar: es intencional, no un error.
     <html lang={lang} suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#1b2a4a" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#0f1521" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#0d2142" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#061026" media="(prefers-color-scheme: dark)" />
         <meta name="color-scheme" content="light dark" />
         <link rel="icon" href={asset('favicon.svg')} type="image/svg+xml" />
         <link rel="apple-touch-icon" href={asset('apple-touch-icon.png')} />

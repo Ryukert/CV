@@ -2,6 +2,17 @@
 
 ## [Sin publicar]
 
+### Fondo y paleta del logotipo
+
+- El logotipo «MA» va de fondo en todo el sitio, fijo y atenuado (`fondo.webp`, 117 KB; en el
+  celular `fondo-movil.webp`, 57 KB). El blanco de la imagen se hizo transparente para que sirva
+  también en el tema oscuro. El original está en `img/fondo-original.png`.
+- Paleta del logotipo en todo el sitio: azul marino `#0d2142`, verde `#157a35` (enlaces, botones,
+  sección activa) y dorado `#d4a52a` (cargo, línea del encabezado, proyecto destacado). Los títulos
+  de sección llevan la línea azul-verde-dorado del logotipo. Tema oscuro con los mismos tonos.
+- Favicon y color de la barra del navegador con la nueva paleta.
+- Prueba: la huella `?v=` con que el CSS pide el fondo debe ser la del archivo actual.
+
 ## 2026-11-24 — publicado en main
 
 ### Depuración del contenido
