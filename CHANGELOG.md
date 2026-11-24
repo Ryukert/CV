@@ -2,6 +2,20 @@
 
 ## [Sin publicar]
 
+### Íconos rediseñados
+
+- Juego de íconos propio con un solo estilo (cuadrícula de 24 px, trazo de 1.75, puntas
+  redondeadas). Cada tecnología sin logotipo tiene ahora su ícono: espectro (FFT), curva (PSD/Welch),
+  filtro, gráfica (Matplotlib, Recharts), red neuronal (Machine Learning), embudo (selección de
+  atributos), sensor con ejes (MEMS), bus (I2C, SPI, UART), polígono (GeoJSON), llave (SSH),
+  engranaje (systemd), ventana (CustomTkinter), «≈» (RapidFuzz). Antes 21 etiquetas compartían 4
+  íconos y tres solo tenían un punto.
+- GitHub y ORCID con su logotipo oficial (Simple Icons); el de ORCID era un dibujo aproximado.
+- Íconos de contacto y de áreas de enfoque redibujados.
+- Favicon nuevo: monograma «MA» (M blanca, A verde, órbita dorada) como el logotipo; los PNG
+  (`apple-touch-icon.png`, `icon-512.png`) se regeneraron desde él: aún tenían el azul anterior.
+- Prueba: ninguna tecnología se queda con el ícono genérico.
+
 ## 2026-11-24 (diseño tecnológico) — publicado en main
 
 ### Diseño tecnológico: el CV como instrumento de medición

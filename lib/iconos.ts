@@ -43,7 +43,33 @@ export const TECH_ICONS: Record<string, [string, string]> = {
 };
 
 /** Íconos de contacto con relleno: símbolo «c-<nombre>». */
-export const ICONOS_RELLENO: readonly string[] = ["github","linkedin"];
+export const ICONOS_RELLENO: readonly string[] = ["linkedin","github","orcid"];
 
 /** Íconos de trazo (contacto, áreas de enfoque y genéricos): símbolo «g-<nombre>». */
-export const ICONOS_TRAZO: readonly string[] = ["mail","phone","orcid","onda","red","chip","mapa","datos","api","terminal","codigo","barras","punto"];
+export const ICONOS_TRAZO: readonly string[] = ["mail","phone","chip","onda","codigo","red","barras","espectro","curva","filtro","grafica","seleccion","aproximado","datos","sensor","bus","poligono","api","llave","engranaje","terminal","ventana","cubo"];
+
+/** Tecnologías sin logotipo => su ícono de trazo propio. */
+export const ICONOS_GENERICOS: Record<string, string> = {
+  "FFT": "espectro",
+  "PSD/Welch": "curva",
+  "Filtros digitales": "filtro",
+  "Digital filters": "filtro",
+  "Matplotlib": "grafica",
+  "Recharts": "grafica",
+  "Machine Learning": "red",
+  "Selección de atributos": "seleccion",
+  "Feature selection": "seleccion",
+  "Sensores MEMS": "sensor",
+  "MEMS sensors": "sensor",
+  "I2C": "bus",
+  "SPI": "bus",
+  "UART": "bus",
+  "GeoJSON": "poligono",
+  "APIs REST": "api",
+  "REST APIs": "api",
+  "SSH": "llave",
+  "systemd": "engranaje",
+  "CustomTkinter": "ventana",
+  "RapidFuzz": "aproximado",
+  "SQL": "datos"
+};

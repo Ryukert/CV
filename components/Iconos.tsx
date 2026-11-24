@@ -2,7 +2,7 @@
 // herramientas/iconos.mjs); aquí cada ícono es solo <svg><use href="…#id"/></svg>, así el HTML
 // no repite cientos de trazos y el navegador guarda el sprite un año.
 import { asset } from '@/lib/cv.ts';
-import { ICONOS_RELLENO, TECH_ICONS } from '@/lib/iconos.ts';
+import { ICONOS_GENERICOS, ICONOS_RELLENO, TECH_ICONS } from '@/lib/iconos.ts';
 
 /** <svg> que usa un símbolo del sprite. `fill` colorea los logotipos y los íconos con relleno. */
 function Uso({ id, clase, fill }: { id: string; clase: string; fill?: string }) {
@@ -20,14 +20,21 @@ export function Icono({ nombre }: { nombre: string }) {
     : <Uso id={`g-${nombre}`} clase="ico" />;
 }
 
+// Respaldo para etiquetas nuevas que aún no están en ICONOS_GENERICOS (herramientas/iconos.mjs).
 const GENERICOS: [RegExp, string][] = [
-  [/FFT|PSD|Welch|RMS|filtr|filter|series|Matplotlib|señal|signal/i, 'onda'],
-  [/learning|visi[oó]n|vision|big data|atributo|feature|\bIA\b|\bAI\b/i, 'red'],
-  [/MEMS|I2C|SPI|UART|sensor/i, 'chip'],
-  [/GeoJSON|mapa|map/i, 'mapa'],
+  [/FFT|espectro|spectrum/i, 'espectro'],
+  [/PSD|Welch|RMS|señal|signal|series/i, 'onda'],
+  [/filtr|filter/i, 'filtro'],
+  [/plot|chart|gr[aá]fic/i, 'grafica'],
+  [/learning|visi[oó]n|vision|neural|\bIA\b|\bAI\b/i, 'red'],
+  [/MEMS|sensor|aceler|acceler/i, 'sensor'],
+  [/I2C|SPI|UART|CAN\b|bus/i, 'bus'],
+  [/GeoJSON|mapa|map/i, 'poligono'],
   [/SQL|base de datos|database/i, 'datos'],
   [/REST|API/i, 'api'],
-  [/SSH|systemd|shell/i, 'terminal'],
+  [/SSH|clave|key/i, 'llave'],
+  [/systemd|servic/i, 'engranaje'],
+  [/shell|terminal|CLI\b/i, 'terminal'],
 ];
 
 /** Logotipo de una etiqueta de datos/*.json ([color, id]), o el nombre del ícono genérico. */
@@ -46,7 +53,8 @@ export function buscarLogo(etiqueta: string): [string, string] | string {
     }
   }
   if (mejor) return TECH_ICONS[mejor];
-  return GENERICOS.find(([re]) => re.test(etiqueta))?.[1] ?? 'punto';
+  for (const p of partes) if (ICONOS_GENERICOS[p]) return ICONOS_GENERICOS[p];
+  return GENERICOS.find(([re]) => re.test(etiqueta))?.[1] ?? 'cubo';
 }
 
 /** Ícono de una tecnología («React 18», «Linux / Ubuntu Server», «Pruebas en navegador (Puppeteer)»…). */
