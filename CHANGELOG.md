@@ -2,6 +2,8 @@
 
 ## [Sin publicar]
 
+## 2026-11-24 (noche) — publicado en main
+
 ### Distribución del sitio y de la información
 
 - Contenedor de 1140 px (antes 900) con cuadrículas que se acomodan solas al ancho de la pantalla.
