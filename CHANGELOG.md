@@ -2,6 +2,8 @@
 
 ## [Sin publicar]
 
+## 2026-11-24 (tarde) — publicado en main
+
 ### Fondo y paleta del logotipo
 
 - El logotipo «MA» va de fondo en todo el sitio, fijo y atenuado (`fondo.webp`, 117 KB; en el
