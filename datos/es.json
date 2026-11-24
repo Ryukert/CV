@@ -5,6 +5,28 @@
     "subrole": "Procesamiento Digital de Señales · Software Científico",
     "location": "Chilpancingo, Guerrero, México (GMT-6)",
     "available": "Disponible para trabajo remoto con horario de EE. UU. y Europa",
+    "focus": [
+        {
+            "icon": "chip",
+            "label": "IoT y sistemas embebidos"
+        },
+        {
+            "icon": "onda",
+            "label": "Procesamiento de señales (DSP)"
+        },
+        {
+            "icon": "codigo",
+            "label": "Desarrollo de software"
+        },
+        {
+            "icon": "red",
+            "label": "Inteligencia artificial"
+        },
+        {
+            "icon": "barras",
+            "label": "Analítica de datos"
+        }
+    ],
     "meta_desc": "CV de Marco Antonio Adame Rodríguez, ingeniero en sistemas IoT y embebidos, procesamiento digital de señales y monitoreo de salud estructural.",
     "nav": {
         "about": "Acerca de mí",
@@ -34,7 +56,8 @@
         "edu": "Formación académica",
         "skills": "Competencias técnicas",
         "other": "Otra experiencia",
-        "contact": "Contacto"
+        "contact": "Contacto",
+        "focus": "Áreas de enfoque"
     },
     "achievements": [
         {

@@ -2,6 +2,18 @@
 
 ## [Sin publicar]
 
+### Distribución del sitio y de la información
+
+- Contenedor de 1140 px (antes 900) con cuadrículas que se acomodan solas al ancho de la pantalla.
+- Encabezado en dos columnas: datos de contacto y, a la derecha, las **áreas de enfoque** del
+  logotipo (IoT, DSP, desarrollo de software, IA, analítica de datos).
+- **Acerca de mí** con el resumen y una ficha de idiomas al lado.
+- **Logros** en tarjetas; los tres **grupos de la experiencia** lado a lado.
+- **Proyectos** en tres columnas; **competencias** en tarjetas por grupo, en dos columnas.
+- **Formación** junto a **Otra experiencia** y **Certificaciones**.
+- En el celular y al imprimir todo vuelve a una columna. En escritorio la página pasa de 7,550 a
+  6,553 px de alto.
+
 ## 2026-11-24 (tarde) — publicado en main
 
 ### Fondo y paleta del logotipo
