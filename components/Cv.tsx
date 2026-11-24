@@ -23,6 +23,7 @@ export default async function Cv({ lang }: { lang: Lang }) {
   const aqui = await url(en ? '/en' : '/');
   const titulo = `${d.profile.name} — ${d.role}`;
   const og = await url(asset('og.jpg'));
+  const mon = d.ui.monitor as Record<string, string>;
 
   const ld = {
     '@context': 'https://schema.org',
@@ -103,12 +104,31 @@ export default async function Cv({ lang }: { lang: Lang }) {
               <button type="button" className="btn ghost" id="compartir" hidden>{String(d.ui.compartir)}</button>
             </p>
           </div>
-          <aside className="enfoque" aria-labelledby="enfoque-titulo">
-            <p className="enfoque-titulo" id="enfoque-titulo">{d.sections.focus}</p>
-            <ul>
-              {d.focus.map((f) => <li key={f.label}><Icono nombre={f.icon} />{f.label}</li>)}
-            </ul>
-          </aside>
+          <div className="hero-lateral">
+            {/* Monitor de señal: oculto sin JavaScript; public/assets/monitor.js lo enciende. */}
+            <figure className="monitor" id="monitor" hidden aria-labelledby="monitor-titulo">
+              <figcaption className="monitor-cab">
+                <span className="led" aria-hidden="true"></span>
+                <span id="monitor-titulo">{mon.titulo}</span>
+                <button type="button" className="monitor-btn" id="monitor-pausa" aria-pressed="false">{mon.pausa}</button>
+              </figcaption>
+              <canvas className="monitor-onda" id="monitor-onda" aria-hidden="true"></canvas>
+              <canvas className="monitor-fft" id="monitor-fft" aria-hidden="true"></canvas>
+              <dl className="monitor-datos">
+                <div><dt>f₀</dt><dd id="monitor-f0">—</dd></div>
+                <div><dt>RMS</dt><dd id="monitor-rms">—</dd></div>
+                <div><dt>fs</dt><dd>200 Hz</dd></div>
+                <div><dt>{en ? 'state' : 'estado'}</dt><dd id="monitor-estado">{mon.reposo}</dd></div>
+              </dl>
+              <p className="monitor-nota">{mon.nota}</p>
+            </figure>
+            <aside className="enfoque" aria-labelledby="enfoque-titulo">
+              <p className="enfoque-titulo" id="enfoque-titulo">{d.sections.focus}</p>
+              <ul>
+                {d.focus.map((f) => <li key={f.label}><Icono nombre={f.icon} />{f.label}</li>)}
+              </ul>
+            </aside>
+          </div>
         </div>
       </header>
 
@@ -149,7 +169,7 @@ export default async function Cv({ lang }: { lang: Lang }) {
         </section>
 
         <div className="buscador" id="buscador" role="search" hidden>
-          <label htmlFor="q">{String(d.ui.buscar)}</label>
+          <label htmlFor="q">{String(d.ui.buscar)} <span className="atajo">{mon.atajo}</span></label>
           <div className="buscador-fila">
             <input type="search" id="q" placeholder={String(d.ui.buscar_ph)} autoComplete="off" spellCheck={false} aria-describedby="q-estado q-ayuda" />
             <button type="button" className="limpiar" id="q-limpiar" hidden>{String(d.ui.limpiar)}</button>

@@ -15,6 +15,8 @@
   --suave-acento: #eaf5ec;
   --borde-acento: #cde6d3;
   --fondo-opacidad: 0.09;
+  --vidrio: rgba(255, 255, 255, 0.8);
+  --mono: ui-monospace, "SFMono-Regular", "Cascadia Code", Consolas, "Liberation Mono", monospace;
   --ink: #22252b;
   --grey: #5a6070;
   --line: #e1e6ee;
@@ -301,13 +303,13 @@ a:focus-visible, summary:focus-visible, .btn:focus-visible {
     color-scheme: dark;
     --navy: #d6e2f3; --navy-d: #061026; --blue: #5cc27a; --blue-l: #8fd6a1; --ink: #e4e8ef;
     --grey: #9aa6ba; --line: #22324f; --bg: #0a1426; --bg-soft: #12203a; --oro: #e6bc4a;
-    --suave-acento: #163323; --borde-acento: #245a35; --fondo-opacidad: 0.13;
+    --suave-acento: #163323; --borde-acento: #245a35; --fondo-opacidad: 0.13; --vidrio: rgba(14, 27, 51, 0.72);
   }
   :root:not([data-theme="light"]) body { background: var(--bg); color: var(--ink); }
   :root:not([data-theme="light"]) .hero { background: linear-gradient(160deg, #10284f 0%, #061026 100%); }
   :root:not([data-theme="light"]) .hero h1 { color: #f2f5fa; }
   :root:not([data-theme="light"]) .nav { background: rgba(10, 20, 38, 0.92); }
-  :root:not([data-theme="light"]) .card { background: #0e1b33; }
+  :root:not([data-theme="light"]) .card { background: var(--vidrio); }
   :root:not([data-theme="light"]) .card.featured { background: var(--bg-soft); }
   :root:not([data-theme="light"]) .btn { color: #06120a; }
   :root:not([data-theme="light"]) .btn.ghost { color: #fff; }
@@ -320,13 +322,13 @@ a:focus-visible, summary:focus-visible, .btn:focus-visible {
   color-scheme: dark;
   --navy: #d6e2f3; --navy-d: #061026; --blue: #5cc27a; --blue-l: #8fd6a1; --ink: #e4e8ef;
   --grey: #9aa6ba; --line: #22324f; --bg: #0a1426; --bg-soft: #12203a; --oro: #e6bc4a;
-  --suave-acento: #163323; --borde-acento: #245a35; --fondo-opacidad: 0.13;
+  --suave-acento: #163323; --borde-acento: #245a35; --fondo-opacidad: 0.13; --vidrio: rgba(14, 27, 51, 0.72);
 }
 :root[data-theme="dark"] body { background: var(--bg); color: var(--ink); }
 :root[data-theme="dark"] .hero { background: linear-gradient(160deg, #10284f 0%, #061026 100%); }
 :root[data-theme="dark"] .hero h1 { color: #f2f5fa; }
 :root[data-theme="dark"] .nav { background: rgba(10, 20, 38, 0.92); }
-:root[data-theme="dark"] .card { background: #0e1b33; }
+:root[data-theme="dark"] .card { background: var(--vidrio); }
 :root[data-theme="dark"] .card.featured { background: var(--bg-soft); }
 :root[data-theme="dark"] .btn { color: #06120a; }
 :root[data-theme="dark"] .btn.ghost { color: #fff; }
@@ -539,4 +541,115 @@ li.coincide { box-shadow: none; }
   .enfoque li, .enfoque-titulo { color: #000; }
   .grupos, .skills-grid, .edu-grid, .logros, .cards { display: block; }
   .grupo, .skills-grid .skillrow, .ficha { border: 0; padding: 0; }
+}
+
+
+/* ---------- Diseño tecnológico: instrumento de medición ---------- */
+
+/* Encabezado con retícula de osciloscopio */
+.hero { position: relative; overflow: hidden; }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at 70% 40%, #000 30%, transparent 85%);
+}
+.hero .wrap { position: relative; }
+.hero-lateral { flex: 0 0 340px; display: grid; gap: 14px; }
+.hero-lateral .enfoque { flex: none; }
+
+/* Monitor SHM (canvas): siempre sobre el azul del encabezado, igual en los dos temas */
+.monitor {
+  --monitor-onda: #5cc27a;
+  --monitor-barra: #d4a52a;
+  --monitor-reticula: rgba(255, 255, 255, .07);
+  --monitor-texto: rgba(255, 255, 255, .5);
+  margin: 0;
+  padding: 10px 14px 10px;
+  border: 1px solid rgba(92, 194, 122, .35);
+  border-radius: var(--radius);
+  background: rgba(3, 10, 24, .55);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .25);
+  font-family: var(--mono);
+  color: #cfe3d6;
+  transition: border-color .3s;
+}
+.monitor.alerta { --monitor-onda: #e6bc4a; border-color: rgba(230, 188, 74, .85); }
+.monitor-cab { display: flex; align-items: center; gap: 8px; font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; color: var(--oro); margin-bottom: 6px; }
+.led { width: 8px; height: 8px; flex: none; border-radius: 50%; background: #5cc27a; box-shadow: 0 0 8px #5cc27a; animation: latido 1.6s ease-in-out infinite; }
+.monitor.alerta .led { background: #e6bc4a; box-shadow: 0 0 10px #e6bc4a; animation-duration: .5s; }
+@keyframes latido { 50% { opacity: .3; } }
+.monitor-btn {
+  margin-left: auto; min-height: 44px; padding: 0 10px;
+  font: inherit; font-size: 0.66rem; letter-spacing: 1px; text-transform: uppercase;
+  color: #cfe3d6; background: transparent; border: 1px solid rgba(255, 255, 255, .2); border-radius: 6px; cursor: pointer;
+}
+.monitor-btn:hover { border-color: var(--oro); color: #fff; }
+.monitor-btn:focus-visible { outline: 2px solid var(--oro); outline-offset: 2px; }
+.monitor-onda { display: block; width: 100%; height: 84px; }
+.monitor-fft { display: block; width: 100%; height: 52px; margin-top: 6px; }
+.monitor-datos { display: grid; grid-template-columns: repeat(4, auto); justify-content: space-between; gap: 2px 10px; margin: 8px 0 2px; }
+.monitor-datos dt { font-size: 0.6rem; letter-spacing: .8px; text-transform: uppercase; color: rgba(255, 255, 255, .45); }
+.monitor-datos dd { margin: 0; font-size: 0.74rem; color: #eef4ff; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.monitor-nota { margin: 4px 0 0; font-size: 0.64rem; line-height: 1.4; color: rgba(255, 255, 255, .45); }
+
+/* Títulos de sección numerados, como canales de un instrumento */
+main { counter-reset: seccion; }
+main section > h2::before {
+  counter-increment: seccion;
+  content: counter(seccion, decimal-leading-zero) " // ";
+  font-family: var(--mono);
+  font-size: 0.8em;
+  font-weight: 600;
+  color: var(--oro);
+}
+
+/* Datos técnicos en monoespaciada */
+.period, .card .fecha, .tech li, h4, .enfoque-titulo, .ficha h3, .chips.stats li { font-family: var(--mono); }
+.period { letter-spacing: .3px; }
+h4 { font-size: 0.74rem; }
+
+/* Tarjetas de vidrio */
+.card, .grupo, .skills-grid .skillrow, .ficha { background: var(--vidrio); backdrop-filter: blur(6px); }
+
+/* Brillo que sigue al cursor (cv.js pone --x y --y) */
+.brillo { position: relative; }
+.brillo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(240px circle at var(--x, 50%) var(--y, 50%), rgba(212, 165, 42, .16), transparent 65%);
+  opacity: 0;
+  transition: opacity .25s;
+}
+.brillo:hover::after { opacity: 1; }
+.brillo:hover { border-color: rgba(212, 165, 42, .55); }
+
+/* Secciones que aparecen al llegar (solo con JavaScript: cv.js pone .revelar) */
+.revelar { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.revelar.visible { opacity: 1; transform: none; }
+
+/* Aviso del atajo del buscador */
+.atajo { margin-left: 6px; padding: 1px 6px; font-family: var(--mono); font-size: 0.68rem; font-weight: 400; color: var(--grey); border: 1px solid var(--line); border-radius: 4px; }
+@media (hover: none) { .atajo { display: none; } }
+
+@media (max-width: 900px) {
+  .hero-lateral { flex: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .led { animation: none; }
+  .revelar { opacity: 1; transform: none; }
+}
+@media print {
+  .monitor, .hero::before, .atajo { display: none; }
+  .revelar { opacity: 1 !important; transform: none !important; }
+  .card, .grupo, .skills-grid .skillrow, .ficha { backdrop-filter: none; background: none; }
 }
