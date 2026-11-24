@@ -129,6 +129,8 @@ for (const [ruta, lang] of [['/', 'es'], ['/en', 'en']] as const) {
   const sinSimbolo = [...new Set(usos.map((u) => u.split('#')[1]))].filter((id) => !sprite.includes(`<symbol id="${id}"`));
   ok(usos.length > 50 && usos.every((u) => /^\/assets\/iconos\.svg\?v=[0-9a-f]{8}#[\w-]+$/.test(u)) && sinSimbolo.length === 0,
     `${ruta}: los ${usos.length} íconos usan el sprite y todos sus símbolos existen` + (sinSimbolo.length ? ` (faltan ${sinSimbolo.join(', ')})` : ''));
+  const sinIcono = q('li').filter((li) => li.querySelector('use[href$="#g-cubo"]')).map((li) => li.textContent?.trim());
+  ok(sinIcono.length === 0, `${ruta}: cada tecnología tiene logotipo o ícono propio` + (sinIcono.length ? ` (con el genérico: ${sinIcono.join(', ')})` : ''));
   // (El sol y la luna del botón de tema siguen en línea: son dos y solo aparecen una vez.)
   ok(q('svg.tico path, svg.ico path').length === 0, `${ruta}: el HTML no repite trazos de íconos`);
   const kb = Math.round(Buffer.byteLength(r.body) / 1024);
