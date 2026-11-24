@@ -1,4 +1,4 @@
-// Genera src/iconos.php con los logotipos de las tecnologías que aparecen en el CV.
+// Genera lib/iconos.ts con los logotipos de las tecnologías que aparecen en el CV.
 //
 //   cd herramientas && npm i --no-save simple-icons@16.30.0 && node iconos.mjs
 //
@@ -14,6 +14,7 @@ const SLUGS = {
   'C/C++': 'cplusplus',
   'C++': 'cplusplus',
   'JavaScript': 'javascript',
+  'TypeScript': 'typescript',
   'Node.js': 'nodedotjs',
   'PHP': 'php',
   'Bash': 'gnubash',
@@ -74,21 +75,16 @@ for (const [nombre, slug] of Object.entries(SLUGS)) {
   if (!i) { faltan.push(`${nombre} (${slug})`); continue; }
   const L = luminancia(i.hex);
   const color = L < 0.03 || L > 0.8 ? 'currentColor' : '#' + i.hex;
-  filas.push(`    '${nombre.replace(/'/g, "\\'")}' => ['${color}', '${i.path}'],`);
+  filas.push(`  '${nombre.replace(/'/g, "\\'")}': ['${color}', '${i.path}'],`);
 }
 
-const php = `<?php
-declare(strict_types=1);
-
-/**
- * Logotipos de tecnologías (Simple Icons, CC0 1.0). ARCHIVO GENERADO por
- * herramientas/iconos.mjs: no editar a mano.
- * nombre => [color de relleno, trazo SVG en una caja de 24×24]
- */
-const TECH_ICONS = [
+const ts = `// Logotipos de tecnologías (Simple Icons, CC0 1.0). ARCHIVO GENERADO por
+// herramientas/iconos.mjs: no editar a mano.
+// nombre => [color de relleno, trazo SVG en una caja de 24×24]
+export const TECH_ICONS: Record<string, [string, string]> = {
 ${filas.join('\n')}
-];
+};
 `;
-writeFileSync(new URL('../src/iconos.php', import.meta.url), php);
-console.log(`src/iconos.php: ${filas.length} íconos`);
+writeFileSync(new URL('../lib/iconos.ts', import.meta.url), ts);
+console.log(`lib/iconos.ts: ${filas.length} íconos`);
 if (faltan.length) console.log('No están en Simple Icons (se usará un ícono genérico):', faltan.join(', '));
