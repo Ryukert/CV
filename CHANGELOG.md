@@ -2,6 +2,8 @@
 
 ## [Sin publicar]
 
+## 2026-11-24 (íconos) — publicado en main
+
 ### HTML más ligero: íconos en un sprite SVG
 
 - Los trazos de los íconos (logotipos de tecnologías, contacto, áreas de enfoque y genéricos) pasan
