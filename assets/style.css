@@ -491,3 +491,39 @@ li.coincide { box-shadow: none; }
   .area { break-inside: avoid; }
   .entry, .card { break-inside: avoid; }
 }
+
+/* ---------- Estilo portafolio: íconos de tecnología, fechas, idiomas y pie ---------- */
+.tico { width: 18px; height: 18px; flex: none; }
+.tico.generico { color: var(--blue); }
+
+/* Competencias como mosaico con logotipo */
+.chips.iconos { gap: 8px; }
+.chips.iconos li { display: flex; align-items: center; gap: 7px; padding: 6px 11px; font-size: 0.82rem; border-radius: 8px; background: var(--bg); }
+#skills .chips.iconos li { padding: 0; }
+#skills .chips.iconos .filtro { display: flex; align-items: center; gap: 7px; padding: 6px 11px; min-height: 36px; }
+#skills .chips.iconos .filtro[aria-pressed="true"] .tico { filter: brightness(0) invert(1); }
+
+/* Tecnologías de cada proyecto y de la experiencia */
+.tech { list-style: none; padding: 0; margin: 10px 0 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+.tech li { display: inline-flex; align-items: center; gap: 5px; margin: 0; padding: 3px 8px 3px 6px; font-size: 0.74rem; color: var(--grey); background: var(--bg-soft); border: 1px solid var(--line); border-radius: 999px; }
+.tech .tico { width: 14px; height: 14px; }
+.card .tech { margin: 0 0 10px; }
+.card .fecha { margin: 0 0 4px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; color: var(--blue); }
+
+/* Acerca de mí: idiomas */
+.idiomas { list-style: none; padding: 0; margin: -8px 0 22px; display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 0.88rem; color: var(--grey); }
+.idiomas li { margin: 0; }
+.idiomas strong { color: var(--navy); }
+
+/* Pie: menú y redes */
+.pie-nav { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 12px; }
+.pie-nav a { color: var(--grey); text-decoration: none; font-weight: 600; }
+.pie-nav a:hover { color: var(--blue); }
+.pie-redes { display: flex; gap: 6px; margin: 0 0 12px !important; }
+.pie-redes a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%; color: var(--navy); }
+.pie-redes a:hover { border-color: var(--blue); color: var(--blue); }
+.pie-redes .ico { width: 18px; height: 18px; margin: 0; }
+
+@media print {
+  .tech li { border: 0; padding: 0 6px 0 0; background: none; }
+}

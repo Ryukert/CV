@@ -30,7 +30,8 @@ Bilingüe (español e inglés), servido desde una única fuente de datos, con en
 ├── assets/                # CSS, JS (cv.js, tema.js), fuente y PDFs (servidos estáticamente)
 │   └── fonts/             # IBM Plex Sans (SIL OFL), servida por el sitio
 ├── herramientas/
-│   └── rendercv.php       # exporta data.php a RenderCV para PDFs por vacante
+│   ├── rendercv.php       # exporta data.php a RenderCV para PDFs por vacante
+│   └── iconos.mjs         # genera src/iconos.php (logotipos de tecnologías, Simple Icons CC0)
 ├── versiones/             # CVs adaptados a cada vacante (solo el README va a git)
 ├── tests/humo.php         # pruebas de humo (sin dependencias)
 ├── tests/navegador/       # pruebas en navegador de las funciones con JavaScript
@@ -41,6 +42,11 @@ Bilingüe (español e inglés), servido desde una única fuente de datos, con en
 
 **Para actualizar el CV solo se edita `src/data.php`.** El HTML de ambos idiomas y el JSON se
 regeneran solos. No hay contenido duplicado entre versiones.
+
+Cada proyecto lleva `date` (mes de inicio, `AAAA-MM`) y se ordena solo del más reciente al más
+antiguo. Las tecnologías de `stack` y de las competencias se muestran con su logotipo: si una
+tecnología nueva no tiene ícono, se agrega a `SLUGS` en `herramientas/iconos.mjs` y se corre
+`cd herramientas && npm i --no-save simple-icons@16.30.0 && node iconos.mjs`.
 
 ## Desarrollo local
 

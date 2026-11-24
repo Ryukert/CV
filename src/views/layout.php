@@ -103,8 +103,15 @@
 
 <main class="wrap" id="main">
 
-  <section class="summary" id="about" aria-label="<?= e($d['nav']['about']) ?>">
+  <section class="summary" id="about">
+    <h2><?= e($d['sections']['about']) ?></h2>
     <p><?= e($d['summary']) ?></p>
+    <ul class="idiomas" aria-label="<?= e($d['sections']['langs']) ?>">
+      <?php foreach ($d['languages'] as $l): ?>
+        <?php [$idioma, $nivel] = array_map('trim', explode(':', $l, 2)) + [1 => '']; ?>
+        <li><strong><?= e($idioma) ?></strong> <?= e($nivel) ?></li>
+      <?php endforeach; ?>
+    </ul>
     <div class="metrics">
       <?php foreach ($d['metrics'] as $m): ?>
         <div class="metric">
@@ -144,6 +151,13 @@
         </div>
         <p class="org"><?= e($job['org']) ?></p>
         <p class="intro"><?= e($job['intro']) ?></p>
+        <?php if (!empty($job['tech'])): ?>
+          <ul class="tech" aria-label="<?= e($d['sections']['stack']) ?>">
+            <?php foreach ($d['experience_tech'][$job['tech']] as $t): ?>
+              <li><?= tech_icon($t) ?><?= e($t) ?></li>
+            <?php endforeach; ?>
+          </ul>
+        <?php endif; ?>
         <?php foreach ($job['groups'] as $g): ?>
           <h4><?= e($g['name']) ?></h4>
           <ul>
@@ -162,9 +176,14 @@
       <?php foreach ($d['projects'] as $pr): ?>
         <?php [$title, $desc] = $d['project_text'][$pr['key']]; ?>
         <article class="card<?= !empty($pr['featured']) ? ' featured' : '' ?><?= $pr['url'] ? ' has-link' : '' ?>">
+          <p class="fecha"><time datetime="<?= e($pr['date']) ?>"><?= e(mes_anio($pr['date'], $d['lang'])) ?></time><?= !empty($pr['ongoing']) ? ' – ' . e($d['sections']['present']) : '' ?></p>
           <h3><?= e($title) ?></h3>
-          <p class="stack"><?= e($pr['stack']) ?></p>
           <p><?= e($desc) ?></p>
+          <ul class="tech stack" aria-label="<?= e($d['sections']['stack']) ?>">
+            <?php foreach (explode(' · ', $pr['stack']) as $t): ?>
+              <li><?= tech_icon($t) ?><?= e($t) ?></li>
+            <?php endforeach; ?>
+          </ul>
           <?php if ($pr['url']): ?>
             <a class="repo" href="<?= e($pr['url']) ?>" rel="noopener"><?= e(short_repo($pr['url'])) ?></a>
           <?php endif; ?>
@@ -178,8 +197,8 @@
     <?php foreach ($d['skills'] as $group => $items): ?>
       <div class="skillrow">
         <h4><?= e($group) ?></h4>
-        <ul class="chips">
-          <?php foreach ($items as $i): ?><li><?= e($i) ?></li><?php endforeach; ?>
+        <ul class="chips iconos">
+          <?php foreach ($items as $i): ?><li><?= tech_icon($i) ?><?= e($i) ?></li><?php endforeach; ?>
         </ul>
       </div>
     <?php endforeach; ?>
@@ -249,10 +268,6 @@
         <h4><?= $d['lang'] === 'en' ? 'Certifications' : 'Certificaciones' ?></h4>
         <ul><?php foreach ($d['certs'] as $c): ?><li><?= e($c) ?></li><?php endforeach; ?></ul>
       </div>
-      <div>
-        <h4><?= $d['lang'] === 'en' ? 'Languages' : 'Idiomas' ?></h4>
-        <ul><?php foreach ($d['languages'] as $l): ?><li><?= e($l) ?></li><?php endforeach; ?></ul>
-      </div>
     </div>
   </section>
 
@@ -288,6 +303,17 @@
 
 <footer>
   <div class="wrap">
+    <nav class="pie-nav" aria-label="<?= $d['lang'] === 'en' ? 'Sections (footer)' : 'Secciones (pie)' ?>">
+      <?php foreach ($d['nav'] as $id => $label): ?>
+        <a href="#<?= e($id) ?>"><?= e($label) ?></a>
+      <?php endforeach; ?>
+    </nav>
+    <p class="pie-redes" aria-label="<?= e($d['sections']['social']) ?>">
+      <a href="<?= e($d['profile']['github']) ?>" rel="noopener" aria-label="GitHub" title="GitHub"><?= icon('github') ?></a>
+      <a href="<?= e($d['profile']['linkedin']) ?>" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><?= icon('linkedin') ?></a>
+      <a href="<?= e($d['profile']['orcid']) ?>" rel="noopener" aria-label="ORCID" title="ORCID"><?= icon('orcid') ?></a>
+      <a href="mailto:<?= e($d['profile']['email']) ?>" aria-label="<?= $d['lang'] === 'en' ? 'Email' : 'Correo' ?>" title="<?= $d['lang'] === 'en' ? 'Email' : 'Correo' ?>"><?= icon('mail') ?></a>
+    </p>
     <p><?= e($d['footer']) ?></p>
     <p><?= e($d['updated_label']) ?>: <time datetime="<?= e(CV_UPDATED) ?>"><?= e($d['updated']) ?></time> · <a href="/api/cv.json?lang=<?= e($d['lang']) ?>">/api/cv.json</a></p>
   </div>

@@ -2,6 +2,19 @@
 
 ## [Sin publicar]
 
+### Estilo portafolio y todos los repos de GitHub
+- **Competencias con logotipo** de cada tecnología (Simple Icons, CC0, servidos por el sitio); las
+  que no tienen logo llevan un ícono por tipo (señales, IA, hardware, datos, APIs, terminal).
+- **Proyectos con fecha** (mes de inicio según GitHub) y su fila de tecnologías con ícono; se ordenan
+  del más reciente al más antiguo, con el SHM-IoT destacado primero.
+- La experiencia muestra las tecnologías que usa.
+- Sección **Acerca de mí** con los idiomas y su nivel (salen de Formación).
+- **Pie** con el menú de secciones y botones de GitHub, LinkedIn, ORCID y correo.
+- Cuatro proyectos nuevos: **Predictor de mortero calibrado**, **SysReview PRISMA**, **Micrositio
+  IEPC Guerrero** y **Simulador de red SHM-IoT**. La red SHM georreferenciada se describe con lo que
+  hace hoy (9 planteles en Tijuana, 32 edificios en Guerrero, STA/LTA).
+- `herramientas/iconos.mjs` genera `src/iconos.php`.
+
 ### Logros clave y PDF al día
 - Sección **Logros clave** en la web (estaba solo en el PDF), con un quinto logro: la plataforma
   web de riesgo sísmico (5 ciudades, 370 establecimientos CLUES, 152 pruebas automáticas).

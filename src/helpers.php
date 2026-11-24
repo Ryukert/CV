@@ -47,6 +47,76 @@ function icon(string $name): string
 }
 
 /**
+ * Ícono de una tecnología tal como se escribe en data.php («React 18», «Linux / Ubuntu Server»,
+ * «Pruebas en navegador (Puppeteer)»…). Usa el logotipo de Simple Icons (src/iconos.php) y, si
+ * no hay, un ícono genérico según el tipo (señales, IA, hardware, datos, APIs, terminal).
+ */
+function tech_icon(string $label): string
+{
+    require_once __DIR__ . '/iconos.php';
+
+    // Candidatos: cada parte separada por « / » y lo que va entre paréntesis.
+    preg_match_all('/\(([^)]*)\)/', $label, $par);
+    $base = trim(preg_replace('/\s*\([^)]*\)\s*/', ' ', $label));
+    $partes = array_merge([$base], preg_split('#\s+/\s+#', $base), $par[1]);
+
+    foreach ($partes as $p) {
+        if (isset(TECH_ICONS[$p])) {
+            [$color, $d] = TECH_ICONS[$p];
+            return '<svg class="tico" viewBox="0 0 24 24" aria-hidden="true" fill="' . $color . '"><path d="' . $d . '"/></svg>';
+        }
+    }
+    // Prefijo más largo: «Vercel Functions» → Vercel, «Arduino Nano RP2040» → Arduino.
+    $mejor = null;
+    foreach ($partes as $p) {
+        foreach (array_keys(TECH_ICONS) as $k) {
+            if (str_starts_with($p, $k . ' ') && ($mejor === null || strlen($k) > strlen($mejor))) {
+                $mejor = $k;
+            }
+        }
+    }
+    if ($mejor !== null) {
+        [$color, $d] = TECH_ICONS[$mejor];
+        return '<svg class="tico" viewBox="0 0 24 24" aria-hidden="true" fill="' . $color . '"><path d="' . $d . '"/></svg>';
+    }
+
+    $genericos = [
+        'onda'     => ['/FFT|PSD|Welch|RMS|filtr|filter|series|Matplotlib|señal|signal/iu',
+                       '<path d="M2 12h3l3-8 4 16 4-12 2 4h4"/>'],
+        'red'      => ['/learning|visi[oó]n|vision|big data|atributo|feature|IA\b|AI\b/iu',
+                       '<circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="12" r="2"/><path d="m7 6.8 10 4.4M7 17.2l10-4.4"/>'],
+        'chip'     => ['/MEMS|I2C|SPI|UART|sensor/i',
+                       '<rect x="6" y="6" width="12" height="12" rx="1.5"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>'],
+        'mapa'     => ['/GeoJSON|mapa|map/i',
+                       '<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/>'],
+        'datos'    => ['/SQL|base de datos|database/i',
+                       '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>'],
+        'api'      => ['/REST|API/i',
+                       '<path d="M8 3H7a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1M16 3h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-1"/>'],
+        'terminal' => ['/SSH|systemd|shell/i',
+                       '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m6 9 3 3-3 3M12 15h6"/>'],
+    ];
+    $trazo = '<circle cx="12" cy="12" r="3"/>';
+    foreach ($genericos as [$re, $svg]) {
+        if (preg_match($re, $label)) {
+            $trazo = $svg;
+            break;
+        }
+    }
+    return '<svg class="tico generico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' . $trazo . '</svg>';
+}
+
+/** «2026-11» → «nov 2026» (es) o «Nov 2026» (en). */
+function mes_anio(string $ym, string $lang): string
+{
+    [$y, $m] = array_map('intval', explode('-', $ym));
+    $meses = $lang === 'en'
+        ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        : ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+    return $meses[$m - 1] . ' ' . $y;
+}
+
+/**
  * Convierte una ruta interna en URL absoluta.
  * Necesario para canonical, hreflang, sitemap y las etiquetas Open Graph.
  *

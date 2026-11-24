@@ -8,7 +8,7 @@ declare(strict_types=1);
  */
 
 /** Fecha de la última actualización del contenido (sitemap, pie de página y /health). */
-const CV_UPDATED = '2026-11-13';
+const CV_UPDATED = '2026-11-24';
 
 const PROFILE = [
     'name'    => 'Marco Antonio Adame Rodríguez',
@@ -49,69 +49,114 @@ const SHARED = [
             'url'     => 'https://revistas.udistrital.edu.co/index.php/vinculos/article/view/24607',
         ],
     ],
+    // 'date' es el mes en que empezó el proyecto (primer commit en GitHub); 'ongoing' si sigue
+    // en curso. Se muestran del más reciente al más antiguo, con el destacado primero.
     'projects' => [
         [
             'key'      => 'shm',
             'pdf'   => true,
             'stack'    => 'Python · C++ · Raspberry Pi · PyQt5',
             'url'      => null,
+            'date'     => '2024-08',
+            'ongoing'  => true,
             'featured' => true,
+        ],
+        [
+            'key'   => 'mortero',
+            'pdf'   => true,
+            'stack' => 'React · Tailwind CSS · PWA · Vercel',
+            'url'   => 'https://predictor-mortero-calibrado.vercel.app',
+            'date'  => '2026-11',
+        ],
+        [
+            'key'   => 'prisma',
+            'pdf'   => true,
+            'stack' => 'Python · CustomTkinter · Pandas · RapidFuzz',
+            'url'   => 'https://github.com/Ryukert/PRISMA-',
+            'date'  => '2026-11',
+        ],
+        [
+            'key'   => 'micrositio',
+            'stack' => 'HTML · CSS · JavaScript · Vercel',
+            'url'   => 'https://maqueta-chi.vercel.app',
+            'date'  => '2026-11',
         ],
         [
             'key'   => 'ecosistema',
             'pdf'   => true,
             'stack' => 'JavaScript · Leaflet · Supabase · PWA · GitHub Actions',
             'url'   => 'https://ecosistemariesgosismicotijuana.vercel.app',
+            'date'  => '2026-10',
         ],
         [
             'key'   => 'ivbc',
             'pdf'   => true,
             'stack' => 'JavaScript · Preact · Supabase · Vercel Functions · GeoJSON',
             'url'   => 'https://iv-bc-sitio.vercel.app',
+            'date'  => '2026-10',
         ],
         [
             'key'   => 'game',
             'stack' => 'React 18 · Vite · Claude API · Vercel',
             'url'   => 'https://github.com/Ryukert/JUEGO-DE-GRENCITO-Y-SISMOTECNITO',
+            'date'  => '2026-09',
+        ],
+        [
+            'key'   => 'attendance',
+            'stack' => 'JavaScript · Supabase · Vercel',
+            'url'   => 'https://github.com/Ryukert/SECUNDARIA-IMA',
+            'date'  => '2026-09',
         ],
         [
             'key'   => 'trading',
             'stack' => 'Python · PySide6',
             'url'   => 'https://github.com/Ryukert/trading-',
+            'date'  => '2026-08',
+        ],
+        [
+            'key'   => 'cv',
+            'stack' => 'PHP · Vercel · JSON API · GitHub Actions',
+            'url'   => 'https://github.com/Ryukert/CV',
+            'date'  => '2026-08',
         ],
         [
             'key'   => 'gps',
             'pdf'   => true,
             'stack' => 'JavaScript · Vercel',
             'url'   => 'https://github.com/Ryukert/SHM_GPS_NETWORK_DASH_elite',
+            'date'  => '2026-05',
         ],
         [
-            'key'   => 'attendance',
-            'stack' => 'JavaScript · Supabase · Vercel',
-            'url'   => 'https://github.com/Ryukert/SECUNDARIA-IMA',
+            'key'   => 'shmsim',
+            'stack' => 'Next.js · React · Recharts',
+            'url'   => 'https://github.com/Ryukert/shm-network-web2.1',
+            'date'  => '2026-05',
+        ],
+        [
+            'key'   => 'crm',
+            'stack' => 'JavaScript · Vercel',
+            'url'   => 'https://github.com/Ryukert/joyeria-crm',
+            'date'  => '2026-03',
         ],
         [
             'key'   => 'supabase',
             'pdf'   => true,
             'stack' => 'JavaScript · Supabase · PostgreSQL',
             'url'   => 'https://github.com/Ryukert/MIIDT_SUPABASE_DASH',
+            'date'  => '2026-02',
         ],
         [
             'key'   => 'api',
             'pdf'   => true,
             'stack' => 'Python · FastAPI',
             'url'   => 'https://github.com/Ryukert/APIAceleraciones',
+            'date'  => '2024-10',
         ],
-        [
-            'key'   => 'crm',
-            'stack' => 'JavaScript · Vercel',
-            'url'   => 'https://github.com/Ryukert/joyeria-crm',
-        ],
-        [
-            'key'   => 'cv',
-            'stack' => 'PHP · Vercel · JSON API · GitHub Actions',
-            'url'   => 'https://github.com/Ryukert/CV',
-        ],
+    ],
+    // Tecnologías que se muestran con ícono bajo cada experiencia (mismas en los dos idiomas).
+    'experience_tech' => [
+        'shm' => ['Python', 'C++', 'Arduino Nano RP2040', 'Raspberry Pi', 'ESP32', 'NumPy', 'SciPy', 'PyQt5',
+                  'FastAPI', 'Ubuntu Server', 'Docker', 'Vercel'],
     ],
     'metrics' => [
         ['value' => '200 Hz', 'key' => 'sampling'],
@@ -131,7 +176,7 @@ function cv_data(string $lang): array
         'location'  => 'Chilpancingo, Guerrero, México (GMT-6)',
         'available' => 'Disponible para trabajo remoto con horario de EE. UU. y Europa',
         'meta_desc' => 'CV de Marco Antonio Adame Rodríguez, ingeniero en sistemas IoT y embebidos, procesamiento digital de señales y monitoreo de salud estructural.',
-        'nav'       => ['about' => 'Perfil', 'logros' => 'Logros', 'exp' => 'Experiencia', 'projects' => 'Proyectos', 'skills' => 'Competencias', 'pubs' => 'Publicaciones', 'edu' => 'Formación', 'areas' => 'Áreas', 'contact' => 'Contacto'],
+        'nav'       => ['about' => 'Acerca de mí', 'logros' => 'Logros', 'exp' => 'Experiencia', 'projects' => 'Proyectos', 'skills' => 'Competencias', 'pubs' => 'Publicaciones', 'edu' => 'Formación', 'areas' => 'Áreas', 'contact' => 'Contacto'],
         'cta_pdf'   => 'Descargar CV en PDF',
         'cta_design'=> 'Versión con diseño',
         'switch'    => 'English',
@@ -144,6 +189,11 @@ function cv_data(string $lang): array
             'papers'   => 'Artículos arbitrados',
         ],
         'sections'  => [
+            'about'    => 'Acerca de mí',
+            'langs'    => 'Idiomas',
+            'stack'    => 'Tecnologías',
+            'present'  => 'actualidad',
+            'social'   => 'Redes',
             'logros'   => 'Logros clave',
             'exp'      => 'Experiencia en investigación y desarrollo',
             'pubs'     => 'Publicaciones y ponencias',
@@ -165,6 +215,7 @@ function cv_data(string $lang): array
             'period' => 'Ago 2024 – Actualidad',
             'org'    => 'Universidad Autónoma de Guerrero (UAGro) · Maestría MIIDT',
             'title'  => 'Investigador y desarrollador principal — Sistema SHM-IoT',
+            'tech'   => 'shm',
             'intro'  => 'Diseño e implementación de extremo a extremo de una solución de bajo costo para monitoreo de salud estructural en obras civiles, validada en campo frente a los equipos comerciales GEA y P-Alert.',
             'groups' => [
                 ['name' => 'Adquisición, firmware y hardware', 'items' => [
@@ -194,7 +245,11 @@ function cv_data(string $lang): array
             'shm'      => ['SHM-IoT MIIDT — Monitoreo estructural de bajo costo', 'Arquitectura integral de adquisición, almacenamiento, análisis y visualización de aceleraciones en estructuras civiles, probada en campo contra sensores comerciales.'],
             'ecosistema' => ['Ecosistema de riesgo sísmico de Tijuana', 'Tablero web que une amenaza sísmica, suelo, estaciones, mapas de aceleración, inspección y difusión sobre una sola base de datos en Supabase. Calcula rutas a hospitales y servicios de emergencia por calles reales (OpenStreetMap, Dijkstra) en cinco ciudades de Baja California con el catálogo oficial CLUES, funciona sin internet como app instalable y se publica con versiones semánticas y pruebas automáticas en cada cambio.'],
             'ivbc'       => ['Infraestructura Verde · Baja California', 'Dashboard de 36 técnicas de infraestructura verde por municipio, con consulta por punto sobre capas GeoJSON y búsqueda de direcciones, panel de edición con inicio de sesión, reportes en PDF y CSV, modo sin conexión y contador de visitas en Supabase.'],
-            'gps'      => ['Red de monitoreo SHM con georreferenciación', 'Dashboard web para visualizar ubicación y estado de los nodos distribuidos, con despliegue público continuo.'],
+            'mortero'    => ['Predictor de mortero calibrado (NTC-DECM)', 'Calculadora web de dosificación y resistencia de morteros calibrada con las Normas Técnicas Complementarias (NTC-DECM). Funciona sin internet y se instala como app; al compilar React y Tailwind dentro del proyecto, la carga pasó de 964 KB a 173 KB y de 7.8 s a 2 s en 4G lento, con pruebas en Chrome sin ventana.'],
+            'prisma'     => ['SysReview PRISMA — cribado de revisiones sistemáticas', 'Aplicación de escritorio para revisiones sistemáticas según PRISMA 2020: combina exportaciones de Scopus, Web of Science, IEEE y Lens (CSV, Excel y texto), elimina duplicados por títulos similares, aplica un cribado automático configurable, guía la revisión manual y genera el diagrama de flujo.'],
+            'micrositio' => ['Micrositio «Guerrero en el extranjero» — IEPC Guerrero', 'Maqueta bilingüe (español e inglés) del micrositio del Instituto Electoral y de Participación Ciudadana de Guerrero dirigido a la ciudadanía guerrerense en el extranjero, con página de eventos, publicada en Vercel para la revisión del diseño.'],
+            'shmsim'     => ['Simulador de red SHM-IoT', 'Dashboard en Next.js que simula una red de sensores SHM georreferenciados por GPS: ubicación, estado, batería y satélites de cada nodo, y RMS por eje y frecuencia dominante en gráficas en tiempo real; listo para conectarse a Supabase o a una API propia.'],
+            'gps'      => ['Red de monitoreo SHM con georreferenciación', 'Panel de monitoreo de la red FCITEC-UABC (SHM + P-Alert) sobre una red simulada de 9 planteles en Tijuana y 32 edificios en Guerrero, con efecto de sitio por tipo de suelo; calcula RMS, PGA, espectro y detección STA/LTA sobre la señal unificada de tres sensores.'],
             'supabase' => ['Dashboard de sensores sobre Supabase', 'Aplicación web para envío, consulta y visualización de mediciones almacenadas en la nube.'],
             'api'      => ['APIs de telemetría para nodos ESP32', 'Servicios REST para recepción, persistencia y consulta de datos de aceleración, con graficación científica.'],
             'game'       => ['Escuadrón Tecnito y Greencito — juego educativo con IA', 'Juego por turnos para grupos de primaria y secundaria: dos mascotas conversan con Claude para enseñar protección civil ante sismos y cuidado del medio ambiente. La API key queda en una función serverless.'],
@@ -401,7 +456,7 @@ function cv_data(string $lang): array
         'location'  => 'Mexico (GMT-6)',
         'available' => 'Available for remote work with US and European overlap',
         'meta_desc' => 'CV of Marco Antonio Adame Rodríguez, IoT and embedded systems engineer working on digital signal processing and structural health monitoring.',
-        'nav'       => ['about' => 'Profile', 'logros' => 'Achievements', 'exp' => 'Experience', 'projects' => 'Projects', 'skills' => 'Skills', 'pubs' => 'Publications', 'edu' => 'Education', 'areas' => 'Areas', 'contact' => 'Contact'],
+        'nav'       => ['about' => 'About me', 'logros' => 'Achievements', 'exp' => 'Experience', 'projects' => 'Projects', 'skills' => 'Skills', 'pubs' => 'Publications', 'edu' => 'Education', 'areas' => 'Areas', 'contact' => 'Contact'],
         'cta_pdf'   => 'Download CV as PDF',
         'cta_design'=> 'Designed version',
         'switch'    => 'Español',
@@ -414,6 +469,11 @@ function cv_data(string $lang): array
             'papers'   => 'Peer-reviewed papers',
         ],
         'sections'  => [
+            'about'    => 'About me',
+            'langs'    => 'Languages',
+            'stack'    => 'Technologies',
+            'present'  => 'present',
+            'social'   => 'Social',
             'logros'   => 'Key achievements',
             'exp'      => 'Research & development experience',
             'pubs'     => 'Publications & talks',
@@ -435,6 +495,7 @@ function cv_data(string $lang): array
             'period' => 'Aug 2024 – Present',
             'org'    => 'Autonomous University of Guerrero (UAGro) · MIIDT graduate program',
             'title'  => 'Lead Researcher and Developer — SHM-IoT System',
+            'tech'   => 'shm',
             'intro'  => 'End-to-end design and implementation of a low-cost structural health monitoring solution for civil works, field-validated against commercial GEA and P-Alert equipment.',
             'groups' => [
                 ['name' => 'Acquisition, firmware and hardware', 'items' => [
@@ -464,7 +525,11 @@ function cv_data(string $lang): array
             'shm'      => ['SHM-IoT MIIDT — Low-cost structural monitoring', 'Full architecture for acquisition, storage, analysis and visualization of accelerations in civil structures, field-tested against commercial sensors.'],
             'ecosistema' => ['Tijuana seismic risk ecosystem', 'Web dashboard linking seismic hazard, soil, stations, acceleration maps, inspection and outreach on a single Supabase database. Computes routes to hospitals and emergency services over real streets (OpenStreetMap, Dijkstra) in five Baja California cities using the official CLUES health registry, works offline as an installable app, and ships with semantic versioning and automated tests on every change.'],
             'ivbc'       => ['Green Infrastructure · Baja California', 'Dashboard of 36 green-infrastructure techniques per municipality, with point queries over GeoJSON layers and address search, a login-protected editing panel, PDF and CSV reports, offline mode and a Supabase visit counter.'],
-            'gps'      => ['Geo-referenced SHM monitoring network', 'Web dashboard showing location and status of distributed monitoring nodes, continuously deployed and public.'],
+            'mortero'    => ['Calibrated mortar predictor (NTC-DECM)', 'Web calculator for mortar mix design and strength, calibrated against the Mexico City Complementary Technical Standards (NTC-DECM). Works offline and installs as an app; bundling React and Tailwind into the project cut the download from 964 KB to 173 KB and load time on slow 4G from 7.8 s to 2 s, with headless Chrome tests.'],
+            'prisma'     => ['SysReview PRISMA — systematic review screening', 'Desktop application for PRISMA 2020 systematic reviews: merges exports from Scopus, Web of Science, IEEE and Lens (CSV, Excel and text), removes duplicates by similar titles, applies configurable automatic screening, guides manual review and generates the flow diagram.'],
+            'micrositio' => ['"Guerrero Abroad" microsite — IEPC Guerrero', 'Bilingual (Spanish/English) mock-up of the Guerrero State Electoral Institute microsite for Guerrero citizens living abroad, with an events page, published on Vercel for design review.'],
+            'shmsim'     => ['SHM-IoT network simulator', 'Next.js dashboard that simulates a network of GPS-georeferenced SHM sensors: location, status, battery and satellites per node, plus per-axis RMS and dominant frequency in real-time charts; ready to connect to Supabase or a custom API.'],
+            'gps'      => ['Geo-referenced SHM monitoring network', 'Monitoring dashboard for the FCITEC-UABC network (SHM + P-Alert) over a simulated network of 9 campuses in Tijuana and 32 buildings in Guerrero, with soil-based site effects; computes RMS, PGA, spectrum and STA/LTA detection on the unified signal of three sensors.'],
             'supabase' => ['Supabase sensor dashboard', 'Web application for submitting, querying and visualizing measurements stored in the cloud.'],
             'api'      => ['ESP32 telemetry APIs', 'REST services for receiving, persisting and querying acceleration data, plus scientific plotting tools.'],
             'game'       => ['Tecnito & Greencito Squad — AI educational game', 'Turn-based game for primary and secondary school classes: two mascots chat through Claude to teach earthquake preparedness and environmental care. The API key stays in a serverless function.'],
@@ -666,7 +731,11 @@ function cv_data(string $lang): array
     $d = $lang === 'en' ? $en : $es;
     $d['profile'] = PROFILE;
     $d['publications'] = SHARED['publications'];
+    // Destacado primero; después del más reciente al más antiguo (sort es estable).
     $d['projects'] = SHARED['projects'];
+    usort($d['projects'], static fn (array $a, array $b): int =>
+        [empty($a['featured']), $b['date']] <=> [empty($b['featured']), $a['date']]);
+    $d['experience_tech'] = SHARED['experience_tech'];
     $d['metrics'] = SHARED['metrics'];
     $d['pdf'] = $lang === 'en'
         ? ['plain' => '/assets/cv-en.pdf', 'design' => '/assets/cv-en-design.pdf']
