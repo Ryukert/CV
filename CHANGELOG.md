@@ -2,6 +2,8 @@
 
 ## [Sin publicar]
 
+## 2026-11-24 (diseño tecnológico) — publicado en main
+
 ### Diseño tecnológico: el CV como instrumento de medición
 
 - **Monitor SHM en vivo** en el encabezado (`public/assets/monitor.js`, 3.2 KB comprimido, sin
