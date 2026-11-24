@@ -223,10 +223,9 @@
       var b = document.createElement('button');
       b.type = 'button';
       b.className = 'filtro';
-      b.textContent = etiqueta;
       b.setAttribute('aria-pressed', 'false');
       b.title = fmt(T.filtrar, etiqueta);
-      li.textContent = '';
+      while (li.firstChild) b.appendChild(li.firstChild);  // conserva el ícono
       li.appendChild(b);
       b.addEventListener('click', function () {
         if (b.getAttribute('aria-pressed') === 'true') { input.value = ''; aplicar(''); return; }
