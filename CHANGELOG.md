@@ -2,6 +2,16 @@
 
 ## [Sin publicar]
 
+### Revisión previa a producción (ship-gate)
+
+- `app/error.tsx`: si una página falla al generarse, se ve un mensaje propio (español e inglés)
+  con enlaces al PDF, sin mostrar el error interno.
+- Pruebas en navegador: `puppeteer-core` 24.43.1 → 25.16.0; `npm audit` pasa de 3 dependencias
+  vulnerables (basic-ftp, extract-zip, zod; solo en las pruebas, no en el sitio) a 0.
+- Se borra `tests/humo.php`, que había quedado de la versión en PHP.
+- `.gitignore` incluye `.env*`.
+- `DEPLOY.md` explica cómo volver a la versión anterior (Instant Rollback de Vercel y `git revert`).
+
 ## 2026-11-24 (íconos) — publicado en main
 
 ### HTML más ligero: íconos en un sprite SVG
