@@ -5,6 +5,7 @@
 //
 // Sale con código 1 si alguna prueba falla.
 import { spawn } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import net from 'node:net';
 import path from 'node:path';
@@ -169,6 +170,12 @@ for (const f of ['cv-es.pdf', 'cv-en.pdf', 'cv-es-diseno.pdf', 'cv-en-design.pdf
   if (!existsSync(path.join(assets, f))) ok(false, `existe public/assets/${f}`);
 }
 ok(!readdirSync(assets).some((f) => f.startsWith('foto')), 'no hay archivos de foto en public/assets/');
+// Lo que style.css pide con url(…?v=hash) se guarda un año: la huella debe ser la del archivo actual.
+const css = readFileSync(path.join(assets, 'style.css'), 'utf8');
+const urlsCss = [...css.matchAll(/url\("([\w./-]+)\?v=([0-9a-f]{8})"\)/g)];
+const malas = urlsCss.filter(([, f, v]) => !existsSync(path.join(assets, f))
+  || createHash('md5').update(readFileSync(path.join(assets, f))).digest('hex').slice(0, 8) !== v).map(([, f]) => f);
+ok(urlsCss.length >= 2 && malas.length === 0, 'style.css pide el fondo con la huella al día (?v=hash)' + (malas.length ? ` (cambiar: ${malas.join(', ')})` : ''));
 
 // ── El PDF sencillo corresponde a los datos ──
 // «npm run pdf» guarda la huella de los datos con que generó los PDF. Si cambiaron y no se

@@ -81,6 +81,10 @@ npm run dev        # http://127.0.0.1:8080
   antes, React vería un HTML distinto al del servidor y volvería a pintarlo.
 - **Archivos versionados:** `herramientas/versiones.ts` calcula la huella de cada archivo de
   `public/assets` antes de compilar; las URL llevan `?v=<hash>` y se guardan un año en el navegador.
+- **Fondo:** el logotipo (`public/assets/fondo.webp` y `fondo-movil.webp`, con el blanco hecho
+  transparente; el original en `img/`). `style.css` lo pide con `?v=<hash>` escrito a mano: si se
+  cambia la imagen, `npm test` dice qué huella poner. La paleta (azul marino, verde y dorado) está
+  en las variables de `:root` al inicio de `style.css`.
 - **URL absolutas** (canonical, sitemap, Open Graph): salen de `SITE_URL` o de `SITIO_PUBLICO` en
   `lib/cv-core.ts`, nunca del encabezado `Host`, que se puede falsificar.
 
