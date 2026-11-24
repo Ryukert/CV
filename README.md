@@ -91,9 +91,8 @@ guarda (la API JSON sí, un día).
 
 Mejora progresiva: sin JavaScript la página queda completa y estos controles no aparecen.
 
-- **Buscador:** marca dónde aparece un término (experiencia, proyectos, competencias, publicaciones,
-  formación, áreas), atenúa lo demás, abre las asignaturas que coinciden y dice cuántas hay por
-  sección. Ignora acentos y mayúsculas. La búsqueda queda en la dirección: `/?q=python` abre ya filtrado.
+- **Buscador:** marca dónde aparece un término (logros, experiencia, proyectos, competencias,
+  publicaciones, formación), atenúa lo demás y dice cuántas coincidencias hay por sección. Ignora acentos y mayúsculas. La búsqueda queda en la dirección: `/?q=python` abre ya filtrado.
 - **Filtro por competencia:** cada competencia es un botón que filtra por ella y sus variantes
   («Linux / Ubuntu Server» encuentra «servidores Ubuntu»).
 - **Tema claro/oscuro:** botón en la barra; la elección se guarda en el navegador.
@@ -126,7 +125,7 @@ se borran.
 
 El **PDF sencillo** que descarga el sitio (`cv-es.pdf`, `cv-en.pdf`) se genera desde `datos/` con
 [RenderCV](https://rendercv.com), así que trae lo mismo que la web: logros clave, experiencia,
-competencias, los proyectos marcados con `"pdf": true`, publicaciones y asignaturas.
+competencias, los proyectos marcados con `"pdf": true`, publicaciones y formación.
 
 ```bash
 pip install "rendercv[full]"            # una vez

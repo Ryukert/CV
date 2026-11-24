@@ -14,7 +14,6 @@
         "skills": "Competencias",
         "pubs": "Publicaciones",
         "edu": "Formación",
-        "areas": "Áreas",
         "contact": "Contacto"
     },
     "cta_pdf": "Descargar CV en PDF",
@@ -22,12 +21,6 @@
     "switch": "English",
     "switch_url": "/en",
     "summary": "Construyo sistemas IoT de extremo a extremo: sensor MEMS, firmware embebido, adquisición en tiempo real, procesamiento de señales, backend en Linux, nube y dashboards. Diseñé desde cero un sistema de monitoreo de salud estructural de bajo costo y lo validé en campo contra instrumentación sísmica comercial (GEA y P-Alert); el trabajo derivó en tres artículos arbitrados y una ponencia internacional. También desarrollo aplicaciones web geoespaciales en producción (Supabase, Leaflet, funcionamiento sin internet) con pruebas automáticas y despliegue continuo. Ingeniero en Computación y egresado de la Maestría en Ingeniería para la Innovación y Desarrollo Tecnológico (UAGro), con promedio de 9.42 y titulación prevista para noviembre de 2026.",
-    "metric_labels": {
-        "sampling": "Muestreo sincronizado",
-        "sensors": "Sensores MEMS integrados",
-        "sites": "Entornos de validación en campo",
-        "papers": "Artículos arbitrados"
-    },
     "sections": {
         "about": "Acerca de mí",
         "langs": "Idiomas",
@@ -38,7 +31,6 @@
         "exp": "Experiencia en investigación y desarrollo",
         "pubs": "Publicaciones y ponencias",
         "projects": "Proyectos",
-        "areas": "Áreas de la computación cubiertas",
         "edu": "Formación académica",
         "skills": "Competencias técnicas",
         "other": "Otra experiencia",
@@ -128,10 +120,6 @@
             "SysReview PRISMA — cribado de revisiones sistemáticas",
             "Aplicación de escritorio para revisiones sistemáticas según PRISMA 2020: combina exportaciones de Scopus, Web of Science, IEEE y Lens (CSV, Excel y texto), elimina duplicados por títulos similares, aplica un cribado automático configurable, guía la revisión manual y genera el diagrama de flujo."
         ],
-        "micrositio": [
-            "Micrositio «Guerrero en el extranjero» — IEPC Guerrero",
-            "Maqueta bilingüe (español e inglés) del micrositio del Instituto Electoral y de Participación Ciudadana de Guerrero dirigido a la ciudadanía guerrerense en el extranjero, con página de eventos, publicada en Vercel para la revisión del diseño."
-        ],
         "shmsim": [
             "Simulador de red SHM-IoT",
             "Dashboard en Next.js que simula una red de sensores SHM georreferenciados por GPS: ubicación, estado, batería y satélites de cada nodo, y RMS por eje y frecuencia dominante en gráficas en tiempo real; listo para conectarse a Supabase o a una API propia."
@@ -169,204 +157,6 @@
             "Sitio bilingüe en Next.js y React con TypeScript sobre Vercel (antes PHP), generado desde una única fuente de datos en JSON, con endpoint JSON público, política de seguridad de contenido estricta con nonce y pruebas automáticas en GitHub Actions. Los mismos datos generan versiones del CV en PDF adaptadas a cada vacante."
         ]
     },
-    "areas": {
-        "toggle": "Ver las 17 áreas con sus 69 asignaturas",
-        "intro": "Las 69 asignaturas acreditadas entre licenciatura y maestría, ordenadas por área de la computación. La etiqueta «Aplicado» señala las áreas que además respaldo con trabajo real —proyectos en producción, publicaciones arbitradas o validación en campo—; «Formación» indica cobertura académica sin proyecto público asociado.",
-        "legend": {
-            "applied": "Aplicado",
-            "coursework": "Formación"
-        },
-        "items": [
-            {
-                "name": "Programación, algoritmos y estructuras de datos",
-                "applied": true,
-                "evidence": "Python y C/C++ a diario: firmware embebido, pipelines de procesamiento y herramientas de escritorio.",
-                "courses": [
-                    "Fundamentos de Programación (9)",
-                    "Programación Orientada a Objetos I (10)",
-                    "Programación Orientada a Objetos II (8)",
-                    "Programación Avanzada (8)",
-                    "Estructura de Datos I (10)",
-                    "Estructura de Datos II (9)",
-                    "Lógica Informática (8)"
-                ]
-            },
-            {
-                "name": "Ingeniería y diseño de software",
-                "applied": true,
-                "evidence": "Aplicaciones PyQt5 con control de sesiones, exportación y recuperación automática ante fallos.",
-                "courses": [
-                    "Análisis y Diseño de Sistemas (10)",
-                    "Ingeniería de Software (8)"
-                ]
-            },
-            {
-                "name": "Compiladores y teoría de lenguajes",
-                "applied": false,
-                "evidence": null,
-                "courses": [
-                    "Compiladores (9)",
-                    "Traductores e Intérpretes (8)"
-                ]
-            },
-            {
-                "name": "Sistemas operativos y administración de servidores",
-                "applied": true,
-                "evidence": "Servidores Ubuntu en operación continua: systemd, SSH/VNC, respaldos y sincronización.",
-                "courses": [
-                    "Sistemas Operativos I (10)",
-                    "Sistemas Operativos II (8)",
-                    "Arquitectura de Servidores (10)"
-                ]
-            },
-            {
-                "name": "Redes y comunicaciones",
-                "applied": true,
-                "evidence": "Monitoreo multi-sede con nodos en redes distintas y receptor centralizado sobre HTTP/HTTPS.",
-                "courses": [
-                    "Fundamentos de Enrutamiento (10)",
-                    "Fundamentos de Redes (9)",
-                    "Sistemas de Cableado Estructurado (9)",
-                    "Fundamentos de Comunicaciones (7)"
-                ]
-            },
-            {
-                "name": "Seguridad, auditoría y cómputo forense",
-                "applied": false,
-                "evidence": "Complementado con las certificaciones Cisco Cybersecurity Essentials y CCNAv7.",
-                "courses": [
-                    "Auditoría de Recursos Informáticos (9)",
-                    "Seguridad en Redes (8)",
-                    "Cómputo Forense (8)"
-                ]
-            },
-            {
-                "name": "Bases de datos y persistencia",
-                "applied": true,
-                "evidence": "PostgreSQL y Supabase como almacenamiento multi-origen de telemetría en la nube.",
-                "courses": [
-                    "Base de Datos II (9)",
-                    "Base de Datos I (7)"
-                ]
-            },
-            {
-                "name": "Arquitectura de computadoras y sistemas digitales",
-                "applied": true,
-                "evidence": "Adquisición sincronizada sobre arquitectura dual-core en el RP2040.",
-                "courses": [
-                    "Sistemas Digitales (10)",
-                    "Organización de Computadoras (10)",
-                    "Microprocesadores (8)"
-                ]
-            },
-            {
-                "name": "Sistemas embebidos, IoT y electrónica",
-                "applied": true,
-                "evidence": "Núcleo de mi trabajo: nodos RP2040 y Raspberry Pi con sensores MEMS por I2C, SPI y UART.",
-                "courses": [
-                    "Temas Selectos de Sistemas Embebidos (10)",
-                    "Electricidad y Magnetismo (10)",
-                    "Microcontroladores (9)",
-                    "Diseño de Sistemas IoT (9)",
-                    "Circuitos Eléctricos (9)",
-                    "Principios Básicos de Sistemas Electrónicos (9)",
-                    "Electrónica (7)"
-                ]
-            },
-            {
-                "name": "Inteligencia artificial y aprendizaje automático",
-                "applied": true,
-                "evidence": "Coautor del artículo sobre selección de atributos mediante feature importance para clasificar casos de dengue.",
-                "courses": [
-                    "Machine Learning (10)",
-                    "Deep Learning (10)",
-                    "Análisis de Datos y Big Data (10)",
-                    "Fundamentos de Inteligencia Artificial (7)"
-                ]
-            },
-            {
-                "name": "Procesamiento de señales, visión e imágenes",
-                "applied": true,
-                "evidence": "Pipeline propio de DSP: FFT, PSD por Welch, RMS, coherencia, fase y correlación cruzada (publicado y arbitrado).",
-                "courses": [
-                    "Visión Artificial (10)",
-                    "Procesamiento Digital de Imágenes (7)"
-                ]
-            },
-            {
-                "name": "Matemáticas, estadística y métodos numéricos",
-                "applied": true,
-                "evidence": "Base del análisis espectral: criterio de Nyquist, resolución frecuencial y estimación estadística de espectros.",
-                "courses": [
-                    "Cálculo Diferencial e Integral (8)",
-                    "Probabilidad y Estadística (8)",
-                    "Métodos Numéricos (8)",
-                    "Geometría Analítica (8)",
-                    "Química Básica (8)",
-                    "Cálculo Vectorial (7)",
-                    "Ecuaciones Diferenciales (7)",
-                    "Álgebra (7)",
-                    "Física General (7)"
-                ]
-            },
-            {
-                "name": "Investigación de operaciones y optimización",
-                "applied": false,
-                "evidence": null,
-                "courses": [
-                    "Investigación de Operaciones (8)"
-                ]
-            },
-            {
-                "name": "Interfaces, visualización y desarrollo de aplicaciones",
-                "applied": true,
-                "evidence": "Dashboards web desplegados en Vercel e interfaces de escritorio para supervisión en vivo.",
-                "courses": [
-                    "Desarrollo de Aplicaciones Móviles (10)",
-                    "Interacción Humano-Computadora (9)"
-                ]
-            },
-            {
-                "name": "Tecnologías de la información e innovación",
-                "applied": true,
-                "evidence": "Alternativa de bajo costo frente a la instrumentación sísmica comercial, validada contra GEA y P-Alert.",
-                "courses": [
-                    "Manejo de Tecnologías de la Información y Comunicación (10)",
-                    "Tecnologías de Información y Comunicación (10)",
-                    "Innovación y Desarrollo Tecnológico Sustentable (10)"
-                ]
-            },
-            {
-                "name": "Investigación y comunicación científica",
-                "applied": true,
-                "evidence": "Tres artículos en Revista Vínculos y ponencia en CICOM 2025 (Tunja, Colombia).",
-                "courses": [
-                    "Habilidades para la Comunicación de las Ideas (10)",
-                    "Pensamiento Lógico, Heurístico y Creativo (10)",
-                    "Seminario de Investigación I (9)",
-                    "Trabajo de Grado III (9)",
-                    "Seminario de Investigación II (8)",
-                    "Trabajo de Grado I (8)",
-                    "Trabajo de Grado II (8)",
-                    "Proyecto de Grado (concluido)"
-                ]
-            },
-            {
-                "name": "Formación complementaria y vinculación",
-                "applied": false,
-                "evidence": "950 horas acreditadas entre servicio social y prácticas profesionales.",
-                "courses": [
-                    "Taller de Emprendurismo (10)",
-                    "Análisis del Mundo Contemporáneo (10)",
-                    "Inglés I (7)",
-                    "Inglés II (7)",
-                    "Estancia Profesional (concluida)",
-                    "Prácticas Profesionales (acreditada)",
-                    "Servicio Social (acreditada)"
-                ]
-            }
-        ]
-    },
     "education": [
         {
             "period": "Ago 2024 – 2026",
@@ -377,42 +167,7 @@
                 "Promedio general 9.42 / 10",
                 "Plan de estudios concluido",
                 "Sin materias reprobadas"
-            ],
-            "coursework": {
-                "label": "Ver las 14 asignaturas cursadas y sus calificaciones",
-                "note": "Calificación sobre 10. Estancia Profesional y Proyecto de Grado son asignaturas acreditables y no promedian.",
-                "groups": [
-                    {
-                        "name": "Inteligencia artificial y datos",
-                        "items": [
-                            "Machine Learning (10)",
-                            "Deep Learning (10)",
-                            "Visión Artificial (10)",
-                            "Análisis de Datos y Big Data (10)"
-                        ]
-                    },
-                    {
-                        "name": "Sistemas embebidos e IoT",
-                        "items": [
-                            "Temas Selectos de Sistemas Embebidos (10)",
-                            "Diseño de Sistemas IoT (9)",
-                            "Principios Básicos de Sistemas Electrónicos (9)"
-                        ]
-                    },
-                    {
-                        "name": "Núcleo del programa",
-                        "items": [
-                            "Tecnologías de Información y Comunicación (10)",
-                            "Innovación y Desarrollo Tecnológico Sustentable (10)",
-                            "Trabajo de Grado I (8)",
-                            "Trabajo de Grado II (8)",
-                            "Trabajo de Grado III (9)",
-                            "Estancia Profesional (concluida)",
-                            "Proyecto de Grado (concluido)"
-                        ]
-                    }
-                ]
-            }
+            ]
         },
         {
             "period": "2018 – 2023",
@@ -422,103 +177,7 @@
             "stats": [
                 "Promedio general 8.56 / 10",
                 "55 asignaturas acreditadas"
-            ],
-            "coursework": {
-                "label": "Ver las 55 asignaturas cursadas y sus calificaciones",
-                "note": "Calificación sobre 10. Escala de 0 a 10, mínima aprobatoria 6.",
-                "groups": [
-                    {
-                        "name": "Programación e ingeniería de software",
-                        "items": [
-                            "Fundamentos de Programación (9)",
-                            "Programación Orientada a Objetos I (10)",
-                            "Programación Orientada a Objetos II (8)",
-                            "Programación Avanzada (8)",
-                            "Estructura de Datos I (10)",
-                            "Estructura de Datos II (9)",
-                            "Lógica Informática (8)",
-                            "Análisis y Diseño de Sistemas (10)",
-                            "Ingeniería de Software (8)",
-                            "Traductores e Intérpretes (8)",
-                            "Compiladores (9)",
-                            "Desarrollo de Aplicaciones Móviles (10)",
-                            "Interacción Humano-Computadora (9)"
-                        ]
-                    },
-                    {
-                        "name": "Hardware, electrónica y arquitectura",
-                        "items": [
-                            "Sistemas Digitales (10)",
-                            "Organización de Computadoras (10)",
-                            "Arquitectura de Servidores (10)",
-                            "Microcontroladores (9)",
-                            "Microprocesadores (8)",
-                            "Circuitos Eléctricos (9)",
-                            "Electricidad y Magnetismo (10)",
-                            "Electrónica (7)"
-                        ]
-                    },
-                    {
-                        "name": "Redes, sistemas operativos y seguridad",
-                        "items": [
-                            "Fundamentos de Enrutamiento (10)",
-                            "Sistemas Operativos I (10)",
-                            "Sistemas Operativos II (8)",
-                            "Fundamentos de Redes (9)",
-                            "Sistemas de Cableado Estructurado (9)",
-                            "Auditoría de Recursos Informáticos (9)",
-                            "Seguridad en Redes (8)",
-                            "Cómputo Forense (8)",
-                            "Fundamentos de Comunicaciones (7)"
-                        ]
-                    },
-                    {
-                        "name": "Datos, inteligencia artificial y señales",
-                        "items": [
-                            "Base de Datos II (9)",
-                            "Base de Datos I (7)",
-                            "Fundamentos de Inteligencia Artificial (7)",
-                            "Procesamiento Digital de Imágenes (7)"
-                        ]
-                    },
-                    {
-                        "name": "Matemáticas y ciencias básicas",
-                        "items": [
-                            "Cálculo Diferencial e Integral (8)",
-                            "Probabilidad y Estadística (8)",
-                            "Métodos Numéricos (8)",
-                            "Geometría Analítica (8)",
-                            "Investigación de Operaciones (8)",
-                            "Química Básica (8)",
-                            "Cálculo Vectorial (7)",
-                            "Ecuaciones Diferenciales (7)",
-                            "Álgebra (7)",
-                            "Física General (7)"
-                        ]
-                    },
-                    {
-                        "name": "Investigación y formación institucional",
-                        "items": [
-                            "Seminario de Investigación I (9)",
-                            "Seminario de Investigación II (8)",
-                            "Taller de Emprendurismo (10)",
-                            "Manejo de Tecnologías de la Información y Comunicación (10)",
-                            "Pensamiento Lógico, Heurístico y Creativo (10)",
-                            "Habilidades para la Comunicación de las Ideas (10)",
-                            "Análisis del Mundo Contemporáneo (10)",
-                            "Inglés I (7)",
-                            "Inglés II (7)"
-                        ]
-                    },
-                    {
-                        "name": "Integración y vinculación",
-                        "items": [
-                            "Prácticas Profesionales (acreditada)",
-                            "Servicio Social (acreditada)"
-                        ]
-                    }
-                ]
-            }
+            ]
         }
     ],
     "other": [
@@ -548,7 +207,6 @@
             "JavaScript",
             "TypeScript",
             "Node.js",
-            "SQL",
             "PHP",
             "Bash",
             "PyQt5 / PySide6",
@@ -570,15 +228,10 @@
             "Matplotlib",
             "FFT",
             "PSD/Welch",
-            "RMS",
-            "Filtros digitales",
-            "Series temporales"
+            "Filtros digitales"
         ],
         "IA y aprendizaje automático": [
             "Machine Learning",
-            "Deep Learning",
-            "Visión artificial",
-            "Big Data",
             "Selección de atributos"
         ],
         "IoT y hardware": [
@@ -635,8 +288,7 @@
             "projects": "proyectos",
             "skills": "competencias",
             "pubs": "publicaciones",
-            "edu": "formación",
-            "areas": "áreas"
+            "edu": "formación"
         },
         "filtrar": "Ver dónde uso %s",
         "tema_oscuro": "Cambiar a tema oscuro",

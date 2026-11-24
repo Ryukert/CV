@@ -129,7 +129,6 @@
     registrar('#skills .chips li', 'skills');
     registrar('#pubs .pubs > li, #pubs .talk', 'pubs');
     registrar('#edu .entry .chips li, #edu .entry .note, #edu .two-col li', 'edu');
-    registrar('#areas .area', 'areas');
 
     // Un término que no es palabra completa (p. ej. «C» o «R») daría falsos positivos:
     // se busca como palabra cuando es corto y como fragmento cuando es largo.
@@ -155,13 +154,10 @@
       return partes.concat(extra).filter(Boolean);
     }
 
-    var abiertos = [];
     function aplicar(consulta, opciones) {
       opciones = opciones || {};
       var q = consulta.trim();
       unidades.forEach(function (u) { u.el.classList.remove('coincide'); });
-      abiertos.forEach(function (d) { d.open = false; });
-      abiertos = [];
       $$('#skills .filtro').forEach(function (b) { b.setAttribute('aria-pressed', String(!!opciones.chip && b === opciones.chip)); });
 
       if (!q) {
@@ -183,9 +179,6 @@
         u.el.classList.add('coincide');
         porSeccion[u.seccion] = (porSeccion[u.seccion] || 0) + 1;
         total++;
-        // Abre los desplegables (asignaturas, áreas) que tienen coincidencias.
-        var d = u.el.closest('details');
-        if (d && !d.open) { d.open = true; abiertos.push(d); }
       });
 
       document.body.classList.add('filtrando');

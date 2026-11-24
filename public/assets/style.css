@@ -94,21 +94,6 @@ h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.8px; color
 
 .summary p { font-size: 1.02rem; margin: 0 0 22px; }
 
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-.metric {
-  background: var(--bg-soft);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 18px 12px 16px;
-  text-align: center;
-}
-.metric strong { display: block; font-size: 1.85rem; line-height: 1.1; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; }
-.metric span { font-size: 0.8rem; color: var(--grey); line-height: 1.3; display: block; margin-top: 6px; }
-
 .logros { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 .logros li {
   margin: 0; padding: 12px 16px;
@@ -127,7 +112,7 @@ h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.8px; color
 .entry.compact .note { margin: 0; font-size: 0.92rem; color: #3c4050; }
 .entry.compact p:last-child { margin: 0; font-size: 0.92rem; color: #3c4050; }
 
-/* ---------- education: grades and coursework ---------- */
+/* ---------- education: grades ---------- */
 .chips.stats { margin: 0 0 8px; }
 .chips.stats li {
   background: #eef3fc;
@@ -135,36 +120,6 @@ h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.8px; color
   color: var(--navy);
   font-weight: 600;
 }
-.coursework { margin-top: 10px; }
-.coursework > summary {
-  cursor: pointer;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--blue);
-  padding: 7px 12px;
-  min-height: 44px;
-  background: var(--bg-soft);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.coursework > summary::-webkit-details-marker { display: none; }
-.coursework > summary::before {
-  content: "+";
-  font-size: 1rem;
-  line-height: 1;
-  width: 14px;
-  text-align: center;
-}
-.coursework[open] > summary::before { content: "\2212"; }
-.coursework > summary:hover { border-color: var(--blue-l); }
-.coursework[open] > summary { margin-bottom: 2px; }
-.coursework .cw-note { font-size: 0.78rem; color: var(--grey); margin: 12px 0 0; }
-.coursework h4 { margin: 14px 0 6px; font-size: 0.78rem; }
-.coursework .chips li { font-size: 0.75rem; }
 
 ul, ol { margin: 4px 0 0; padding-left: 20px; }
 li { margin-bottom: 5px; }
@@ -237,7 +192,6 @@ footer p { margin: 2px 0; }
   .hero-grid { flex-direction: column; align-items: center; text-align: center; gap: 18px; }
   .hero h1 { font-size: 1.6rem; }
   .actions, .hero .links { justify-content: center; }
-  .metrics { grid-template-columns: repeat(2, 1fr); }
   .card.featured { padding: 18px; }
   .cards { grid-template-columns: 1fr; }
   .skillrow { grid-template-columns: 1fr; gap: 4px; }
@@ -254,9 +208,6 @@ footer p { margin: 2px 0; }
   /* En papel no se puede hacer clic: se imprime adónde lleva cada enlace externo. */
   .card .repo::after { content: none; }
   .pubs a[href^="http"]::after { content: " (" attr(href) ")"; font-weight: 400; font-size: 0.75rem; color: #444; word-break: break-all; }
-  .coursework > summary { display: none; }
-  .coursework > *:not(summary) { display: block !important; }
-  .coursework { content-visibility: visible !important; }
 }
 
 /* ---------- skip link ---------- */
@@ -307,35 +258,6 @@ footer p { margin: 2px 0; }
 .nav-inner a.active { background: var(--bg-soft); color: var(--blue); box-shadow: inset 0 -2px 0 var(--blue); }
 section[id] { scroll-margin-top: 60px; }
 
-/* ---------- computing areas ---------- */
-.areas-intro { font-size: 0.9rem; color: var(--grey); margin: -6px 0 18px; max-width: 68ch; }
-.areas { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-.area {
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--line);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  background: #fff;
-}
-.area.is-applied { border-left-color: var(--blue); }
-.area h3 { font-size: 0.92rem; line-height: 1.35; }
-.area .badge {
-  display: inline-block;
-  margin: 6px 0 0;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.7px;
-  text-transform: uppercase;
-  color: var(--grey);
-  background: var(--bg-soft);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 1px 9px;
-}
-.area.is-applied .badge { color: var(--navy); background: #eef3fc; border-color: #cfdcf3; }
-.area .evidence { font-size: 0.84rem; margin: 9px 0 0; }
-.area .area-courses { font-size: 0.75rem; color: var(--grey); margin: 9px 0 0; line-height: 1.5; }
-
 /* ---------- focus visibility ---------- */
 a:focus-visible, summary:focus-visible, .btn:focus-visible {
   outline: 2px solid var(--blue);
@@ -346,10 +268,6 @@ a:focus-visible, summary:focus-visible, .btn:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   .card:hover { transform: none; }
-}
-
-@media (max-width: 720px) {
-  .areas { grid-template-columns: 1fr; }
 }
 
 /* ---------- dark mode ---------- */
@@ -367,11 +285,11 @@ a:focus-visible, summary:focus-visible, .btn:focus-visible {
   :root:not([data-theme="light"]) .hero { background: linear-gradient(160deg, #16203a 0%, #0d1322 100%); }
   :root:not([data-theme="light"]) .hero h1 { color: #f2f5fa; }
   :root:not([data-theme="light"]) .nav { background: rgba(16, 20, 29, 0.92); }
-  :root:not([data-theme="light"]) .card, :root:not([data-theme="light"]) .area { background: #141926; }
+  :root:not([data-theme="light"]) .card { background: #141926; }
   :root:not([data-theme="light"]) .card.featured { background: var(--bg-soft); }
   :root:not([data-theme="light"]) .btn { color: #0d1322; }
   :root:not([data-theme="light"]) .btn.ghost { color: #fff; }
-  :root:not([data-theme="light"]) .chips.stats li, :root:not([data-theme="light"]) .area.is-applied .badge { background: #1d2941; border-color: #2f3f5e; color: #cddcf5; }
+  :root:not([data-theme="light"]) .chips.stats li { background: #1d2941; border-color: #2f3f5e; color: #cddcf5; }
   :root:not([data-theme="light"]) .entry.compact .note, :root:not([data-theme="light"]) .entry.compact p:last-child { color: #c3c9d6; }
   :root:not([data-theme="light"]) h2 { border-bottom-color: var(--line); }
   :root:not([data-theme="light"]) .coincide { background: #2a3550; }
@@ -385,11 +303,11 @@ a:focus-visible, summary:focus-visible, .btn:focus-visible {
 :root[data-theme="dark"] .hero { background: linear-gradient(160deg, #16203a 0%, #0d1322 100%); }
 :root[data-theme="dark"] .hero h1 { color: #f2f5fa; }
 :root[data-theme="dark"] .nav { background: rgba(16, 20, 29, 0.92); }
-:root[data-theme="dark"] .card, :root[data-theme="dark"] .area { background: #141926; }
+:root[data-theme="dark"] .card { background: #141926; }
 :root[data-theme="dark"] .card.featured { background: var(--bg-soft); }
 :root[data-theme="dark"] .btn { color: #0d1322; }
 :root[data-theme="dark"] .btn.ghost { color: #fff; }
-:root[data-theme="dark"] .chips.stats li, :root[data-theme="dark"] .area.is-applied .badge { background: #1d2941; border-color: #2f3f5e; color: #cddcf5; }
+:root[data-theme="dark"] .chips.stats li { background: #1d2941; border-color: #2f3f5e; color: #cddcf5; }
 :root[data-theme="dark"] .entry.compact .note, :root[data-theme="dark"] .entry.compact p:last-child { color: #c3c9d6; }
 :root[data-theme="dark"] h2 { border-bottom-color: var(--line); }
 :root[data-theme="dark"] .coincide { background: #2a3550; }
@@ -463,7 +381,7 @@ button.btn.ghost { border: 1px solid rgba(255,255,255,.35); }
 /* Resultado del filtro: lo que coincide se marca; lo demás se atenúa */
 .filtrando [data-buscable]:not(.coincide) { opacity: 0.38; }
 .coincide { background: #eef3fc; border-radius: 6px; box-shadow: 0 0 0 3px rgba(46, 95, 163, .15); }
-.card.coincide, .area.coincide { box-shadow: 0 0 0 2px var(--blue); }
+.card.coincide { box-shadow: 0 0 0 2px var(--blue); }
 li.coincide { box-shadow: none; }
 
 .aviso {
@@ -487,8 +405,6 @@ li.coincide { box-shadow: none; }
 
 @media print {
   .nav, .skip { display: none; }
-  .coursework > .areas { display: grid !important; grid-template-columns: 1fr 1fr; }
-  .area { break-inside: avoid; }
   .entry, .card { break-inside: avoid; }
 }
 

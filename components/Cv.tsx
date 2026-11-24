@@ -129,14 +129,6 @@ export default async function Cv({ lang }: { lang: Lang }) {
               return <li key={l}><strong>{idioma.trim()}</strong> {resto.join(':').trim()}</li>;
             })}
           </ul>
-          <div className="metrics">
-            {d.metrics.map((m) => (
-              <div className="metric" key={m.key}>
-                <strong>{m.value}</strong>
-                <span>{d.metric_labels[m.key]}</span>
-              </div>
-            ))}
-          </div>
         </section>
 
         <section id="logros">
@@ -243,18 +235,6 @@ export default async function Cv({ lang }: { lang: Lang }) {
                 <ul className="chips stats">{ed.stats.map((s) => <li key={s}>{s}</li>)}</ul>
               )}
               <p className="note">{ed.note}</p>
-              {ed.coursework && (
-                <details className="coursework">
-                  <summary>{ed.coursework.label}</summary>
-                  {ed.coursework.note && <p className="cw-note">{ed.coursework.note}</p>}
-                  {ed.coursework.groups.map((g) => (
-                    <Fragment key={g.name}>
-                      <h4>{g.name}</h4>
-                      <ul className="chips">{g.items.map((c) => <li key={c}>{c}</li>)}</ul>
-                    </Fragment>
-                  ))}
-                </details>
-              )}
             </article>
           ))}
 
@@ -276,24 +256,6 @@ export default async function Cv({ lang }: { lang: Lang }) {
               <ul>{d.certs.map((c) => <li key={c}>{c}</li>)}</ul>
             </div>
           </div>
-        </section>
-
-        <section id="areas">
-          <h2>{d.sections.areas}</h2>
-          <p className="areas-intro">{d.areas.intro}</p>
-          <details className="coursework">
-            <summary>{d.areas.toggle}</summary>
-            <div className="areas">
-              {d.areas.items.map((a) => (
-                <article className={'area' + (a.applied ? ' is-applied' : '')} key={a.name}>
-                  <h3>{a.name}</h3>
-                  <p className="badge">{a.applied ? d.areas.legend.applied : d.areas.legend.coursework}</p>
-                  {a.evidence && <p className="evidence">{a.evidence}</p>}
-                  <p className="area-courses">{a.courses.join(' · ')}</p>
-                </article>
-              ))}
-            </div>
-          </details>
         </section>
 
         <section id="contact" className="contact">
