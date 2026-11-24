@@ -2,6 +2,8 @@
 
 ## [Sin publicar]
 
+## 2026-11-24 — publicado en main
+
 ### Depuración del contenido
 
 - Fuera la sección **Áreas de la computación** y las **listas de asignaturas** de Formación (las 69
