@@ -321,6 +321,15 @@
         "copiado": "Correo copiado: %s",
         "compartir": "Compartir",
         "enlace_copiado": "Enlace copiado",
-        "no_copiado": "No se pudo copiar; selecciónalo a mano."
+        "no_copiado": "No se pudo copiar; selecciónalo a mano.",
+        "monitor": {
+            "titulo": "Monitor SHM · en vivo",
+            "nota": "Simulación: un acelerómetro a 200 Hz y su espectro (FFT), calculados en tu navegador.",
+            "pausa": "Pausar",
+            "reanudar": "Reanudar",
+            "evento": "evento",
+            "reposo": "vibración ambiental",
+            "atajo": "Atajo: / o Ctrl+K"
+        }
     }
 }

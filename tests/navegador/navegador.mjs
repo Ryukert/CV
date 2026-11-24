@@ -156,11 +156,54 @@ try {
   ok(/^https?:\/\/.+\/$/.test(s.portapapeles) && /Enlace copiado/.test(s.aviso), "sin menú de compartir del sistema, «Compartir» copia el enlace: " + s.portapapeles);
   await p.close();
 
+  // ── Monitor SHM, secciones que aparecen y atajo de teclado ──
+  p = await pagina();
+  await p.goto(BASE + "/", { waitUntil: "networkidle0" });
+  await p.waitForSelector("#monitor[data-listo]", { timeout: 5000 }).catch(() => {});
+  await pausa(800);
+  s = await p.evaluate(() => ({
+    oculto: document.getElementById("monitor").hidden,
+    ancho: document.getElementById("monitor-onda").width,
+    f0: parseFloat(document.getElementById("monitor-f0").textContent),
+    rms: parseFloat(document.getElementById("monitor-rms").textContent),
+  }));
+  ok(!s.oculto && s.ancho > 0, "el monitor SHM aparece y dibuja en el canvas");
+  ok(s.f0 > 1.5 && s.f0 < 15 && s.rms > 0, `el monitor calcula la frecuencia dominante con la FFT (f₀ = ${s.f0} Hz, RMS = ${s.rms})`);
+  const cuadro = () => p.$eval("#monitor-onda", (c) => c.toDataURL());
+  await p.click("#monitor-pausa");
+  let a = await cuadro(); await pausa(400); let b = await cuadro();
+  ok(a === b && (await p.$eval("#monitor-pausa", (e) => e.getAttribute("aria-pressed"))) === "true", "«Pausar» detiene el monitor");
+  await p.click("#monitor-pausa");
+  a = await cuadro(); await pausa(400); b = await cuadro();
+  ok(a !== b, "«Reanudar» lo vuelve a mover");
+
+  s = await p.evaluate(() => document.querySelectorAll("main section.revelar:not(.visible)").length);
+  await p.evaluate(() => document.querySelector("#pubs").scrollIntoView());
+  await pausa(900);
+  ok(s > 0 && (await p.$eval("#pubs", (e) => getComputedStyle(e).opacity)) === "1", `las secciones aparecen al llegar a ellas (${s} esperaban)`);
+
+  await p.evaluate(() => { window.scrollTo(0, 0); document.activeElement && document.activeElement.blur(); });
+  await p.keyboard.press("/");
+  ok((await p.evaluate(() => document.activeElement && document.activeElement.id)) === "q", "la tecla «/» lleva al buscador");
+  ok(p.errores.length === 0, "monitor y efectos sin errores ni bloqueos de la CSP" + (p.errores.length ? ": " + p.errores.join(" | ") : ""));
+  await p.close();
+
+  p = await pagina();
+  await p.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
+  await p.goto(BASE + "/", { waitUntil: "networkidle0" });
+  await p.waitForSelector("#monitor[data-listo]", { timeout: 5000 }).catch(() => {});
+  s = await p.evaluate(() => ({
+    pausado: document.getElementById("monitor-pausa").getAttribute("aria-pressed"),
+    revelar: document.querySelectorAll("main section.revelar").length,
+  }));
+  ok(s.pausado === "true" && s.revelar === 0, "con «reducir movimiento» el monitor arranca en pausa y nada se anima");
+  await p.close();
+
   // ── Sin JavaScript ──
   p = await pagina({ js: false });
   await p.goto(BASE + "/", { waitUntil: "networkidle0" });
   s = await p.evaluate(() => ({
-    visibles: ["#buscador", "#tema", "#compartir", "[data-copiar]"].filter((sel) => { const e = document.querySelector(sel); return e && e.offsetParent !== null; }),
+    visibles: ["#buscador", "#tema", "#compartir", "[data-copiar]", "#monitor"].filter((sel) => { const e = document.querySelector(sel); return e && e.offsetParent !== null; }),
     proyectos: document.querySelectorAll("#projects .card").length,
     chips: document.querySelectorAll("#skills .chips li").length,
   }));
@@ -174,7 +217,7 @@ try {
   s = await p.evaluate(() => ({
     scrollX: document.documentElement.scrollWidth > innerWidth,
     tema: (({ right, width }) => ({ right, width }))(document.querySelector("#tema").getBoundingClientRect()),
-    chicos: [...document.querySelectorAll("#tema, #compartir, [data-copiar], #q")].filter((e) => e.offsetParent && e.getBoundingClientRect().height < 44).map((e) => e.id || e.className),
+    chicos: [...document.querySelectorAll("#tema, #compartir, [data-copiar], #q, #monitor-pausa")].filter((e) => e.offsetParent && e.getBoundingClientRect().height < 44).map((e) => e.id || e.className),
   }));
   ok(!s.scrollX, "en el celular no hay desplazamiento horizontal");
   ok(s.tema.right <= 390 && s.tema.width >= 44, "el botón de tema se ve completo en la barra del celular");

@@ -24,7 +24,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
       </head>
       <body>
         {children}
-        <ArrancarCv src={asset('cv.js')} nonce={nonce} />
+        <ArrancarCv srcs={[asset('cv.js'), asset('monitor.js')]} nonce={nonce} />
       </body>
     </html>
   );

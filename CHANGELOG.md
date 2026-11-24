@@ -2,6 +2,22 @@
 
 ## [Sin publicar]
 
+### Diseño tecnológico: el CV como instrumento de medición
+
+- **Monitor SHM en vivo** en el encabezado (`public/assets/monitor.js`, 3.2 KB comprimido, sin
+  bibliotecas): simula un acelerómetro a 200 Hz con tres modos de vibración, ruido y eventos que
+  decaen; calcula en el navegador la FFT de 512 puntos (ventana de Hann) y muestra la forma de
+  onda, el espectro hasta 30 Hz, la frecuencia dominante (interpolación parabólica), el RMS y el
+  estado. Botón para pausar; se detiene solo cuando no se ve.
+- Encabezado con retícula de osciloscopio; títulos de sección numerados («01 // …»); fechas,
+  tecnologías y etiquetas en monoespaciada; tarjetas de vidrio con un brillo dorado que sigue al
+  cursor; las secciones aparecen al llegar a ellas.
+- Atajo de teclado: `/` o `Ctrl+K` lleva al buscador.
+- Mejora progresiva: sin JavaScript el monitor no aparece y todo se ve completo; con «reducir
+  movimiento» el monitor arranca en pausa y nada se anima. Al imprimir, todo visible y sin efectos.
+- Corrección: al cambiar de tema, la barra del navegador usaba los colores anteriores a la paleta.
+- 8 pruebas nuevas en navegador (monitor, FFT, pausa, aparición, atajo, «reducir movimiento»).
+
 ## 2026-11-24 (ship-gate) — publicado en main
 
 ### Revisión previa a producción (ship-gate)

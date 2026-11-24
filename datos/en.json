@@ -321,6 +321,15 @@
         "copiado": "Email copied: %s",
         "compartir": "Share",
         "enlace_copiado": "Link copied",
-        "no_copiado": "Could not copy; please select it manually."
+        "no_copiado": "Could not copy; please select it manually.",
+        "monitor": {
+            "titulo": "SHM monitor · live",
+            "nota": "Simulation: a 200 Hz accelerometer and its spectrum (FFT), computed in your browser.",
+            "pausa": "Pause",
+            "reanudar": "Resume",
+            "evento": "event",
+            "reposo": "ambient vibration",
+            "atajo": "Shortcut: / or Ctrl+K"
+        }
     }
 }

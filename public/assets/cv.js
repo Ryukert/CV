@@ -71,7 +71,7 @@
       boton.setAttribute('aria-label', texto);
       boton.title = texto;
       var meta = $$('meta[name="theme-color"]');
-      meta.forEach(function (m) { m.setAttribute('content', t === 'dark' ? '#0f1521' : '#1b2a4a'); m.removeAttribute('media'); });
+      meta.forEach(function (m) { m.setAttribute('content', t === 'dark' ? '#061026' : '#0d2142'); m.removeAttribute('media'); });
     }
     boton.addEventListener('click', function () {
       var nuevo = efectivo() === 'dark' ? 'light' : 'dark';
@@ -238,4 +238,56 @@
       aplicar(input.value, chip ? { chip: chip, variantes: variantes(chip.textContent) } : null);
     }
   })();
+
+  // ── 5. Diseño: brillo que sigue al cursor, secciones que aparecen y atajo de teclado ──
+  var reducido = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Brillo en tarjetas: la posición del cursor va en variables CSS (CSSOM, permitido por la CSP).
+  if (!reducido && window.matchMedia && matchMedia('(hover: hover)').matches) {
+    $$('.card, .grupo, .skills-grid .skillrow, .logros li, .ficha').forEach(function (el) {
+      el.classList.add('brillo');
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--x', (e.clientX - r.left) + 'px');
+        el.style.setProperty('--y', (e.clientY - r.top) + 'px');
+      });
+    });
+  }
+
+  // Secciones que aparecen al llegar a ellas. Sin JavaScript (o con «reducir movimiento»)
+  // se ven desde el principio: la clase que las oculta solo la pone este script.
+  if (!reducido && 'IntersectionObserver' in window) {
+    var secciones = $$('main section[id]');
+    var revelar = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('visible'); revelar.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    secciones.forEach(function (s) {
+      var r = s.getBoundingClientRect();
+      if (r.top < innerHeight) return;           // lo que ya se ve no se anima
+      s.classList.add('revelar');
+      revelar.observe(s);
+    });
+    // Al buscar o imprimir, todo visible.
+    var mostrarTodo = function () { secciones.forEach(function (s) { s.classList.add('visible'); }); };
+    window.addEventListener('beforeprint', mostrarTodo);
+    var q = $('#q');
+    if (q) q.addEventListener('input', mostrarTodo);
+    $$('#skills .filtro').forEach(function (b) { b.addEventListener('click', mostrarTodo); });
+    if (new URLSearchParams(location.search).get('q')) mostrarTodo();
+  }
+
+  // Atajo: «/» o Ctrl+K (⌘K) lleva al buscador.
+  document.addEventListener('keydown', function (e) {
+    var q = $('#q');
+    if (!q || $('#buscador').hidden) return;
+    var enCampo = /^(INPUT|TEXTAREA|SELECT)$/.test((e.target && e.target.tagName) || '') || (e.target && e.target.isContentEditable);
+    if ((e.key === '/' && !enCampo) || ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K'))) {
+      e.preventDefault();
+      $('#buscador').scrollIntoView({ behavior: reducido ? 'auto' : 'smooth', block: 'start' });
+      q.focus();
+      q.select();
+    }
+  });
 })();

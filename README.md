@@ -103,6 +103,10 @@ Mejora progresiva: sin JavaScript la página queda completa y estos controles no
   («Linux / Ubuntu Server» encuentra «servidores Ubuntu»).
 - **Tema claro/oscuro:** botón en la barra; la elección se guarda en el navegador.
   `public/assets/tema.js` la aplica antes de pintar para que no parpadee.
+- **Monitor SHM** (`public/assets/monitor.js`): señal simulada de un acelerómetro a 200 Hz, su FFT,
+  la frecuencia dominante y el RMS dibujados en `<canvas>`; se pausa solo cuando no se ve.
+- **Efectos:** brillo que sigue al cursor en las tarjetas, secciones que aparecen al llegar y el
+  atajo `/` o `Ctrl+K` para buscar. Con «reducir movimiento» no hay animaciones.
 - **Copiar correo** y **Compartir** (menú del sistema en el celular; en la computadora copia el enlace).
 
 Los textos de la interfaz están en `datos/es.json` y `datos/en.json` (`ui`).
