@@ -123,6 +123,16 @@ for (const [ruta, lang] of [['/', 'es'], ['/en', 'en']] as const) {
   }
   ok(q('#projects .card .fecha time[datetime]').length === d.projects.length, `${ruta}: cada proyecto muestra su fecha`);
   ok(q('#skills .chips li svg.tico').length === Object.values(d.skills).flat().length, `${ruta}: cada competencia lleva ícono`);
+  // Íconos: el HTML solo lleva <use href="/assets/iconos.svg?v=…#id">; los trazos están en el sprite.
+  const sprite = readFileSync(path.join(RAIZ, 'public', 'assets', 'iconos.svg'), 'utf8');
+  const usos = q('svg use').map((u) => u.getAttribute('href') ?? '');
+  const sinSimbolo = [...new Set(usos.map((u) => u.split('#')[1]))].filter((id) => !sprite.includes(`<symbol id="${id}"`));
+  ok(usos.length > 50 && usos.every((u) => /^\/assets\/iconos\.svg\?v=[0-9a-f]{8}#[\w-]+$/.test(u)) && sinSimbolo.length === 0,
+    `${ruta}: los ${usos.length} íconos usan el sprite y todos sus símbolos existen` + (sinSimbolo.length ? ` (faltan ${sinSimbolo.join(', ')})` : ''));
+  // (El sol y la luna del botón de tema siguen en línea: son dos y solo aparecen una vez.)
+  ok(q('svg.tico path, svg.ico path').length === 0, `${ruta}: el HTML no repite trazos de íconos`);
+  const kb = Math.round(Buffer.byteLength(r.body) / 1024);
+  ok(kb < 180, `${ruta}: el HTML pesa ${kb} KB (límite 180 KB; con los trazos en línea eran 368)`);
   ok(d.focus.length > 0 && q('.hero .enfoque li svg').length === d.focus.length, `${ruta}: el encabezado muestra las ${d.focus.length} áreas de enfoque con ícono`);
 }
 
