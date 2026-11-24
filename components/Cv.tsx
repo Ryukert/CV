@@ -2,7 +2,6 @@
 // las funciones interactivas las pone public/assets/cv.js (mejora progresiva).
 import { asset, assetSize, cvData, url } from '@/lib/cv.ts';
 import { mesAnio, type Lang } from '@/lib/cv-core.ts';
-import { Fragment } from 'react';
 import { Icono, IconoTecnologia } from '@/components/Iconos.tsx';
 
 /** JSON dentro de <script>: sin «<», «>» ni «&» que pudieran cerrar la etiqueta. */
@@ -104,6 +103,12 @@ export default async function Cv({ lang }: { lang: Lang }) {
               <button type="button" className="btn ghost" id="compartir" hidden>{String(d.ui.compartir)}</button>
             </p>
           </div>
+          <aside className="enfoque" aria-labelledby="enfoque-titulo">
+            <p className="enfoque-titulo" id="enfoque-titulo">{d.sections.focus}</p>
+            <ul>
+              {d.focus.map((f) => <li key={f.label}><Icono nombre={f.icon} />{f.label}</li>)}
+            </ul>
+          </aside>
         </div>
       </header>
 
@@ -122,13 +127,18 @@ export default async function Cv({ lang }: { lang: Lang }) {
       <main className="wrap" id="main">
         <section className="summary" id="about">
           <h2>{d.sections.about}</h2>
-          <p>{d.summary}</p>
-          <ul className="idiomas" aria-label={d.sections.langs}>
-            {d.languages.map((l) => {
-              const [idioma, ...resto] = l.split(':');
-              return <li key={l}><strong>{idioma.trim()}</strong> {resto.join(':').trim()}</li>;
-            })}
-          </ul>
+          <div className="about-grid">
+            <p>{d.summary}</p>
+            <aside className="ficha">
+              <h3>{d.sections.langs}</h3>
+              <ul className="idiomas">
+                {d.languages.map((l) => {
+                  const [idioma, ...resto] = l.split(':');
+                  return <li key={l}><strong>{idioma.trim()}</strong> {resto.join(':').trim()}</li>;
+                })}
+              </ul>
+            </aside>
+          </div>
         </section>
 
         <section id="logros">
@@ -163,12 +173,14 @@ export default async function Cv({ lang }: { lang: Lang }) {
                   {d.experience_tech[job.tech].map((t) => <li key={t}><IconoTecnologia etiqueta={t} />{t}</li>)}
                 </ul>
               )}
-              {job.groups.map((g) => (
-                <Fragment key={g.name}>
-                  <h4>{g.name}</h4>
-                  <ul>{g.items.map((it) => <li key={it}>{it}</li>)}</ul>
-                </Fragment>
-              ))}
+              <div className="grupos">
+                {job.groups.map((g) => (
+                  <div className="grupo" key={g.name}>
+                    <h4>{g.name}</h4>
+                    <ul>{g.items.map((it) => <li key={it}>{it}</li>)}</ul>
+                  </div>
+                ))}
+              </div>
             </article>
           ))}
         </section>
@@ -197,14 +209,16 @@ export default async function Cv({ lang }: { lang: Lang }) {
 
         <section id="skills">
           <h2>{d.sections.skills}</h2>
-          {Object.entries(d.skills).map(([grupo, items]) => (
-            <div className="skillrow" key={grupo}>
-              <h4>{grupo}</h4>
-              <ul className="chips iconos">
-                {items.map((i) => <li key={i}><IconoTecnologia etiqueta={i} />{i}</li>)}
-              </ul>
-            </div>
-          ))}
+          <div className="skills-grid">
+            {Object.entries(d.skills).map(([grupo, items]) => (
+              <div className="skillrow" key={grupo}>
+                <h4>{grupo}</h4>
+                <ul className="chips iconos">
+                  {items.map((i) => <li key={i}><IconoTecnologia etiqueta={i} />{i}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section id="pubs">
@@ -224,6 +238,8 @@ export default async function Cv({ lang }: { lang: Lang }) {
 
         <section id="edu">
           <h2>{d.sections.edu}</h2>
+          <div className="edu-grid">
+          <div>
           {d.education.map((ed) => (
             <article className="entry compact" key={ed.title}>
               <div className="entry-head">
@@ -237,8 +253,10 @@ export default async function Cv({ lang }: { lang: Lang }) {
               <p className="note">{ed.note}</p>
             </article>
           ))}
+          </div>
 
-          <h2 className="sub">{d.sections.other}</h2>
+          <div>
+          <h3 className="sub">{d.sections.other}</h3>
           {d.other.map((o) => (
             <article className="entry compact" key={o.title}>
               <div className="entry-head">
@@ -255,6 +273,8 @@ export default async function Cv({ lang }: { lang: Lang }) {
               <h4>{en ? 'Certifications' : 'Certificaciones'}</h4>
               <ul>{d.certs.map((c) => <li key={c}>{c}</li>)}</ul>
             </div>
+          </div>
+          </div>
           </div>
         </section>
 

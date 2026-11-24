@@ -123,6 +123,7 @@ for (const [ruta, lang] of [['/', 'es'], ['/en', 'en']] as const) {
   }
   ok(q('#projects .card .fecha time[datetime]').length === d.projects.length, `${ruta}: cada proyecto muestra su fecha`);
   ok(q('#skills .chips li svg.tico').length === Object.values(d.skills).flat().length, `${ruta}: cada competencia lleva ícono`);
+  ok(d.focus.length > 0 && q('.hero .enfoque li svg').length === d.focus.length, `${ruta}: el encabezado muestra las ${d.focus.length} áreas de enfoque con ícono`);
 }
 
 // ── Los dos idiomas tienen la misma estructura ──

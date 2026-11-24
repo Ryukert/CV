@@ -36,6 +36,7 @@ export interface Grupo { name: string; items: string[] }
 
 export interface Idioma {
   lang: Lang; locale: string; role: string; subrole: string; location: string; available: string; meta_desc: string;
+  focus: { icon: string; label: string }[];   // áreas de enfoque del encabezado (ícono de components/Iconos.tsx)
   nav: Record<string, string>;
   cta_pdf: string; cta_design: string; switch: string; switch_url: string;
   summary: string;
