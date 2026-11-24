@@ -467,3 +467,76 @@ li.coincide { box-shadow: none; }
   body::before { display: none; }
   .tech li { border: 0; padding: 0 6px 0 0; background: none; }
 }
+
+/* ---------- Distribución: contenedor ancho y cuadrículas que se acomodan solas ---------- */
+:root { --max: 1140px; }
+
+/* Encabezado: datos a la izquierda, áreas de enfoque a la derecha */
+.hero-grid { justify-content: space-between; align-items: center; }
+.enfoque {
+  flex: 0 0 280px;
+  padding: 18px 20px;
+  border: 1px solid rgba(212, 165, 42, .45);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .04);
+}
+.enfoque-titulo { margin: 0 0 10px; font-size: 0.72rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--oro); }
+.enfoque ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+.enfoque li { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 0.9rem; color: #e6ecf5; }
+.enfoque .ico { width: 18px; height: 18px; color: var(--oro); }
+
+/* Acerca de mí: resumen + ficha de idiomas */
+.about-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; align-items: start; }
+.about-grid > p { margin: 0; max-width: 75ch; }
+.ficha { padding: 16px 18px; border: 1px solid var(--line); border-left: 3px solid var(--oro); border-radius: var(--radius); background: var(--bg); }
+.ficha h3 { margin: 0 0 8px; font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase; color: var(--grey); }
+.ficha .idiomas { display: grid; gap: 8px; margin: 0; font-size: 0.86rem; }
+
+/* Logros en tarjetas */
+.logros { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+.logros li { height: 100%; }
+
+/* Experiencia: introducción a lo ancho y los tres grupos lado a lado */
+.entry .intro { max-width: 85ch; }
+.grupos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; margin-top: 14px; }
+.grupo { padding: 4px 16px 10px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); }
+.grupo h4 { margin-top: 12px; color: var(--blue); }
+.grupo ul { padding-left: 18px; margin: 0; font-size: 0.92rem; }
+.grupo li { margin-bottom: 6px; }
+
+/* Proyectos: tres columnas en pantallas anchas */
+.cards { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+.card { display: flex; flex-direction: column; }
+.card .repo { margin-top: auto; }
+
+/* Competencias: cada grupo en su tarjeta, dos columnas */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 14px; }
+.skills-grid .skillrow { display: block; margin: 0; padding: 4px 16px 14px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); }
+.skills-grid .skillrow h4 { margin: 12px 0 10px; }
+
+/* Formación a la izquierda; otra experiencia y certificaciones a la derecha */
+.edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 32px; }
+.edu-grid h3.sub { margin: 0 0 14px; font-size: 0.82rem; letter-spacing: 0.8px; text-transform: uppercase; color: var(--grey); }
+.edu-grid .two-col { display: block; margin-top: 22px; }
+.edu-grid .two-col h4 { margin-top: 0; }
+
+@media (max-width: 900px) {
+  .hero-grid { flex-direction: column; align-items: stretch; }
+  .enfoque { flex: none; }
+  .enfoque ul { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+  .about-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+@media (max-width: 720px) {
+  .enfoque { text-align: left; padding: 14px 16px; }
+  .enfoque ul { grid-template-columns: 1fr 1fr; gap: 8px 12px; }
+  .enfoque li { font-size: 0.8rem; gap: 7px; }
+  .logros, .cards, .grupos, .skills-grid, .edu-grid { grid-template-columns: 1fr; }
+  .edu-grid { gap: 8px; }
+}
+
+@media print {
+  .enfoque { border-color: #ccc; background: none; }
+  .enfoque li, .enfoque-titulo { color: #000; }
+  .grupos, .skills-grid, .edu-grid, .logros, .cards { display: block; }
+  .grupo, .skills-grid .skillrow, .ficha { border: 0; padding: 0; }
+}

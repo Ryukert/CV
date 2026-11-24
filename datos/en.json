@@ -5,6 +5,28 @@
     "subrole": "Digital Signal Processing · Scientific Software",
     "location": "Mexico (GMT-6)",
     "available": "Available for remote work with US and European overlap",
+    "focus": [
+        {
+            "icon": "chip",
+            "label": "IoT & embedded systems"
+        },
+        {
+            "icon": "onda",
+            "label": "Signal processing (DSP)"
+        },
+        {
+            "icon": "codigo",
+            "label": "Software development"
+        },
+        {
+            "icon": "red",
+            "label": "Artificial intelligence"
+        },
+        {
+            "icon": "barras",
+            "label": "Data analytics"
+        }
+    ],
     "meta_desc": "CV of Marco Antonio Adame Rodríguez, IoT and embedded systems engineer working on digital signal processing and structural health monitoring.",
     "nav": {
         "about": "About me",
@@ -34,7 +56,8 @@
         "edu": "Education",
         "skills": "Technical skills",
         "other": "Additional experience",
-        "contact": "Contact"
+        "contact": "Contact",
+        "focus": "Focus areas"
     },
     "achievements": [
         {
