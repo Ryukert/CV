@@ -15,3 +15,7 @@ lib/versiones.json
 .next/
 next-env.d.ts
 *.tsbuildinfo
+
+# Variables de entorno (SITE_URL u otras): nunca al repositorio
+.env*
+!.env.ejemplo
