@@ -30,7 +30,6 @@ export interface Compartido {
   publications: Publication[];
   projects: Project[];
   experience_tech: Record<string, string[]>;
-  metrics: { value: string; key: string }[];
 }
 
 export interface Grupo { name: string; items: string[] }
@@ -40,20 +39,12 @@ export interface Idioma {
   nav: Record<string, string>;
   cta_pdf: string; cta_design: string; switch: string; switch_url: string;
   summary: string;
-  metric_labels: Record<string, string>;
   sections: Record<string, string>;
   achievements: { title: string; text: string }[];
   experience: { period: string; org: string; title: string; tech?: string; intro: string; groups: Grupo[] }[];
   talk: { label: string; text: string };
   project_text: Record<string, [string, string]>;
-  areas: {
-    toggle: string; intro: string; legend: { applied: string; coursework: string };
-    items: { name: string; applied: boolean; evidence?: string; courses: string[] }[];
-  };
-  education: {
-    period: string; org: string; title: string; note: string; stats?: string[];
-    coursework?: { label: string; note?: string; groups: Grupo[] };
-  }[];
+  education: { period: string; org: string; title: string; note: string; stats?: string[] }[];
   other: { period: string; org: string; title: string; note: string }[];
   skills: Record<string, string[]>;
   certs: string[];
@@ -67,7 +58,6 @@ export type Cv = Idioma & {
   publications: Publication[];
   projects: Project[];
   experience_tech: Record<string, string[]>;
-  metrics: { value: string; key: string }[];
   pdf: { plain: string; design: string };
   updated_iso: string;
 };
@@ -86,7 +76,6 @@ export function armarCv(c: Compartido, idioma: Idioma): Cv {
     publications: c.publications,
     projects: ordenarProyectos(c.projects),
     experience_tech: c.experience_tech,
-    metrics: c.metrics,
     pdf: en
       ? { plain: '/assets/cv-en.pdf', design: '/assets/cv-en-design.pdf' }
       : { plain: '/assets/cv-es.pdf', design: '/assets/cv-es-diseno.pdf' },

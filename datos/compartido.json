@@ -77,12 +77,6 @@
             "date": "2026-11"
         },
         {
-            "key": "micrositio",
-            "stack": "HTML · CSS · JavaScript · Vercel",
-            "url": "https://maqueta-chi.vercel.app",
-            "date": "2026-11"
-        },
-        {
             "key": "ecosistema",
             "pdf": true,
             "stack": "JavaScript · Leaflet · Supabase · PWA · GitHub Actions",
@@ -169,23 +163,5 @@
             "Docker",
             "Vercel"
         ]
-    },
-    "metrics": [
-        {
-            "value": "200 Hz",
-            "key": "sampling"
-        },
-        {
-            "value": "4",
-            "key": "sensors"
-        },
-        {
-            "value": "5",
-            "key": "sites"
-        },
-        {
-            "value": "3",
-            "key": "papers"
-        }
-    ]
+    }
 }

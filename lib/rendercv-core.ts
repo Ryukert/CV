@@ -2,9 +2,8 @@
 // Lo usan herramientas/rendercv.ts (genera los PDF) y tests/humo.ts (comprueba que los PDF
 // publicados corresponden a los datos actuales).
 //
-// completo = true es el PDF sencillo que descarga el sitio: logros, los proyectos marcados
-// con "pdf": true y las asignaturas. false es la base para adaptar a una vacante (todos los
-// proyectos, sin asignaturas).
+// completo = true es el PDF sencillo que descarga el sitio: logros y los proyectos marcados
+// con "pdf": true. false es la base para adaptar a una vacante (todos los proyectos, sin logros).
 import { createHash } from 'node:crypto';
 import type { Cv } from './cv-core.ts';
 
@@ -50,13 +49,10 @@ export function cvRendercv(d: Cv, completo = true, sitio = ''): Record<string, u
   }));
   const charla = [`**${rcvMd(d.talk.label)}:** ${rcvMd(d.talk.text)}`];
 
-  const formacion = d.education.map((ed) => {
-    const puntos = [rcvMd((ed.stats ?? []).join(' · ')), rcvMd(ed.note)];
-    if (completo && ed.coursework) {
-      for (const g of ed.coursework.groups) puntos.push(`**${rcvMd(g.name)}:** ${rcvMd(g.items.join(', '))}`);
-    }
-    return { institution: ed.org, area: rcvMd(ed.title), date: ed.period, highlights: puntos };
-  });
+  const formacion = d.education.map((ed) => ({
+    institution: ed.org, area: rcvMd(ed.title), date: ed.period,
+    highlights: [rcvMd((ed.stats ?? []).join(' · ')), rcvMd(ed.note)],
+  }));
 
   const otra = d.other.map((o) => ({ company: rcvMd(o.org), position: rcvMd(o.title), date: o.period, summary: rcvMd(o.note) }));
   const competencias = Object.entries(d.skills).map(([g, items]) => ({ label: rcvMd(g), details: rcvMd(items.join(', ')) }));

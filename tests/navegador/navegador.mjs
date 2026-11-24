@@ -107,7 +107,6 @@ try {
 
   await p.type("#q", "deep learning");
   await pausa(300);
-  ok(await p.evaluate(() => [...document.querySelectorAll("details")].some((d) => d.open && d.querySelector(".coincide"))), "abre las asignaturas donde hay coincidencias");
   await p.close();
 
   // ── Búsqueda que llega en la dirección ──

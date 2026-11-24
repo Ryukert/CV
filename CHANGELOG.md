@@ -2,6 +2,17 @@
 
 ## [Sin publicar]
 
+### Depuración del contenido
+
+- Fuera la sección **Áreas de la computación** y las **listas de asignaturas** de Formación (las 69
+  asignaturas aparecían dos veces). En Formación quedan el título, el promedio y la nota.
+- Fuera las **métricas** (200 Hz, 4, 5, 3): repetían los logros clave y el resumen.
+- Fuera el proyecto **Micrositio IEPC Guerrero** (maqueta sin backend).
+- Competencias: fuera las genéricas que no son herramientas o ya estaban cubiertas (Big Data, Deep
+  Learning, Visión artificial, Series temporales, RMS y SQL; queda PostgreSQL).
+- El PDF sencillo pasa de 3 páginas llenas a 2½ (90 KB).
+- Se quitan el CSS y el JavaScript que solo usaban esas secciones.
+
 ### Migración de PHP a Next.js + React (TypeScript)
 
 - El sitio pasa de PHP (runtime de la comunidad `vercel-php`) a **Next.js 16 y React 19** con
