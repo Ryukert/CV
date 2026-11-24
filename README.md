@@ -32,18 +32,18 @@ Bilingüe (español e inglés), servido desde una única fuente de datos, con en
 │   └── health/, robots.txt/, sitemap.xml/
 ├── components/
 │   ├── Cv.tsx             # el CV completo (componente de servidor)
-│   ├── Iconos.tsx         # íconos de contacto y de tecnologías
+│   ├── Iconos.tsx         # íconos: <use> del sprite public/assets/iconos.svg
 │   └── ArrancarCv.tsx     # carga cv.js cuando React terminó de hidratar
 ├── lib/
 │   ├── cv-core.ts         # arma el CV (sin dependencias; lo usan web, PDF y pruebas)
 │   ├── cv.ts              # capa de datos de la web (URL absolutas, versiones de archivos)
 │   ├── rendercv-core.ts   # conversión al formato de RenderCV
-│   └── iconos.ts          # GENERADO: logotipos (Simple Icons, CC0)
+│   └── iconos.ts          # GENERADO: índice del sprite (nombre → color e id)
 ├── proxy.ts               # CSP con nonce, solo GET/HEAD, encabezados de seguridad
 ├── public/assets/         # CSS, cv.js, tema.js, fuente, PDFs e imágenes
 ├── herramientas/
 │   ├── rendercv.ts        # genera los PDF y los YAML por vacante
-│   ├── iconos.mjs         # genera lib/iconos.ts
+│   ├── iconos.mjs         # genera el sprite iconos.svg y lib/iconos.ts
 │   └── versiones.ts       # huella ?v= de cada archivo (corre antes de dev y build)
 ├── tests/humo.ts          # pruebas de humo contra la versión compilada
 ├── tests/navegador/       # pruebas en navegador de las funciones con JavaScript
@@ -79,6 +79,8 @@ npm run dev        # http://127.0.0.1:8080
 - **Las funciones interactivas siguen en `public/assets/cv.js`** (JavaScript propio, sin
   bibliotecas). `ArrancarCv.tsx` lo carga *después* de que React hidrata la página: si lo hiciera
   antes, React vería un HTML distinto al del servidor y volvería a pintarlo.
+- **Íconos en un sprite:** todos los trazos están en `public/assets/iconos.svg` y la página solo
+  los referencia con `<svg><use href="…#id"/></svg>`; el HTML pesa ~125 KB (22 KB comprimido).
 - **Archivos versionados:** `herramientas/versiones.ts` calcula la huella de cada archivo de
   `public/assets` antes de compilar; las URL llevan `?v=<hash>` y se guardan un año en el navegador.
 - **Fondo:** el logotipo (`public/assets/fondo.webp` y `fondo-movil.webp`, con el blanco hecho

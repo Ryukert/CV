@@ -2,6 +2,18 @@
 
 ## [Sin publicar]
 
+## 2026-11-24 (íconos) — publicado en main
+
+### HTML más ligero: íconos en un sprite SVG
+
+- Los trazos de los íconos (logotipos de tecnologías, contacto, áreas de enfoque y genéricos) pasan
+  a `public/assets/iconos.svg`; la página solo los referencia con `<use href>`. Antes cada trazo
+  iba en el HTML y otra vez en los datos internos de React.
+- HTML de la página: de 368 KB a 125 KB (comprimido, de 106 KB a 22 KB). El sprite pesa 67 KB y
+  el navegador lo guarda un año (cambia de URL si cambia).
+- `herramientas/iconos.mjs` genera el sprite y `lib/iconos.ts` (solo nombres, colores e ids).
+- Pruebas: cada ícono usa un símbolo que existe en el sprite y el HTML no pasa de 180 KB.
+
 ## 2026-11-24 (noche) — publicado en main
 
 ### Distribución del sitio y de la información
