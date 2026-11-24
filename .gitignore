@@ -9,3 +9,9 @@ node_modules/
 .vercel
 .DS_Store
 Thumbs.db
+
+# Generado por herramientas/versiones.ts antes de dev y build
+lib/versiones.json
+.next/
+next-env.d.ts
+*.tsbuildinfo

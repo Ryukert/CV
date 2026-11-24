@@ -1,0 +1,167 @@
+{
+    "updated": "2026-11-24",
+    "profile": {
+        "name": "Marco Antonio Adame Rodríguez",
+        "email": "ragnarockgames86@gmail.com",
+        "phone": "+52 747 334 2910",
+        "github": "https://github.com/Ryukert",
+        "linkedin": "https://www.linkedin.com/in/marco-antonio-adame-rodr%C3%ADguez-211615227/",
+        "orcid": "https://orcid.org/0009-0003-2361-4945"
+    },
+    "publications": [
+        {
+            "authors": "Adame Rodríguez, M. A., Alcaraz Vázquez, M., Martínez, E. T., García Guevara, D. S., Alonso Silverio, G. A.",
+            "year": 2026,
+            "title": {
+                "es": "Sistema de medición de vibraciones ambientales en mesa vibradora biaxial",
+                "en": "Ambient Vibration Measurement System on a Biaxial Vibrating Table"
+            },
+            "venue": "Revista Vínculos, 22(1)",
+            "role": {
+                "es": "Autor principal",
+                "en": "Lead author"
+            },
+            "url": "https://revistas.udistrital.edu.co/index.php/vinculos/article/view/24610"
+        },
+        {
+            "authors": "Alcaraz Vázquez, M., Adame Rodríguez, M. A., García Guevara, D. S., Martínez, E. T., Alonso Silverio, G. A.",
+            "year": 2025,
+            "title": {
+                "es": "Selección de atributos mediante feature importance para la clasificación de casos de dengue en México",
+                "en": "Feature-importance-based attribute selection for dengue case classification in Mexico"
+            },
+            "venue": "Revista Vínculos, 22(2)",
+            "role": {
+                "es": "Coautor",
+                "en": "Co-author"
+            },
+            "url": "https://revistas.udistrital.edu.co/index.php/vinculos/article/view/24567"
+        },
+        {
+            "authors": "García Guevara, D. S., Martínez, E. T., Alcaraz Vázquez, M., Adame Rodríguez, M. A., Alonso Silverio, G. A.",
+            "year": 2025,
+            "title": {
+                "es": "Agitador de muestras biológicas con control de temperatura basado en tecnologías IoT",
+                "en": "IoT-based biological sample shaker with temperature control"
+            },
+            "venue": "Revista Vínculos, 22(2)",
+            "role": {
+                "es": "Coautor",
+                "en": "Co-author"
+            },
+            "url": "https://revistas.udistrital.edu.co/index.php/vinculos/article/view/24607"
+        }
+    ],
+    "projects": [
+        {
+            "key": "shm",
+            "pdf": true,
+            "stack": "Python · C++ · Raspberry Pi · PyQt5",
+            "url": null,
+            "date": "2024-08",
+            "ongoing": true,
+            "featured": true
+        },
+        {
+            "key": "mortero",
+            "pdf": true,
+            "stack": "React · Tailwind CSS · PWA · Vercel",
+            "url": "https://predictor-mortero-calibrado.vercel.app",
+            "date": "2026-11"
+        },
+        {
+            "key": "prisma",
+            "pdf": true,
+            "stack": "Python · CustomTkinter · Pandas · RapidFuzz",
+            "url": "https://github.com/Ryukert/PRISMA-",
+            "date": "2026-11"
+        },
+        {
+            "key": "ecosistema",
+            "pdf": true,
+            "stack": "JavaScript · Leaflet · Supabase · PWA · GitHub Actions",
+            "url": "https://ecosistemariesgosismicotijuana.vercel.app",
+            "date": "2026-10"
+        },
+        {
+            "key": "ivbc",
+            "pdf": true,
+            "stack": "JavaScript · Preact · Supabase · Vercel Functions · GeoJSON",
+            "url": "https://iv-bc-sitio.vercel.app",
+            "date": "2026-10"
+        },
+        {
+            "key": "game",
+            "stack": "React 18 · Vite · Claude API · Vercel",
+            "url": "https://github.com/Ryukert/JUEGO-DE-GRENCITO-Y-SISMOTECNITO",
+            "date": "2026-09"
+        },
+        {
+            "key": "attendance",
+            "stack": "JavaScript · Supabase · Vercel",
+            "url": "https://github.com/Ryukert/SECUNDARIA-IMA",
+            "date": "2026-09"
+        },
+        {
+            "key": "trading",
+            "stack": "Python · PySide6",
+            "url": "https://github.com/Ryukert/trading-",
+            "date": "2026-08"
+        },
+        {
+            "key": "cv",
+            "stack": "Next.js · React · TypeScript · Vercel · GitHub Actions",
+            "url": "https://github.com/Ryukert/CV",
+            "date": "2026-08"
+        },
+        {
+            "key": "gps",
+            "pdf": true,
+            "stack": "JavaScript · Vercel",
+            "url": "https://github.com/Ryukert/SHM_GPS_NETWORK_DASH_elite",
+            "date": "2026-05"
+        },
+        {
+            "key": "shmsim",
+            "stack": "Next.js · React · Recharts",
+            "url": "https://github.com/Ryukert/shm-network-web2.1",
+            "date": "2026-05"
+        },
+        {
+            "key": "crm",
+            "stack": "JavaScript · Vercel",
+            "url": "https://github.com/Ryukert/joyeria-crm",
+            "date": "2026-03"
+        },
+        {
+            "key": "supabase",
+            "pdf": true,
+            "stack": "JavaScript · Supabase · PostgreSQL",
+            "url": "https://github.com/Ryukert/MIIDT_SUPABASE_DASH",
+            "date": "2026-02"
+        },
+        {
+            "key": "api",
+            "pdf": true,
+            "stack": "Python · FastAPI",
+            "url": "https://github.com/Ryukert/APIAceleraciones",
+            "date": "2024-10"
+        }
+    ],
+    "experience_tech": {
+        "shm": [
+            "Python",
+            "C++",
+            "Arduino Nano RP2040",
+            "Raspberry Pi",
+            "ESP32",
+            "NumPy",
+            "SciPy",
+            "PyQt5",
+            "FastAPI",
+            "Ubuntu Server",
+            "Docker",
+            "Vercel"
+        ]
+    }
+}

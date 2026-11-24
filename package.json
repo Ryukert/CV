@@ -1,0 +1,31 @@
+{
+  "name": "cv",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "versiones": "node herramientas/versiones.ts",
+    "predev": "npm run versiones",
+    "dev": "next dev -p 8080",
+    "prebuild": "npm run versiones",
+    "build": "next build",
+    "start": "next start -p 8080",
+    "typecheck": "tsc --noEmit",
+    "test": "node tests/humo.ts",
+    "pdf": "node herramientas/rendercv.ts --publicar"
+  },
+  "engines": {
+    "node": ">=22.18"
+  },
+  "dependencies": {
+    "next": "16.4.6",
+    "react": "19.2.9",
+    "react-dom": "19.2.9"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "linkedom": "0.18.14",
+    "typescript": "5.9.3"
+  }
+}

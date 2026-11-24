@@ -1,0 +1,303 @@
+{
+    "lang": "en",
+    "locale": "en_US",
+    "role": "IoT & Embedded Systems Engineer",
+    "subrole": "Digital Signal Processing · Scientific Software",
+    "location": "Mexico (GMT-6)",
+    "available": "Available for remote work with US and European overlap",
+    "meta_desc": "CV of Marco Antonio Adame Rodríguez, IoT and embedded systems engineer working on digital signal processing and structural health monitoring.",
+    "nav": {
+        "about": "About me",
+        "logros": "Achievements",
+        "exp": "Experience",
+        "projects": "Projects",
+        "skills": "Skills",
+        "pubs": "Publications",
+        "edu": "Education",
+        "contact": "Contact"
+    },
+    "cta_pdf": "Download CV as PDF",
+    "cta_design": "Designed version",
+    "switch": "Español",
+    "switch_url": "/",
+    "summary": "I build end-to-end IoT systems: MEMS sensor, embedded firmware, real-time acquisition, signal processing, Linux backend, cloud and dashboards. I designed a low-cost structural health monitoring system from scratch and validated it in the field against commercial seismic instrumentation (GEA and P-Alert); the work led to three peer-reviewed papers and an international conference talk. I also build production geospatial web applications (Supabase, Leaflet, offline-first) with automated tests and continuous deployment. Computer Engineer and MSc graduate in Engineering for Innovation and Technological Development (UAGro), 9.42/10 GPA, degree conferral expected November 2026.",
+    "sections": {
+        "about": "About me",
+        "langs": "Languages",
+        "stack": "Technologies",
+        "present": "present",
+        "social": "Social",
+        "logros": "Key achievements",
+        "exp": "Research & development experience",
+        "pubs": "Publications & talks",
+        "projects": "Projects",
+        "edu": "Education",
+        "skills": "Technical skills",
+        "other": "Additional experience",
+        "contact": "Contact"
+    },
+    "achievements": [
+        {
+            "title": "Complete SHM-IoT system designed from the ground up",
+            "text": "and validated in the field against commercial GEA and P-Alert equipment, at a fraction of the cost of traditional seismic instrumentation."
+        },
+        {
+            "title": "Ambient vibration measurement on a biaxial shaking table:",
+            "text": "synchronized 200 Hz sampling, FFT analysis over 2048-point windows, 0.98 Hz frequency resolution, and automatic RPM computation from the dominant frequency (peer-reviewed publication)."
+        },
+        {
+            "title": "Continuously running multi-site monitoring:",
+            "text": "nodes across separate networks, a centralized Ubuntu Server receiver, local buffering against connectivity loss, and published web dashboards."
+        },
+        {
+            "title": "Python/PyQt5 vibration analysis suite",
+            "text": "that processes large volumes of records and generates comparative technical reports automatically."
+        },
+        {
+            "title": "Production seismic-risk web platform:",
+            "text": "real-street routing in 5 Baja California cities to 370 health facilities from the official CLUES registry, offline support, and 152 automated tests on every change."
+        }
+    ],
+    "experience": [
+        {
+            "period": "Aug 2024 – Present",
+            "org": "Autonomous University of Guerrero (UAGro) · MIIDT graduate program",
+            "title": "Lead Researcher and Developer — SHM-IoT System",
+            "tech": "shm",
+            "intro": "End-to-end design and implementation of a low-cost structural health monitoring solution for civil works, field-validated against commercial GEA and P-Alert equipment.",
+            "groups": [
+                {
+                    "name": "Acquisition, firmware and hardware",
+                    "items": [
+                        "Designed acquisition nodes on Arduino Nano RP2040 Connect and Raspberry Pi 4, integrating four MEMS sensors (MPU9250, MPU6050, LSM6DSOX and ADXL335) over I2C, SPI and UART.",
+                        "Implemented synchronized 200 Hz acquisition across both RP2040 cores, with ample Nyquist margin for the structural frequency range of interest.",
+                        "Validated the system in five environments — a biaxial shaking table, university buildings, a botanical garden, a high school campus and lightweight experimental structures — comparing its records against commercial GEA and P-Alert equipment."
+                    ]
+                },
+                {
+                    "name": "Signal processing and scientific software",
+                    "items": [
+                        "Built a Python (NumPy/SciPy) DSP pipeline to identify the dynamic response of structures: RMS, FFT, power spectral density (Welch), dominant frequency, coherence, phase analysis and cross-correlation.",
+                        "Developed PyQt5 desktop applications for acquisition, live monitoring and analysis, with session control and automatic crash recovery.",
+                        "Built tools to process large TXT, CSV, JSON and JSONL record sets: time synchronization, resampling, gap detection, digital filtering and series trimming.",
+                        "Automated the generation of technical reports and comparative plots against reference equipment; these results underpin my lead-author paper."
+                    ]
+                },
+                {
+                    "name": "Backend, cloud and infrastructure",
+                    "items": [
+                        "Designed a centralized multi-site receiver over HTTP/HTTPS with local buffering, so connectivity outages do not cause data loss.",
+                        "Developed REST APIs in FastAPI for ingesting, persisting and querying ESP32 node telemetry.",
+                        "Administered continuously running Ubuntu servers: systemd services, Docker containers, SSH/VNC remote access, backups and synchronization.",
+                        "Published web dashboards on Vercel to visualize, filter and download data from both custom nodes and commercial sensors in one place."
+                    ]
+                }
+            ]
+        }
+    ],
+    "talk": {
+        "label": "Conference talk",
+        "text": "\"Ambient Vibration Measurement System on a Biaxial Vibrating Table\". 15th International Computing Conference (CICOM 2025), Tunja, Colombia, October 2025."
+    },
+    "project_text": {
+        "shm": [
+            "SHM-IoT MIIDT — Low-cost structural monitoring",
+            "Full architecture for acquisition, storage, analysis and visualization of accelerations in civil structures, field-tested against commercial sensors."
+        ],
+        "ecosistema": [
+            "Tijuana seismic risk ecosystem",
+            "Web dashboard linking seismic hazard, soil, stations, acceleration maps, inspection and outreach on a single Supabase database. Computes routes to hospitals and emergency services over real streets (OpenStreetMap, Dijkstra) in five Baja California cities using the official CLUES health registry, works offline as an installable app, and ships with semantic versioning and automated tests on every change."
+        ],
+        "ivbc": [
+            "Green Infrastructure · Baja California",
+            "Dashboard of 36 green-infrastructure techniques per municipality, with point queries over GeoJSON layers and address search, a login-protected editing panel, PDF and CSV reports, offline mode and a Supabase visit counter."
+        ],
+        "mortero": [
+            "Calibrated mortar predictor (NTC-DECM)",
+            "Web calculator for mortar mix design and strength, calibrated against the Mexico City Complementary Technical Standards (NTC-DECM). Works offline and installs as an app; bundling React and Tailwind into the project cut the download from 964 KB to 173 KB and load time on slow 4G from 7.8 s to 2 s, with headless Chrome tests."
+        ],
+        "prisma": [
+            "SysReview PRISMA — systematic review screening",
+            "Desktop application for PRISMA 2020 systematic reviews: merges exports from Scopus, Web of Science, IEEE and Lens (CSV, Excel and text), removes duplicates by similar titles, applies configurable automatic screening, guides manual review and generates the flow diagram."
+        ],
+        "shmsim": [
+            "SHM-IoT network simulator",
+            "Next.js dashboard that simulates a network of GPS-georeferenced SHM sensors: location, status, battery and satellites per node, plus per-axis RMS and dominant frequency in real-time charts; ready to connect to Supabase or a custom API."
+        ],
+        "gps": [
+            "Geo-referenced SHM monitoring network",
+            "Monitoring dashboard for the FCITEC-UABC network (SHM + P-Alert) over a simulated network of 9 campuses in Tijuana and 32 buildings in Guerrero, with soil-based site effects; computes RMS, PGA, spectrum and STA/LTA detection on the unified signal of three sensors."
+        ],
+        "supabase": [
+            "Supabase sensor dashboard",
+            "Web application for submitting, querying and visualizing measurements stored in the cloud."
+        ],
+        "api": [
+            "ESP32 telemetry APIs",
+            "REST services for receiving, persisting and querying acceleration data, plus scientific plotting tools."
+        ],
+        "game": [
+            "Tecnito & Greencito Squad — AI educational game",
+            "Turn-based game for primary and secondary school classes: two mascots chat through Claude to teach earthquake preparedness and environmental care. The API key stays in a serverless function."
+        ],
+        "trading": [
+            "Trading Fusion Pro 3.0",
+            "Educational desktop tool for technical and fundamental analysis, with cost-aware backtesting and walk-forward validation. Refactored a 4,363-line script into a modular architecture."
+        ],
+        "attendance": [
+            "School attendance tracker",
+            "App for taking roll and generating attendance reports per class, with data in Supabase and automated tests for the core logic."
+        ],
+        "crm": [
+            "Jewelry store CRM",
+            "Customer management web app for a jewelry business, deployed on Vercel."
+        ],
+        "cv": [
+            "This online CV",
+            "Bilingual Next.js and React site in TypeScript on Vercel (formerly PHP), generated from a single JSON data source, with a public JSON endpoint, a strict nonce-based Content Security Policy and automated tests on GitHub Actions. The same data generates PDF versions of the CV tailored to each job posting."
+        ]
+    },
+    "education": [
+        {
+            "period": "Aug 2024 – 2026",
+            "org": "Universidad Autónoma de Guerrero",
+            "title": "MSc in Engineering for Innovation and Technological Development",
+            "note": "Terminal specialization: Information and Communication Technologies (2023 curriculum). All coursework completed; degree conferral in progress, expected November 2026. Thesis: \"Development and implementation of a low-cost IoT system for structural health monitoring in civil works\".",
+            "stats": [
+                "GPA 9.42 / 10",
+                "All coursework completed",
+                "No failed courses"
+            ]
+        },
+        {
+            "period": "2018 – 2023",
+            "org": "Universidad Autónoma de Guerrero",
+            "title": "BSc in Computer Engineering",
+            "note": "School of Engineering, Chilpancingo. Degree awarded 2023. Federal professional license no. 13426767.",
+            "stats": [
+                "GPA 8.56 / 10",
+                "55 courses passed"
+            ]
+        }
+    ],
+    "other": [
+        {
+            "period": "Jun 2023 – Jun 2024",
+            "org": "Ministry of Labour (Mexico)",
+            "title": "Jóvenes Construyendo el Futuro — Publishing department",
+            "note": "12-month vocational training programme in digital production and printing."
+        },
+        {
+            "period": "Aug 2022 – Jan 2023",
+            "org": "35th Military Zone (Mexican Army)",
+            "title": "Professional internship — IT area",
+            "note": "450 certified hours. Computer equipment support and maintenance in an institutional environment."
+        },
+        {
+            "period": "Feb 2022 – Jul 2022",
+            "org": "Ignacio Manuel Altamirano Secondary School",
+            "title": "Social service — Computing area",
+            "note": "500 certified hours. Technical support and community-sector educational support."
+        }
+    ],
+    "skills": {
+        "Languages & frameworks": [
+            "Python",
+            "C/C++ (embedded)",
+            "JavaScript",
+            "TypeScript",
+            "Node.js",
+            "PHP",
+            "Bash",
+            "PyQt5 / PySide6",
+            "React",
+            "Next.js",
+            "Preact"
+        ],
+        "Web & mapping": [
+            "Leaflet",
+            "GeoJSON",
+            "OpenStreetMap",
+            "PWA / Service Workers",
+            "Browser testing (Puppeteer)"
+        ],
+        "Data & signals": [
+            "NumPy",
+            "Pandas",
+            "SciPy",
+            "Matplotlib",
+            "FFT",
+            "PSD/Welch",
+            "Digital filters"
+        ],
+        "AI & machine learning": [
+            "Machine Learning",
+            "Feature selection"
+        ],
+        "IoT & hardware": [
+            "Raspberry Pi",
+            "ESP32",
+            "Arduino Nano RP2040",
+            "MEMS sensors",
+            "I2C",
+            "SPI",
+            "UART"
+        ],
+        "Backend & cloud": [
+            "FastAPI",
+            "REST APIs",
+            "Supabase",
+            "PostgreSQL",
+            "Firebase",
+            "Vercel Functions"
+        ],
+        "Systems & DevOps": [
+            "Linux / Ubuntu Server",
+            "Docker",
+            "systemd",
+            "SSH",
+            "Git",
+            "GitHub Actions (CI)",
+            "Vercel"
+        ]
+    },
+    "certs": [
+        "Data Science Essentials with Python — Cisco / UAGro (Dec 2025)",
+        "Cybersecurity Essentials — Cisco (Mar 2022)",
+        "NDG Linux Unhatched — Cisco (May 2022)",
+        "CCNAv7: Introduction to Networks — Cisco (Jun 2021)"
+    ],
+    "languages": [
+        "Spanish: native.",
+        "English: intermediate (B1), TOEFL ITP 470 (2025). Fluent reading of technical documentation and scientific literature."
+    ],
+    "contact_intro": "Open to remote opportunities in IoT, embedded systems, signal processing, backend development and web applications.",
+    "footer": "Built with Next.js and React on Vercel. Source code available on GitHub.",
+    "updated_label": "Last updated",
+    "updated": "November 2026",
+    "ui": {
+        "buscar": "Search this CV",
+        "buscar_ph": "Python, Supabase, sensors, FFT…",
+        "buscar_ayuda": "You can also click a skill to see where I have used it.",
+        "limpiar": "Clear",
+        "sin_resultados": "No matches for \"%s\".",
+        "resultados": "\"%s\": %d matches",
+        "secciones": {
+            "logros": "achievements",
+            "exp": "experience",
+            "projects": "projects",
+            "skills": "skills",
+            "pubs": "publications",
+            "edu": "education"
+        },
+        "filtrar": "See where I use %s",
+        "tema_oscuro": "Switch to dark theme",
+        "tema_claro": "Switch to light theme",
+        "copiar": "Copy",
+        "copiar_correo": "Copy email",
+        "copiado": "Email copied: %s",
+        "compartir": "Share",
+        "enlace_copiado": "Link copied",
+        "no_copiado": "Could not copy; please select it manually."
+    }
+}
