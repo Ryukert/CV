@@ -5,7 +5,7 @@
 //
 //   cd tests/navegador && npm ci && node navegador.mjs
 //
-// Levanta el servidor embebido de PHP (PHP en el PATH, o en la variable PHP).
+// Levanta la versión compilada del sitio (antes: npm run build en la raíz).
 import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
 import net from "node:net";
@@ -24,8 +24,8 @@ function buscarNavegador() {
   return c.find((p) => p && existsSync(p));
 }
 
-const php = spawn(process.env.PHP || "php", ["-S", `127.0.0.1:${PUERTO}`, "router-dev.php"], { cwd: RAIZ, stdio: "ignore" });
-const listo = async () => { for (let i = 0; i < 50; i++) { if (await new Promise((r) => { const s = net.connect(PUERTO, "127.0.0.1", () => { s.end(); r(true); }).on("error", () => r(false)); })) return; await new Promise((r) => setTimeout(r, 100)); } throw new Error("PHP no arrancó"); };
+const php = spawn(process.execPath, [path.join(RAIZ, "node_modules", "next", "dist", "bin", "next"), "start", "-p", String(PUERTO), "-H", "127.0.0.1"], { cwd: RAIZ, stdio: "ignore" });
+const listo = async () => { for (let i = 0; i < 150; i++) { if (await new Promise((r) => { const s = net.connect(PUERTO, "127.0.0.1", () => { s.end(); r(true); }).on("error", () => r(false)); })) return; await new Promise((r) => setTimeout(r, 100)); } throw new Error("El servidor no arrancó"); };
 await listo();
 
 const ejecutable = buscarNavegador();

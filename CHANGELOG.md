@@ -2,6 +2,19 @@
 
 ## [Sin publicar]
 
+### Migración de PHP a Next.js + React (TypeScript)
+
+- El sitio pasa de PHP (runtime de la comunidad `vercel-php`) a **Next.js 16 y React 19** con
+  TypeScript, con soporte oficial de Vercel.
+- Los datos pasan de `src/data.php` a `datos/compartido.json`, `datos/es.json` y `datos/en.json`.
+- **CSP estricta con nonce** por respuesta (`proxy.ts`): sin `unsafe-inline` aunque Next.js necesita
+  scripts en línea. Solo GET/HEAD (405 lo demás) y los mismos encabezados de seguridad.
+- Las funciones con JavaScript (`cv.js`) se cargan después de que React hidrata la página.
+- La generación del PDF (`npm run pdf`), los íconos y las pruebas pasan a Node/TypeScript; GitHub
+  Actions compila con Next.js. Ya no hay PHP en el repositorio.
+- Mismas rutas y URL: `/`, `/en`, `/api/cv.json`, `/health`, `/sitemap.xml`, `/robots.txt`, `/assets/…`.
+- Competencias: TypeScript y Next.js.
+
 ### Estilo portafolio y todos los repos de GitHub
 - **Competencias con logotipo** de cada tecnología (Simple Icons, CC0, servidos por el sitio); las
   que no tienen logo llevan un ícono por tipo (señales, IA, hardware, datos, APIs, terminal).

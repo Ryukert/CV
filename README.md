@@ -1,6 +1,7 @@
 # CV — Marco Antonio Adame Rodríguez
 
-Sitio web personal / CV en línea, hecho en **PHP** y desplegado en **Vercel** como función serverless.
+Sitio web personal / CV en línea, hecho con **Next.js 16 y React 19 en TypeScript** y desplegado en
+**Vercel**. Hasta noviembre de 2026 estaba en PHP.
 
 Bilingüe (español e inglés), servido desde una única fuente de datos, con endpoint JSON público.
 
@@ -17,51 +18,76 @@ Bilingüe (español e inglés), servido desde una única fuente de datos, con en
 
 ## Estructura
 
-```
+```text
 .
-├── api/
-│   └── index.php          # front controller: enruta todas las peticiones
-├── src/
-│   ├── data.php           # FUENTE ÚNICA DE VERDAD del CV (es + en)
-│   ├── helpers.php        # utilidades de escape y formato
-│   └── views/
-│       ├── layout.php     # plantilla del CV
-│       └── 404.php
-├── assets/                # CSS, JS (cv.js, tema.js), fuente y PDFs (servidos estáticamente)
-│   └── fonts/             # IBM Plex Sans (SIL OFL), servida por el sitio
+├── datos/
+│   ├── compartido.json    # FUENTE ÚNICA: perfil, publicaciones, proyectos, métricas
+│   ├── es.json            # textos en español
+│   └── en.json            # textos en inglés
+├── app/                   # rutas de Next.js (App Router)
+│   ├── layout.tsx         # <html>, <head>, tema.js y hoja de estilos
+│   ├── page.tsx, en/      # CV en español e inglés
+│   ├── not-found.tsx      # 404 con noindex
+│   ├── api/cv.json/       # API JSON
+│   └── health/, robots.txt/, sitemap.xml/
+├── components/
+│   ├── Cv.tsx             # el CV completo (componente de servidor)
+│   ├── Iconos.tsx         # íconos de contacto y de tecnologías
+│   └── ArrancarCv.tsx     # carga cv.js cuando React terminó de hidratar
+├── lib/
+│   ├── cv-core.ts         # arma el CV (sin dependencias; lo usan web, PDF y pruebas)
+│   ├── cv.ts              # capa de datos de la web (URL absolutas, versiones de archivos)
+│   ├── rendercv-core.ts   # conversión al formato de RenderCV
+│   └── iconos.ts          # GENERADO: logotipos (Simple Icons, CC0)
+├── proxy.ts               # CSP con nonce, solo GET/HEAD, encabezados de seguridad
+├── public/assets/         # CSS, cv.js, tema.js, fuente, PDFs e imágenes
 ├── herramientas/
-│   ├── rendercv.php       # exporta data.php a RenderCV para PDFs por vacante
-│   └── iconos.mjs         # genera src/iconos.php (logotipos de tecnologías, Simple Icons CC0)
-├── versiones/             # CVs adaptados a cada vacante (solo el README va a git)
-├── tests/humo.php         # pruebas de humo (sin dependencias)
+│   ├── rendercv.ts        # genera los PDF y los YAML por vacante
+│   ├── iconos.mjs         # genera lib/iconos.ts
+│   └── versiones.ts       # huella ?v= de cada archivo (corre antes de dev y build)
+├── tests/humo.ts          # pruebas de humo contra la versión compilada
 ├── tests/navegador/       # pruebas en navegador de las funciones con JavaScript
-├── .github/workflows/     # pruebas en GitHub Actions
-├── router-dev.php         # router solo para desarrollo local
-└── vercel.json            # runtime PHP, reescritura a api/index.php y encabezados
+├── versiones/             # CVs adaptados a cada vacante (solo el README va a git)
+└── vercel.json            # framework: nextjs
 ```
 
-**Para actualizar el CV solo se edita `src/data.php`.** El HTML de ambos idiomas y el JSON se
-regeneran solos. No hay contenido duplicado entre versiones.
+**Para actualizar el CV solo se editan los archivos de `datos/`.** El HTML de ambos idiomas, el JSON
+y el PDF salen de ahí. Lo que es igual en los dos idiomas está en `compartido.json`; los textos, en
+`es.json` y `en.json` (con las mismas claves: las pruebas lo revisan).
 
 Cada proyecto lleva `date` (mes de inicio, `AAAA-MM`) y se ordena solo del más reciente al más
 antiguo. Las tecnologías de `stack` y de las competencias se muestran con su logotipo: si una
 tecnología nueva no tiene ícono, se agrega a `SLUGS` en `herramientas/iconos.mjs` y se corre
-`cd herramientas && npm i --no-save simple-icons@16.30.0 && node iconos.mjs`.
+`npm i --no-save simple-icons@16.30.0 && node herramientas/iconos.mjs`.
 
 ## Desarrollo local
 
-Requiere PHP 8.1 o superior instalado.
+Requiere Node.js 22.18 o más nuevo (las herramientas corren TypeScript directo en Node).
 
 ```bash
-php -S 127.0.0.1:8080 router-dev.php
+npm install
+npm run dev        # http://127.0.0.1:8080
 ```
 
-Luego abrir http://127.0.0.1:8080
+## Cómo está hecho
 
-`router-dev.php` solo existe para el servidor embebido de PHP: sirve los archivos de `assets/`
-directamente y manda el resto a `api/index.php`, imitando lo que hace Vercel en producción.
+- **Componentes de servidor:** el HTML completo sale del servidor; sin JavaScript la página se ve
+  entera.
+- **CSP estricta con nonce:** `proxy.ts` genera un nonce distinto en cada respuesta. Next.js pone
+  scripts en línea para arrancar React y solo se ejecutan los que llevan ese nonce; no hay
+  `unsafe-inline`. Estilos, fuentes e imágenes salen solo del propio sitio.
+- **Las funciones interactivas siguen en `public/assets/cv.js`** (JavaScript propio, sin
+  bibliotecas). `ArrancarCv.tsx` lo carga *después* de que React hidrata la página: si lo hiciera
+  antes, React vería un HTML distinto al del servidor y volvería a pintarlo.
+- **Archivos versionados:** `herramientas/versiones.ts` calcula la huella de cada archivo de
+  `public/assets` antes de compilar; las URL llevan `?v=<hash>` y se guardan un año en el navegador.
+- **URL absolutas** (canonical, sitemap, Open Graph): salen de `SITE_URL` o de `SITIO_PUBLICO` en
+  `lib/cv-core.ts`, nunca del encabezado `Host`, que se puede falsificar.
 
-## Funciones con JavaScript (`assets/cv.js`)
+Diferencia con la versión en PHP: por el nonce, el HTML se genera en cada visita y la CDN no lo
+guarda (la API JSON sí, un día).
+
+## Funciones con JavaScript (`public/assets/cv.js`)
 
 Mejora progresiva: sin JavaScript la página queda completa y estos controles no aparecen.
 
@@ -70,27 +96,25 @@ Mejora progresiva: sin JavaScript la página queda completa y estos controles no
   sección. Ignora acentos y mayúsculas. La búsqueda queda en la dirección: `/?q=python` abre ya filtrado.
 - **Filtro por competencia:** cada competencia es un botón que filtra por ella y sus variantes
   («Linux / Ubuntu Server» encuentra «servidores Ubuntu»).
-- **Tema claro/oscuro:** botón en la barra; la elección se guarda en el navegador. `assets/tema.js` la
-  aplica antes de pintar para que no parpadee.
+- **Tema claro/oscuro:** botón en la barra; la elección se guarda en el navegador.
+  `public/assets/tema.js` la aplica antes de pintar para que no parpadee.
 - **Copiar correo** y **Compartir** (menú del sistema en el celular; en la computadora copia el enlace).
 
-Los textos de la interfaz están en `data.php` (`ui`, en los dos idiomas). Todo es JavaScript propio,
-sin bibliotecas ni scripts en línea, así que la CSP sigue estricta.
+Los textos de la interfaz están en `datos/es.json` y `datos/en.json` (`ui`).
 
 ## Pruebas
 
 ```bash
-php tests/humo.php                                      # sin dependencias
+npm run build && npm test                               # humo: rutas, encabezados, contenido, PDF
 cd tests/navegador && npm ci && node navegador.mjs      # en Chrome o Edge sin ventana
 ```
 
-Las del navegador prueban el buscador, el filtro, el tema (y que se recuerde), copiar y compartir,
-que sin JavaScript no aparezcan controles rotos y el celular.
-
-Levanta el servidor embebido y revisa cada ruta: códigos de respuesta, encabezados de seguridad
-(CSP estricta, sin scripts ni estilos en línea), que existan todos los archivos que enlaza la página,
-JSON-LD, Open Graph, la API JSON, el sitemap, el 404 y que los dos idiomas tengan la misma estructura.
-GitHub Actions las corre en cada push (`.github/workflows/pruebas.yml`).
+Las de humo levantan la versión compilada y revisan cada ruta: códigos de respuesta, CSP con nonce
+(y que cambie en cada respuesta), que todo script en línea lleve el nonce, que existan los archivos
+que enlaza la página, JSON-LD, Open Graph, la API JSON, el sitemap, el 404, el 405 y que los dos
+idiomas tengan la misma estructura. Las del navegador prueban el buscador, el filtro, el tema (y que
+se recuerde), copiar y compartir, que sin JavaScript no aparezcan controles rotos y el celular.
+GitHub Actions corre todo en cada push (`.github/workflows/pruebas.yml`).
 
 ## Ramas
 
@@ -100,63 +124,27 @@ se borran.
 
 ## CV en PDF (RenderCV)
 
-El **PDF sencillo** que descarga el sitio (`assets/cv-es.pdf`, `assets/cv-en.pdf`) se genera desde
-`data.php` con [RenderCV](https://rendercv.com), así que trae lo mismo que la web: logros clave,
-experiencia, competencias, los proyectos marcados con `'pdf' => true`, publicaciones y asignaturas.
+El **PDF sencillo** que descarga el sitio (`cv-es.pdf`, `cv-en.pdf`) se genera desde `datos/` con
+[RenderCV](https://rendercv.com), así que trae lo mismo que la web: logros clave, experiencia,
+competencias, los proyectos marcados con `"pdf": true`, publicaciones y asignaturas.
 
 ```bash
 pip install "rendercv[full]"            # una vez
-php herramientas/rendercv.php --publicar
+npm run pdf
 ```
 
-**Cada vez que se cambia `data.php` hay que correrlo.** Guarda en `assets/cv-pdf.json` la huella de
-los datos con que se generó; si quedó atrasado, `tests/humo.php` (y GitHub Actions) falla y dice el
-comando. La conversión está en `src/rendercv.php`.
+**Cada vez que cambian los datos hay que correrlo.** Guarda en `public/assets/cv-pdf.json` la huella
+de los datos con que se generó; si quedó atrasado, `npm test` (y GitHub Actions) falla y dice el
+comando.
 
 Los PDF **con diseño** (`cv-es-diseno.pdf`, `cv-en-design.pdf`) están hechos a mano y no se generan.
 
 Para mandar una versión adaptada a una vacante: `versiones/README.md`.
 
-## Rendimiento y seguridad
-
-- Sin recursos de terceros: la fuente, el CSS y el JS se sirven desde el sitio, así que la página no
-  espera a Google Fonts ni le envía la IP de los visitantes.
-- CSS, JS, foto y PDF llevan `?v=<hash>` según su contenido (`asset()` en `helpers.php`): se guardan un
-  año en el navegador y se renuevan solos al cambiar.
-- HTML y JSON: una hora en el navegador y un día en la CDN de Vercel, con `stale-while-revalidate`
-  para que casi ninguna visita espere el arranque en frío de PHP.
-- CSP estricta (`default-src 'self'`, sin `unsafe-inline`), `frame-ancestors 'none'`,
-  `Permissions-Policy` y solo GET/HEAD (lo demás responde 405).
-
 ## Despliegue en Vercel
 
-1. Subir este repositorio a GitHub.
-2. En [vercel.com](https://vercel.com), **Add New → Project** e importar el repositorio.
-3. En *Framework Preset* elegir **Other**. No configurar comando de build ni directorio de salida.
-4. La dirección pública es **https://cv-coral-pi.vercel.app** (`SITIO_PUBLICO` en `src/helpers.php`);
-   con ella se arman la URL canónica, el sitemap y Open Graph, nunca con el encabezado `Host` de la
-   petición, que se puede falsificar. Con un dominio propio, se agrega en **Settings → Environment
-   Variables** la variable `SITE_URL` (sin `/` al final) o se cambia `SITIO_PUBLICO`.
-5. **Deploy**.
-
-Vercel lee `vercel.json`, instala el runtime `vercel-php@0.9.0` (PHP 8.5) y publica el sitio.
-Cada `git push` a la rama principal genera un despliegue nuevo automáticamente.
-
-### Notas sobre el runtime
-
-`vercel-php` es un runtime **mantenido por la comunidad** (`vercel-community/php`), no un producto
-oficial de Vercel. Funciona bien, pero conviene tenerlo presente:
-
-- La versión está fijada en `vercel.json`. Si un despliegue empieza a fallar sin que se haya
-  cambiado el código, lo primero a revisar es si esa versión sigue publicada.
-- Las funciones serverless tienen arranque en frío: la primera visita tras un periodo de
-  inactividad puede tardar un poco más.
-- No hay estado entre peticiones ni sistema de archivos persistente. Este sitio no lo necesita.
-
-## Dominio propio
-
-En Vercel: **Settings → Domains → Add**. Si aún no hay dominio, la URL
-`nombre-del-proyecto.vercel.app` funciona perfectamente y es la que puede ir en el CV en PDF.
+Ver `DEPLOY.md`. La dirección pública es **<https://cv-coral-pi.vercel.app>**; con un dominio propio
+se agrega la variable `SITE_URL` (sin `/` al final) en **Settings → Environment Variables**.
 
 ## Licencia
 

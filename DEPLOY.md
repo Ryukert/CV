@@ -1,67 +1,41 @@
-# Pasos exactos para publicarlo
+# Publicar en Vercel
 
-## 1. Crear el repositorio en GitHub
+El repositorio ya está en GitHub (`Ryukert/CV`) y conectado a Vercel. Vercel despliega `main`
+en cada push y crea una vista previa por cada rama.
 
-En https://github.com/new → nombre sugerido: `cv-marco-adame` → Public → **Create repository**.
-No marques "Add a README" (este proyecto ya trae uno).
+## Al pasar de PHP a Next.js (una sola vez)
 
-## 2. Subir los archivos desde tu computadora
+`vercel.json` ya dice `"framework": "nextjs"`, así que Vercel compila con `npm run build`. Aun así,
+conviene revisar en **Vercel → el proyecto → Settings → Build and Deployment**:
 
-Descomprime el archivo `cv-web.zip`, abre una terminal dentro de la carpeta y ejecuta:
+1. *Framework Preset*: **Next.js** (antes era *Other*).
+2. *Build Command*, *Output Directory* e *Install Command*: vacíos (los valores de Next.js).
+3. *Node.js Version*: **22.x** o más nueva (las herramientas usan TypeScript directo en Node).
 
-```bash
-git init
-git add .
-git commit -m "CV en PHP desplegable en Vercel"
-git branch -M main
-git remote add origin https://github.com/Ryukert/cv-marco-adame.git
-git push -u origin main
-```
+La variable `SITE_URL` (si existe) sigue funcionando igual.
 
-Cambia la URL si le pusiste otro nombre al repositorio.
+## Comprobar que todo quedó bien
 
-## 3. Conectar con Vercel
-
-1. Entra a https://vercel.com e inicia sesión con tu cuenta de GitHub.
-2. **Add New → Project**.
-3. Busca `cv-marco-adame` e **Import**.
-4. En *Framework Preset* selecciona **Other**.
-5. Deja vacíos *Build Command* y *Output Directory*.
-6. En *Environment Variables* agrega `SITE_URL` con la dirección que te dará Vercel, sin `/` al final
-   (p. ej. `https://cv-marco-adame.vercel.app`). Si aún no la sabes, despliega, cópiala, agrégala y
-   vuelve a desplegar.
-7. **Deploy**.
-
-En un minuto tendrás una URL del tipo `https://cv-marco-adame.vercel.app`.
-
-## 4. Comprobar que todo quedó bien
-
-Abre estas rutas en el navegador:
+Abre estas rutas en la vista previa de la rama antes de unirla a `main`:
 
 - `/` → CV en español
 - `/en` → CV en inglés
 - `/health` → debe responder `{"status":"ok","cv_updated":"AAAA-MM-DD"}`
-- `/api/cv.json` → tu CV en JSON
+- `/api/cv.json` → el CV en JSON
 - `/assets/cv-es.pdf` → descarga del PDF
 
-Si `/health` responde pero `/` no, el problema está en las vistas.
-Si nada responde, revisa el log del despliegue en Vercel: pestaña **Deployments → Functions**.
-
-## 5. Ponerlo a trabajar
-
-- Agrega la URL a tu LinkedIn, en el campo *Sitio web*.
-- Ponla en el encabezado de tu CV en PDF, junto a GitHub y ORCID.
-- Fíjala en tu perfil de GitHub (Pinned repositories) para que sea lo primero que se vea.
+En las herramientas del navegador (consola) no debe aparecer ningún aviso de la CSP.
 
 ## Errores comunes
 
-**"The Runtime vercel-php@0.9.0 is not found"**
-La versión ya no está publicada. Revisa https://github.com/vercel-community/php/releases
-y actualiza el número en `vercel.json`.
+**El despliegue falla en «Running TypeScript»**
+Corre `npm run build` en tu computadora: muestra el mismo error con el archivo y la línea.
 
-**Página en blanco sin error**
-En Vercel: *Deployments → el despliegue → Functions → Logs*. Ahí aparece el error real de PHP.
+**Página en blanco o error 500**
+En Vercel: *Deployments → el despliegue → Logs*. Ahí aparece el error real.
+
+**Los botones (buscador, tema, copiar) no aparecen**
+Abre la consola del navegador: si dice que la CSP bloqueó un script, revisa `proxy.ts`.
 
 **El CSS no carga**
-Verifica que la carpeta `assets/` sí se haya subido a GitHub. Un `.gitignore` mal puesto
-es la causa habitual.
+Verifica que `public/assets/` se haya subido a GitHub.

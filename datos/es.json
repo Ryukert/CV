@@ -1,0 +1,651 @@
+{
+    "lang": "es",
+    "locale": "es_MX",
+    "role": "Ingeniero en Sistemas IoT y Embebidos",
+    "subrole": "Procesamiento Digital de Señales · Software Científico",
+    "location": "Chilpancingo, Guerrero, México (GMT-6)",
+    "available": "Disponible para trabajo remoto con horario de EE. UU. y Europa",
+    "meta_desc": "CV de Marco Antonio Adame Rodríguez, ingeniero en sistemas IoT y embebidos, procesamiento digital de señales y monitoreo de salud estructural.",
+    "nav": {
+        "about": "Acerca de mí",
+        "logros": "Logros",
+        "exp": "Experiencia",
+        "projects": "Proyectos",
+        "skills": "Competencias",
+        "pubs": "Publicaciones",
+        "edu": "Formación",
+        "areas": "Áreas",
+        "contact": "Contacto"
+    },
+    "cta_pdf": "Descargar CV en PDF",
+    "cta_design": "Versión con diseño",
+    "switch": "English",
+    "switch_url": "/en",
+    "summary": "Construyo sistemas IoT de extremo a extremo: sensor MEMS, firmware embebido, adquisición en tiempo real, procesamiento de señales, backend en Linux, nube y dashboards. Diseñé desde cero un sistema de monitoreo de salud estructural de bajo costo y lo validé en campo contra instrumentación sísmica comercial (GEA y P-Alert); el trabajo derivó en tres artículos arbitrados y una ponencia internacional. También desarrollo aplicaciones web geoespaciales en producción (Supabase, Leaflet, funcionamiento sin internet) con pruebas automáticas y despliegue continuo. Ingeniero en Computación y egresado de la Maestría en Ingeniería para la Innovación y Desarrollo Tecnológico (UAGro), con promedio de 9.42 y titulación prevista para noviembre de 2026.",
+    "metric_labels": {
+        "sampling": "Muestreo sincronizado",
+        "sensors": "Sensores MEMS integrados",
+        "sites": "Entornos de validación en campo",
+        "papers": "Artículos arbitrados"
+    },
+    "sections": {
+        "about": "Acerca de mí",
+        "langs": "Idiomas",
+        "stack": "Tecnologías",
+        "present": "actualidad",
+        "social": "Redes",
+        "logros": "Logros clave",
+        "exp": "Experiencia en investigación y desarrollo",
+        "pubs": "Publicaciones y ponencias",
+        "projects": "Proyectos",
+        "areas": "Áreas de la computación cubiertas",
+        "edu": "Formación académica",
+        "skills": "Competencias técnicas",
+        "other": "Otra experiencia",
+        "contact": "Contacto"
+    },
+    "achievements": [
+        {
+            "title": "Sistema SHM-IoT completo diseñado desde cero",
+            "text": "y validado en campo frente a los equipos comerciales GEA y P-Alert, a una fracción del costo de la instrumentación sísmica tradicional."
+        },
+        {
+            "title": "Medición de vibraciones en mesa vibradora biaxial:",
+            "text": "muestreo sincronizado a 200 Hz, análisis FFT sobre ventanas de 2048 puntos y resolución frecuencial de 0.98 Hz, con cálculo automático de RPM a partir de la frecuencia dominante (publicado y arbitrado)."
+        },
+        {
+            "title": "Monitoreo multi-sede en operación continua:",
+            "text": "nodos en redes distintas, receptor centralizado sobre Ubuntu Server, buffer local contra caídas de conectividad y dashboards web publicados."
+        },
+        {
+            "title": "Suite de análisis de vibraciones en Python/PyQt5",
+            "text": "que procesa grandes volúmenes de registros y genera informes técnicos comparativos de forma automatizada."
+        },
+        {
+            "title": "Plataforma web de riesgo sísmico en producción:",
+            "text": "rutas por calles reales en 5 ciudades de Baja California hacia 370 establecimientos de salud del catálogo oficial CLUES, funcionamiento sin internet y 152 pruebas automáticas en cada cambio."
+        }
+    ],
+    "experience": [
+        {
+            "period": "Ago 2024 – Actualidad",
+            "org": "Universidad Autónoma de Guerrero (UAGro) · Maestría MIIDT",
+            "title": "Investigador y desarrollador principal — Sistema SHM-IoT",
+            "tech": "shm",
+            "intro": "Diseño e implementación de extremo a extremo de una solución de bajo costo para monitoreo de salud estructural en obras civiles, validada en campo frente a los equipos comerciales GEA y P-Alert.",
+            "groups": [
+                {
+                    "name": "Adquisición, firmware y hardware",
+                    "items": [
+                        "Diseñé nodos de adquisición sobre Arduino Nano RP2040 Connect y Raspberry Pi 4, integrando cuatro sensores MEMS (MPU9250, MPU6050, LSM6DSOX y ADXL335) por I2C, SPI y UART.",
+                        "Implementé adquisición sincronizada a 200 Hz sobre los dos núcleos del RP2040, con margen suficiente por Nyquist para el rango de frecuencias estructurales de interés.",
+                        "Validé el sistema en cinco entornos —mesa vibradora biaxial, edificios universitarios, Jardín Botánico, COBACH y estructuras experimentales ligeras— comparando sus registros contra los equipos comerciales GEA y P-Alert."
+                    ]
+                },
+                {
+                    "name": "Procesamiento de señales y software científico",
+                    "items": [
+                        "Construí en Python (NumPy/SciPy) el pipeline de DSP para identificar la respuesta dinámica de las estructuras: RMS, FFT, densidad espectral de potencia (Welch), frecuencia dominante, coherencia, fase y correlación cruzada.",
+                        "Desarrollé aplicaciones de escritorio en PyQt5 para adquisición, supervisión en vivo y análisis, con control de sesiones y recuperación automática ante fallos.",
+                        "Construí herramientas para procesar archivos TXT, CSV, JSON y JSONL con grandes volúmenes de registros: sincronización temporal, remuestreo, detección de huecos, filtrado digital y recorte de series.",
+                        "Automaticé la generación de informes técnicos y gráficas comparativas contra los equipos de referencia; estos resultados sustentan el artículo publicado como autor principal."
+                    ]
+                },
+                {
+                    "name": "Backend, nube e infraestructura",
+                    "items": [
+                        "Diseñé un receptor centralizado multi-sede sobre HTTP/HTTPS con buffer local, de modo que una caída de conectividad no implique pérdida de datos.",
+                        "Desarrollé APIs REST en FastAPI para recepción, persistencia y consulta de telemetría de nodos ESP32.",
+                        "Administré servidores Ubuntu en operación continua: servicios con systemd, contenedores Docker, acceso remoto SSH/VNC, respaldos y sincronización.",
+                        "Publiqué dashboards web en Vercel para visualizar, filtrar y descargar datos de nodos propios y de sensores comerciales en un mismo lugar."
+                    ]
+                }
+            ]
+        }
+    ],
+    "talk": {
+        "label": "Ponencia",
+        "text": "«Sistema de medición de vibraciones ambientales en mesa vibradora biaxial». 15.º Congreso Internacional de Computación (CICOM 2025), Tunja, Colombia, octubre 2025."
+    },
+    "project_text": {
+        "shm": [
+            "SHM-IoT MIIDT — Monitoreo estructural de bajo costo",
+            "Arquitectura integral de adquisición, almacenamiento, análisis y visualización de aceleraciones en estructuras civiles, probada en campo contra sensores comerciales."
+        ],
+        "ecosistema": [
+            "Ecosistema de riesgo sísmico de Tijuana",
+            "Tablero web que une amenaza sísmica, suelo, estaciones, mapas de aceleración, inspección y difusión sobre una sola base de datos en Supabase. Calcula rutas a hospitales y servicios de emergencia por calles reales (OpenStreetMap, Dijkstra) en cinco ciudades de Baja California con el catálogo oficial CLUES, funciona sin internet como app instalable y se publica con versiones semánticas y pruebas automáticas en cada cambio."
+        ],
+        "ivbc": [
+            "Infraestructura Verde · Baja California",
+            "Dashboard de 36 técnicas de infraestructura verde por municipio, con consulta por punto sobre capas GeoJSON y búsqueda de direcciones, panel de edición con inicio de sesión, reportes en PDF y CSV, modo sin conexión y contador de visitas en Supabase."
+        ],
+        "mortero": [
+            "Predictor de mortero calibrado (NTC-DECM)",
+            "Calculadora web de dosificación y resistencia de morteros calibrada con las Normas Técnicas Complementarias (NTC-DECM). Funciona sin internet y se instala como app; al compilar React y Tailwind dentro del proyecto, la carga pasó de 964 KB a 173 KB y de 7.8 s a 2 s en 4G lento, con pruebas en Chrome sin ventana."
+        ],
+        "prisma": [
+            "SysReview PRISMA — cribado de revisiones sistemáticas",
+            "Aplicación de escritorio para revisiones sistemáticas según PRISMA 2020: combina exportaciones de Scopus, Web of Science, IEEE y Lens (CSV, Excel y texto), elimina duplicados por títulos similares, aplica un cribado automático configurable, guía la revisión manual y genera el diagrama de flujo."
+        ],
+        "micrositio": [
+            "Micrositio «Guerrero en el extranjero» — IEPC Guerrero",
+            "Maqueta bilingüe (español e inglés) del micrositio del Instituto Electoral y de Participación Ciudadana de Guerrero dirigido a la ciudadanía guerrerense en el extranjero, con página de eventos, publicada en Vercel para la revisión del diseño."
+        ],
+        "shmsim": [
+            "Simulador de red SHM-IoT",
+            "Dashboard en Next.js que simula una red de sensores SHM georreferenciados por GPS: ubicación, estado, batería y satélites de cada nodo, y RMS por eje y frecuencia dominante en gráficas en tiempo real; listo para conectarse a Supabase o a una API propia."
+        ],
+        "gps": [
+            "Red de monitoreo SHM con georreferenciación",
+            "Panel de monitoreo de la red FCITEC-UABC (SHM + P-Alert) sobre una red simulada de 9 planteles en Tijuana y 32 edificios en Guerrero, con efecto de sitio por tipo de suelo; calcula RMS, PGA, espectro y detección STA/LTA sobre la señal unificada de tres sensores."
+        ],
+        "supabase": [
+            "Dashboard de sensores sobre Supabase",
+            "Aplicación web para envío, consulta y visualización de mediciones almacenadas en la nube."
+        ],
+        "api": [
+            "APIs de telemetría para nodos ESP32",
+            "Servicios REST para recepción, persistencia y consulta de datos de aceleración, con graficación científica."
+        ],
+        "game": [
+            "Escuadrón Tecnito y Greencito — juego educativo con IA",
+            "Juego por turnos para grupos de primaria y secundaria: dos mascotas conversan con Claude para enseñar protección civil ante sismos y cuidado del medio ambiente. La API key queda en una función serverless."
+        ],
+        "trading": [
+            "Trading Fusion Pro 3.0",
+            "Herramienta educativa de escritorio para análisis técnico y fundamental, con backtesting con costos y validación walk-forward. Refactoricé un script de 4,363 líneas a una arquitectura modular."
+        ],
+        "attendance": [
+            "Lista de asistencia escolar",
+            "Aplicación para pasar lista y generar reportes de asistencia por grupo, con datos en Supabase y pruebas automatizadas de la lógica."
+        ],
+        "crm": [
+            "CRM para joyería",
+            "Aplicación web de gestión de clientes para un negocio de joyería, desplegada en Vercel."
+        ],
+        "cv": [
+            "Este CV en línea",
+            "Sitio bilingüe en Next.js y React con TypeScript sobre Vercel (antes PHP), generado desde una única fuente de datos en JSON, con endpoint JSON público, política de seguridad de contenido estricta con nonce y pruebas automáticas en GitHub Actions. Los mismos datos generan versiones del CV en PDF adaptadas a cada vacante."
+        ]
+    },
+    "areas": {
+        "toggle": "Ver las 17 áreas con sus 69 asignaturas",
+        "intro": "Las 69 asignaturas acreditadas entre licenciatura y maestría, ordenadas por área de la computación. La etiqueta «Aplicado» señala las áreas que además respaldo con trabajo real —proyectos en producción, publicaciones arbitradas o validación en campo—; «Formación» indica cobertura académica sin proyecto público asociado.",
+        "legend": {
+            "applied": "Aplicado",
+            "coursework": "Formación"
+        },
+        "items": [
+            {
+                "name": "Programación, algoritmos y estructuras de datos",
+                "applied": true,
+                "evidence": "Python y C/C++ a diario: firmware embebido, pipelines de procesamiento y herramientas de escritorio.",
+                "courses": [
+                    "Fundamentos de Programación (9)",
+                    "Programación Orientada a Objetos I (10)",
+                    "Programación Orientada a Objetos II (8)",
+                    "Programación Avanzada (8)",
+                    "Estructura de Datos I (10)",
+                    "Estructura de Datos II (9)",
+                    "Lógica Informática (8)"
+                ]
+            },
+            {
+                "name": "Ingeniería y diseño de software",
+                "applied": true,
+                "evidence": "Aplicaciones PyQt5 con control de sesiones, exportación y recuperación automática ante fallos.",
+                "courses": [
+                    "Análisis y Diseño de Sistemas (10)",
+                    "Ingeniería de Software (8)"
+                ]
+            },
+            {
+                "name": "Compiladores y teoría de lenguajes",
+                "applied": false,
+                "evidence": null,
+                "courses": [
+                    "Compiladores (9)",
+                    "Traductores e Intérpretes (8)"
+                ]
+            },
+            {
+                "name": "Sistemas operativos y administración de servidores",
+                "applied": true,
+                "evidence": "Servidores Ubuntu en operación continua: systemd, SSH/VNC, respaldos y sincronización.",
+                "courses": [
+                    "Sistemas Operativos I (10)",
+                    "Sistemas Operativos II (8)",
+                    "Arquitectura de Servidores (10)"
+                ]
+            },
+            {
+                "name": "Redes y comunicaciones",
+                "applied": true,
+                "evidence": "Monitoreo multi-sede con nodos en redes distintas y receptor centralizado sobre HTTP/HTTPS.",
+                "courses": [
+                    "Fundamentos de Enrutamiento (10)",
+                    "Fundamentos de Redes (9)",
+                    "Sistemas de Cableado Estructurado (9)",
+                    "Fundamentos de Comunicaciones (7)"
+                ]
+            },
+            {
+                "name": "Seguridad, auditoría y cómputo forense",
+                "applied": false,
+                "evidence": "Complementado con las certificaciones Cisco Cybersecurity Essentials y CCNAv7.",
+                "courses": [
+                    "Auditoría de Recursos Informáticos (9)",
+                    "Seguridad en Redes (8)",
+                    "Cómputo Forense (8)"
+                ]
+            },
+            {
+                "name": "Bases de datos y persistencia",
+                "applied": true,
+                "evidence": "PostgreSQL y Supabase como almacenamiento multi-origen de telemetría en la nube.",
+                "courses": [
+                    "Base de Datos II (9)",
+                    "Base de Datos I (7)"
+                ]
+            },
+            {
+                "name": "Arquitectura de computadoras y sistemas digitales",
+                "applied": true,
+                "evidence": "Adquisición sincronizada sobre arquitectura dual-core en el RP2040.",
+                "courses": [
+                    "Sistemas Digitales (10)",
+                    "Organización de Computadoras (10)",
+                    "Microprocesadores (8)"
+                ]
+            },
+            {
+                "name": "Sistemas embebidos, IoT y electrónica",
+                "applied": true,
+                "evidence": "Núcleo de mi trabajo: nodos RP2040 y Raspberry Pi con sensores MEMS por I2C, SPI y UART.",
+                "courses": [
+                    "Temas Selectos de Sistemas Embebidos (10)",
+                    "Electricidad y Magnetismo (10)",
+                    "Microcontroladores (9)",
+                    "Diseño de Sistemas IoT (9)",
+                    "Circuitos Eléctricos (9)",
+                    "Principios Básicos de Sistemas Electrónicos (9)",
+                    "Electrónica (7)"
+                ]
+            },
+            {
+                "name": "Inteligencia artificial y aprendizaje automático",
+                "applied": true,
+                "evidence": "Coautor del artículo sobre selección de atributos mediante feature importance para clasificar casos de dengue.",
+                "courses": [
+                    "Machine Learning (10)",
+                    "Deep Learning (10)",
+                    "Análisis de Datos y Big Data (10)",
+                    "Fundamentos de Inteligencia Artificial (7)"
+                ]
+            },
+            {
+                "name": "Procesamiento de señales, visión e imágenes",
+                "applied": true,
+                "evidence": "Pipeline propio de DSP: FFT, PSD por Welch, RMS, coherencia, fase y correlación cruzada (publicado y arbitrado).",
+                "courses": [
+                    "Visión Artificial (10)",
+                    "Procesamiento Digital de Imágenes (7)"
+                ]
+            },
+            {
+                "name": "Matemáticas, estadística y métodos numéricos",
+                "applied": true,
+                "evidence": "Base del análisis espectral: criterio de Nyquist, resolución frecuencial y estimación estadística de espectros.",
+                "courses": [
+                    "Cálculo Diferencial e Integral (8)",
+                    "Probabilidad y Estadística (8)",
+                    "Métodos Numéricos (8)",
+                    "Geometría Analítica (8)",
+                    "Química Básica (8)",
+                    "Cálculo Vectorial (7)",
+                    "Ecuaciones Diferenciales (7)",
+                    "Álgebra (7)",
+                    "Física General (7)"
+                ]
+            },
+            {
+                "name": "Investigación de operaciones y optimización",
+                "applied": false,
+                "evidence": null,
+                "courses": [
+                    "Investigación de Operaciones (8)"
+                ]
+            },
+            {
+                "name": "Interfaces, visualización y desarrollo de aplicaciones",
+                "applied": true,
+                "evidence": "Dashboards web desplegados en Vercel e interfaces de escritorio para supervisión en vivo.",
+                "courses": [
+                    "Desarrollo de Aplicaciones Móviles (10)",
+                    "Interacción Humano-Computadora (9)"
+                ]
+            },
+            {
+                "name": "Tecnologías de la información e innovación",
+                "applied": true,
+                "evidence": "Alternativa de bajo costo frente a la instrumentación sísmica comercial, validada contra GEA y P-Alert.",
+                "courses": [
+                    "Manejo de Tecnologías de la Información y Comunicación (10)",
+                    "Tecnologías de Información y Comunicación (10)",
+                    "Innovación y Desarrollo Tecnológico Sustentable (10)"
+                ]
+            },
+            {
+                "name": "Investigación y comunicación científica",
+                "applied": true,
+                "evidence": "Tres artículos en Revista Vínculos y ponencia en CICOM 2025 (Tunja, Colombia).",
+                "courses": [
+                    "Habilidades para la Comunicación de las Ideas (10)",
+                    "Pensamiento Lógico, Heurístico y Creativo (10)",
+                    "Seminario de Investigación I (9)",
+                    "Trabajo de Grado III (9)",
+                    "Seminario de Investigación II (8)",
+                    "Trabajo de Grado I (8)",
+                    "Trabajo de Grado II (8)",
+                    "Proyecto de Grado (concluido)"
+                ]
+            },
+            {
+                "name": "Formación complementaria y vinculación",
+                "applied": false,
+                "evidence": "950 horas acreditadas entre servicio social y prácticas profesionales.",
+                "courses": [
+                    "Taller de Emprendurismo (10)",
+                    "Análisis del Mundo Contemporáneo (10)",
+                    "Inglés I (7)",
+                    "Inglés II (7)",
+                    "Estancia Profesional (concluida)",
+                    "Prácticas Profesionales (acreditada)",
+                    "Servicio Social (acreditada)"
+                ]
+            }
+        ]
+    },
+    "education": [
+        {
+            "period": "Ago 2024 – 2026",
+            "org": "Universidad Autónoma de Guerrero",
+            "title": "Maestría en Ingeniería para la Innovación y Desarrollo Tecnológico",
+            "note": "Opción terminal: Tecnologías de la Información y Comunicación (Plan 2023). Plan de estudios concluido; en proceso de titulación, prevista para noviembre de 2026. Tesis: «Desarrollo e implementación de un sistema de bajo costo y tecnologías IoT para el monitoreo de la salud estructural en obras civiles».",
+            "stats": [
+                "Promedio general 9.42 / 10",
+                "Plan de estudios concluido",
+                "Sin materias reprobadas"
+            ],
+            "coursework": {
+                "label": "Ver las 14 asignaturas cursadas y sus calificaciones",
+                "note": "Calificación sobre 10. Estancia Profesional y Proyecto de Grado son asignaturas acreditables y no promedian.",
+                "groups": [
+                    {
+                        "name": "Inteligencia artificial y datos",
+                        "items": [
+                            "Machine Learning (10)",
+                            "Deep Learning (10)",
+                            "Visión Artificial (10)",
+                            "Análisis de Datos y Big Data (10)"
+                        ]
+                    },
+                    {
+                        "name": "Sistemas embebidos e IoT",
+                        "items": [
+                            "Temas Selectos de Sistemas Embebidos (10)",
+                            "Diseño de Sistemas IoT (9)",
+                            "Principios Básicos de Sistemas Electrónicos (9)"
+                        ]
+                    },
+                    {
+                        "name": "Núcleo del programa",
+                        "items": [
+                            "Tecnologías de Información y Comunicación (10)",
+                            "Innovación y Desarrollo Tecnológico Sustentable (10)",
+                            "Trabajo de Grado I (8)",
+                            "Trabajo de Grado II (8)",
+                            "Trabajo de Grado III (9)",
+                            "Estancia Profesional (concluida)",
+                            "Proyecto de Grado (concluido)"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "period": "2018 – 2023",
+            "org": "Universidad Autónoma de Guerrero",
+            "title": "Ingeniero en Computación",
+            "note": "Unidad Académica de Ingeniería, Chilpancingo. Titulado en 2023. Cédula profesional federal núm. 13426767.",
+            "stats": [
+                "Promedio general 8.56 / 10",
+                "55 asignaturas acreditadas"
+            ],
+            "coursework": {
+                "label": "Ver las 55 asignaturas cursadas y sus calificaciones",
+                "note": "Calificación sobre 10. Escala de 0 a 10, mínima aprobatoria 6.",
+                "groups": [
+                    {
+                        "name": "Programación e ingeniería de software",
+                        "items": [
+                            "Fundamentos de Programación (9)",
+                            "Programación Orientada a Objetos I (10)",
+                            "Programación Orientada a Objetos II (8)",
+                            "Programación Avanzada (8)",
+                            "Estructura de Datos I (10)",
+                            "Estructura de Datos II (9)",
+                            "Lógica Informática (8)",
+                            "Análisis y Diseño de Sistemas (10)",
+                            "Ingeniería de Software (8)",
+                            "Traductores e Intérpretes (8)",
+                            "Compiladores (9)",
+                            "Desarrollo de Aplicaciones Móviles (10)",
+                            "Interacción Humano-Computadora (9)"
+                        ]
+                    },
+                    {
+                        "name": "Hardware, electrónica y arquitectura",
+                        "items": [
+                            "Sistemas Digitales (10)",
+                            "Organización de Computadoras (10)",
+                            "Arquitectura de Servidores (10)",
+                            "Microcontroladores (9)",
+                            "Microprocesadores (8)",
+                            "Circuitos Eléctricos (9)",
+                            "Electricidad y Magnetismo (10)",
+                            "Electrónica (7)"
+                        ]
+                    },
+                    {
+                        "name": "Redes, sistemas operativos y seguridad",
+                        "items": [
+                            "Fundamentos de Enrutamiento (10)",
+                            "Sistemas Operativos I (10)",
+                            "Sistemas Operativos II (8)",
+                            "Fundamentos de Redes (9)",
+                            "Sistemas de Cableado Estructurado (9)",
+                            "Auditoría de Recursos Informáticos (9)",
+                            "Seguridad en Redes (8)",
+                            "Cómputo Forense (8)",
+                            "Fundamentos de Comunicaciones (7)"
+                        ]
+                    },
+                    {
+                        "name": "Datos, inteligencia artificial y señales",
+                        "items": [
+                            "Base de Datos II (9)",
+                            "Base de Datos I (7)",
+                            "Fundamentos de Inteligencia Artificial (7)",
+                            "Procesamiento Digital de Imágenes (7)"
+                        ]
+                    },
+                    {
+                        "name": "Matemáticas y ciencias básicas",
+                        "items": [
+                            "Cálculo Diferencial e Integral (8)",
+                            "Probabilidad y Estadística (8)",
+                            "Métodos Numéricos (8)",
+                            "Geometría Analítica (8)",
+                            "Investigación de Operaciones (8)",
+                            "Química Básica (8)",
+                            "Cálculo Vectorial (7)",
+                            "Ecuaciones Diferenciales (7)",
+                            "Álgebra (7)",
+                            "Física General (7)"
+                        ]
+                    },
+                    {
+                        "name": "Investigación y formación institucional",
+                        "items": [
+                            "Seminario de Investigación I (9)",
+                            "Seminario de Investigación II (8)",
+                            "Taller de Emprendurismo (10)",
+                            "Manejo de Tecnologías de la Información y Comunicación (10)",
+                            "Pensamiento Lógico, Heurístico y Creativo (10)",
+                            "Habilidades para la Comunicación de las Ideas (10)",
+                            "Análisis del Mundo Contemporáneo (10)",
+                            "Inglés I (7)",
+                            "Inglés II (7)"
+                        ]
+                    },
+                    {
+                        "name": "Integración y vinculación",
+                        "items": [
+                            "Prácticas Profesionales (acreditada)",
+                            "Servicio Social (acreditada)"
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "other": [
+        {
+            "period": "Jun 2023 – Jun 2024",
+            "org": "Secretaría del Trabajo y Previsión Social",
+            "title": "Jóvenes Construyendo el Futuro — Departamento de publicaciones",
+            "note": "Capacitación laboral de 12 meses en producción e impresión digital."
+        },
+        {
+            "period": "Ago 2022 – Ene 2023",
+            "org": "35ª Zona Militar (SEDENA)",
+            "title": "Prácticas profesionales — Área de Computación",
+            "note": "450 horas acreditadas y liberadas. Soporte y mantenimiento de equipo de cómputo en entorno institucional."
+        },
+        {
+            "period": "Feb 2022 – Jul 2022",
+            "org": "Escuela Secundaria Ignacio Manuel Altamirano",
+            "title": "Servicio social — Área de cómputo",
+            "note": "500 horas acreditadas y liberadas. Apoyo técnico y acompañamiento educativo en el sector comunitario."
+        }
+    ],
+    "skills": {
+        "Lenguajes y frameworks": [
+            "Python",
+            "C/C++ (embebidos)",
+            "JavaScript",
+            "TypeScript",
+            "Node.js",
+            "SQL",
+            "PHP",
+            "Bash",
+            "PyQt5 / PySide6",
+            "React",
+            "Next.js",
+            "Preact"
+        ],
+        "Web y mapas": [
+            "Leaflet",
+            "GeoJSON",
+            "OpenStreetMap",
+            "PWA / Service Workers",
+            "Pruebas en navegador (Puppeteer)"
+        ],
+        "Datos y señales": [
+            "NumPy",
+            "Pandas",
+            "SciPy",
+            "Matplotlib",
+            "FFT",
+            "PSD/Welch",
+            "RMS",
+            "Filtros digitales",
+            "Series temporales"
+        ],
+        "IA y aprendizaje automático": [
+            "Machine Learning",
+            "Deep Learning",
+            "Visión artificial",
+            "Big Data",
+            "Selección de atributos"
+        ],
+        "IoT y hardware": [
+            "Raspberry Pi",
+            "ESP32",
+            "Arduino Nano RP2040",
+            "Sensores MEMS",
+            "I2C",
+            "SPI",
+            "UART"
+        ],
+        "Backend y nube": [
+            "FastAPI",
+            "APIs REST",
+            "Supabase",
+            "PostgreSQL",
+            "Firebase",
+            "Vercel Functions"
+        ],
+        "Sistemas y DevOps": [
+            "Linux / Ubuntu Server",
+            "Docker",
+            "systemd",
+            "SSH",
+            "Git",
+            "GitHub Actions (CI)",
+            "Vercel"
+        ]
+    },
+    "certs": [
+        "Data Science Essentials with Python — Cisco / UAGro (dic 2025)",
+        "Cybersecurity Essentials — Cisco (mar 2022)",
+        "NDG Linux Unhatched — Cisco (may 2022)",
+        "CCNAv7: Introduction to Networks — Cisco (jun 2021)"
+    ],
+    "languages": [
+        "Español: lengua materna.",
+        "Inglés: intermedio (B1), TOEFL ITP 470 puntos (2025). Lectura fluida de documentación técnica y literatura científica."
+    ],
+    "contact_intro": "Abierto a oportunidades remotas en IoT, sistemas embebidos, procesamiento de señales, desarrollo backend y aplicaciones web.",
+    "footer": "Sitio construido con Next.js y React sobre Vercel. Código fuente disponible en GitHub.",
+    "updated_label": "Última actualización",
+    "updated": "noviembre de 2026",
+    "ui": {
+        "buscar": "Buscar en el CV",
+        "buscar_ph": "Python, Supabase, sensores, FFT…",
+        "buscar_ayuda": "También puedes hacer clic en una competencia para ver dónde la he usado.",
+        "limpiar": "Limpiar",
+        "sin_resultados": "Sin coincidencias para «%s».",
+        "resultados": "«%s»: %d coincidencias",
+        "secciones": {
+            "logros": "logros",
+            "exp": "experiencia",
+            "projects": "proyectos",
+            "skills": "competencias",
+            "pubs": "publicaciones",
+            "edu": "formación",
+            "areas": "áreas"
+        },
+        "filtrar": "Ver dónde uso %s",
+        "tema_oscuro": "Cambiar a tema oscuro",
+        "tema_claro": "Cambiar a tema claro",
+        "copiar": "Copiar",
+        "copiar_correo": "Copiar correo",
+        "copiado": "Correo copiado: %s",
+        "compartir": "Compartir",
+        "enlace_copiado": "Enlace copiado",
+        "no_copiado": "No se pudo copiar; selecciónalo a mano."
+    }
+}
