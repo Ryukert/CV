@@ -70,7 +70,8 @@ try {
   ok(Number(s.atenuado) < 0.5, "lo que no coincide se atenúa");
   ok(s.url === "?q=supabase", "la búsqueda queda en la dirección (?q=supabase) para compartirla");
 
-  await p.click("#q", { clickCount: 3 });
+  // Vaciar el campo antes de escribir (desde puppeteer 25 el triple clic ya no selecciona su texto).
+  await p.$eval("#q", (e) => { e.value = ""; });
   await p.type("#q", "tecnologias");
   await pausa(300);
   ok(await p.evaluate(() => [...document.querySelectorAll(".coincide")].some((e) => /Tecnologías/.test(e.textContent))), "sin acentos: «tecnologias» encuentra «Tecnologías»");

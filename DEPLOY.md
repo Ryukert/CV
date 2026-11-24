@@ -26,6 +26,25 @@ Abre estas rutas en la vista previa de la rama antes de unirla a `main`:
 
 En las herramientas del navegador (consola) no debe aparecer ningún aviso de la CSP.
 
+## Volver a la versión anterior (si algo sale mal en producción)
+
+1. **Inmediato, sin tocar el código:** Vercel → el proyecto → *Deployments* → el último despliegue
+   que funcionaba → menú «⋯» → **Instant Rollback** (o *Promote to Production*). El sitio vuelve
+   en segundos.
+2. **Después, en git:** deshacer el cambio en `main` con un commit nuevo y subirlo:
+
+   ```bash
+   git switch main
+   git revert -m 1 <commit «Publica develop: …» que falló>
+   git push origin main
+   ```
+
+   Luego llevar el mismo revert a `develop` (`git switch develop && git merge main`).
+3. Comprobar: `/health` responde `{"status":"ok",…}` y la página se ve bien.
+
+Antes de publicar, la vista previa de `develop` en Vercel y GitHub Actions (tipos, compilación,
+pruebas de humo y de navegador) hacen de entorno de prueba.
+
 ## Errores comunes
 
 **El despliegue falla en «Running TypeScript»**
