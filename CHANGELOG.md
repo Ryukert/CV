@@ -2,6 +2,8 @@
 
 ## [Sin publicar]
 
+## 2026-11-24 (ship-gate) — publicado en main
+
 ### Revisión previa a producción (ship-gate)
 
 - `app/error.tsx`: si una página falla al generarse, se ve un mensaje propio (español e inglés)
