@@ -27,7 +27,7 @@
             "label": "Data analytics"
         }
     ],
-    "meta_desc": "CV of Marco Antonio Adame Rodríguez, IoT and embedded systems engineer working on digital signal processing and structural health monitoring.",
+    "meta_desc": "CV of Marco Antonio Adame Rodríguez, IoT and embedded systems engineer working on digital signal processing, structural health monitoring and web development.",
     "nav": {
         "about": "About me",
         "logros": "Achievements",
@@ -42,7 +42,7 @@
     "cta_design": "Designed version",
     "switch": "Español",
     "switch_url": "/",
-    "summary": "I build end-to-end IoT systems: MEMS sensor, embedded firmware, real-time acquisition, signal processing, Linux backend, cloud and dashboards. I designed a low-cost structural health monitoring system from scratch and validated it in the field against commercial seismic instrumentation (GEA and P-Alert); the work led to three peer-reviewed papers and an international conference talk. I also build production geospatial web applications (Supabase, Leaflet, offline-first) with automated tests and continuous deployment. Computer Engineer and MSc graduate in Engineering for Innovation and Technological Development (UAGro), 9.42/10 GPA, degree conferral expected November 2026.",
+    "summary": "Computer Engineer specialized in IoT and embedded systems and digital signal processing. I designed a low-cost structural health monitoring system from scratch —from the MEMS sensor and firmware to the Linux backend and dashboards—, validated it in the field against commercial seismic instrumentation (GEA and P-Alert), and the work led to three peer-reviewed papers and an international conference talk. I currently work as a web developer at IEPC Guerrero and collaborate with UABC on geospatial seismic-risk web platforms with automated tests and continuous deployment. MSc in Engineering for Innovation and Technological Development (UAGro), 9.42/10 GPA, degree conferral expected November 2026.",
     "sections": {
         "about": "About me",
         "langs": "Languages",
@@ -50,7 +50,7 @@
         "present": "present",
         "social": "Social",
         "logros": "Key achievements",
-        "exp": "Research & development experience",
+        "exp": "Professional experience",
         "pubs": "Publications & talks",
         "projects": "Projects",
         "edu": "Education",
@@ -62,7 +62,7 @@
     "achievements": [
         {
             "title": "Complete SHM-IoT system designed from the ground up",
-            "text": "and validated in the field against commercial GEA and P-Alert equipment, at a fraction of the cost of traditional seismic instrumentation."
+            "text": "and validated in five field environments against commercial GEA and P-Alert equipment; it underpins my master's thesis and a peer-reviewed lead-author paper."
         },
         {
             "title": "Ambient vibration measurement on a biaxial shaking table:",
@@ -82,6 +82,51 @@
         }
     ],
     "experience": [
+        {
+            "period": "Oct 2026 – Present",
+            "org": "Guerrero State Electoral and Citizen Participation Institute (IEPC Guerrero) · Chilpancingo, Mexico",
+            "title": "Web Developer",
+            "tech": "iepc",
+            "intro": "Development of institutional websites and support for the institute's IT infrastructure.",
+            "groups": [
+                {
+                    "name": "Websites",
+                    "items": [
+                        "Built the mock-up of the bilingual (Spanish/English) \"Guerrero Abroad\" microsite for Guerrero citizens living abroad, with a past-events page and links to the official regulations; published on Vercel for design review."
+                    ]
+                },
+                {
+                    "name": "Support and infrastructure",
+                    "items": [
+                        "Provide technical support for the institute's computers, network and users."
+                    ]
+                }
+            ]
+        },
+        {
+            "period": "May 2026 – Present",
+            "org": "School of Engineering and Technology Sciences (FCITEC), Autonomous University of Baja California · remote collaboration",
+            "title": "Geospatial Software Developer (collaboration)",
+            "tech": "uabc",
+            "intro": "Development of seismic-risk and green-infrastructure web platforms for Baja California, with data in Supabase, interactive maps and offline support.",
+            "groups": [
+                {
+                    "name": "Seismic risk",
+                    "items": [
+                        "Built the Tijuana seismic risk ecosystem: a dashboard linking seismic hazard, soil, stations, acceleration maps, inspection and outreach on a single Supabase database.",
+                        "Implemented real-street routing (OpenStreetMap, Dijkstra) to 370 health facilities from the official CLUES registry in five Baja California cities, working offline as an installable app.",
+                        "Built the monitoring dashboard for the FCITEC-UABC network (SHM + P-Alert): RMS, PGA, spectrum and STA/LTA detection over a simulated network of 9 campuses in Tijuana and 32 buildings in Guerrero, with soil-based site effects."
+                    ]
+                },
+                {
+                    "name": "Green infrastructure and quality",
+                    "items": [
+                        "Built the Baja California Green Infrastructure dashboard: 36 techniques per municipality, point queries over GeoJSON layers, a login-protected editing panel and PDF and CSV reports.",
+                        "Ship with semantic versioning, 152 automated tests on every change (GitHub Actions) and continuous deployment on Vercel."
+                    ]
+                }
+            ]
+        },
         {
             "period": "Aug 2024 – Present",
             "org": "Autonomous University of Guerrero (UAGro) · MIIDT graduate program",
@@ -185,7 +230,7 @@
             "period": "Aug 2024 – 2026",
             "org": "Universidad Autónoma de Guerrero",
             "title": "MSc in Engineering for Innovation and Technological Development",
-            "note": "Terminal specialization: Information and Communication Technologies (2023 curriculum). All coursework completed; degree conferral in progress, expected November 2026. Thesis: \"Development and implementation of a low-cost IoT system for structural health monitoring in civil works\".",
+            "note": "Terminal specialization: Information and Communication Technologies (2023 curriculum). Degree conferral in progress, expected November 2026. Thesis: \"Development and implementation of a low-cost IoT system for structural health monitoring in civil works\".",
             "stats": [
                 "GPA 9.42 / 10",
                 "All coursework completed",

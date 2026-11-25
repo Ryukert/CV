@@ -129,7 +129,7 @@ GitHub Actions corre todo en cada push (`.github/workflows/pruebas.yml`).
 
 ## Ramas y versiones
 
-Versión actual: **3.1.0**. Los cambios de cada versión están en [`CHANGELOG.md`](CHANGELOG.md)
+Versión actual: **3.2.0**. Los cambios de cada versión están en [`CHANGELOG.md`](CHANGELOG.md)
 (versionado semántico). La versión se ve en el pie de la página y en `/health`.
 
 | Rama | Para qué |

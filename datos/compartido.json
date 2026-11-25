@@ -1,5 +1,5 @@
 {
-    "updated": "2026-11-24",
+    "updated": "2026-11-25",
     "profile": {
         "name": "Marco Antonio Adame Rodríguez",
         "email": "ragnarockgames86@gmail.com",
@@ -11,7 +11,7 @@
     "publications": [
         {
             "authors": "Adame Rodríguez, M. A., Alcaraz Vázquez, M., Martínez, E. T., García Guevara, D. S., Alonso Silverio, G. A.",
-            "year": 2026,
+            "year": 2025,
             "title": {
                 "es": "Sistema de medición de vibraciones ambientales en mesa vibradora biaxial",
                 "en": "Ambient Vibration Measurement System on a Biaxial Vibrating Table"
@@ -78,14 +78,12 @@
         },
         {
             "key": "ecosistema",
-            "pdf": true,
             "stack": "JavaScript · Leaflet · Supabase · PWA · GitHub Actions",
             "url": "https://ecosistemariesgosismicotijuana.vercel.app",
             "date": "2026-10"
         },
         {
             "key": "ivbc",
-            "pdf": true,
             "stack": "JavaScript · Preact · Supabase · Vercel Functions · GeoJSON",
             "url": "https://iv-bc-sitio.vercel.app",
             "date": "2026-10"
@@ -116,7 +114,6 @@
         },
         {
             "key": "gps",
-            "pdf": true,
             "stack": "JavaScript · Vercel",
             "url": "https://github.com/Ryukert/SHM_GPS_NETWORK_DASH_elite",
             "date": "2026-05"
@@ -149,6 +146,22 @@
         }
     ],
     "experience_tech": {
+        "iepc": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Vercel"
+        ],
+        "uabc": [
+            "JavaScript",
+            "Preact",
+            "Leaflet",
+            "GeoJSON",
+            "Supabase",
+            "PWA",
+            "GitHub Actions",
+            "Vercel"
+        ],
         "shm": [
             "Python",
             "C++",
