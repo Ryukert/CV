@@ -75,7 +75,9 @@ npm run dev        # http://127.0.0.1:8080
   entera.
 - **CSP estricta con nonce:** `proxy.ts` genera un nonce distinto en cada respuesta. Next.js pone
   scripts en línea para arrancar React y solo se ejecutan los que llevan ese nonce; no hay
-  `unsafe-inline`. Estilos, fuentes e imágenes salen solo del propio sitio.
+  `unsafe-inline`. Además exige **Trusted Types**: nada entra al DOM por `innerHTML` ni como URL de
+  script sin pasar por una política (la de Next.js o `cv`, que solo acepta `/assets/*.js`).
+  Estilos, fuentes e imágenes salen solo del propio sitio.
 - **Las funciones interactivas siguen en `public/assets/cv.js`** (JavaScript propio, sin
   bibliotecas). `ArrancarCv.tsx` lo carga *después* de que React hidrata la página: si lo hiciera
   antes, React vería un HTML distinto al del servidor y volvería a pintarlo.
@@ -127,7 +129,7 @@ GitHub Actions corre todo en cada push (`.github/workflows/pruebas.yml`).
 
 ## Ramas y versiones
 
-Versión actual: **2.4.0**. Los cambios de cada versión están en [`CHANGELOG.md`](CHANGELOG.md)
+Versión actual: **3.0.0**. Los cambios de cada versión están en [`CHANGELOG.md`](CHANGELOG.md)
 (versionado semántico). La versión se ve en el pie de la página y en `/health`.
 
 | Rama | Para qué |

@@ -186,6 +186,13 @@ try {
   await p.keyboard.press("/");
   ok((await p.evaluate(() => document.activeElement && document.activeElement.id)) === "q", "la tecla «/» lleva al buscador");
   ok(p.errores.length === 0, "monitor y efectos sin errores ni bloqueos de la CSP" + (p.errores.length ? ": " + p.errores.join(" | ") : ""));
+  s = await p.evaluate(() => {
+    const r = {};
+    try { document.createElement("div").innerHTML = "<img src=x onerror=alert(1)>"; r.html = "permitido"; } catch (e) { r.html = e.name; }
+    try { document.createElement("script").src = "https://evil.example/x.js"; r.src = "permitido"; } catch (e) { r.src = e.name; }
+    return r;
+  });
+  ok(s.html === "TypeError" && s.src === "TypeError", `Trusted Types bloquea innerHTML y src de script sin política (innerHTML: ${s.html}, src: ${s.src})`);
   await p.close();
 
   p = await pagina();
