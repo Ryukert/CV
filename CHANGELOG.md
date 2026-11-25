@@ -13,7 +13,10 @@ versiones 1.0.0 a 2.3.0 se etiquetaron después, sobre los commits de `main` que
 
 ## [Sin publicar]
 
-Hallazgos del pentest del 25 de noviembre de 2026 (0 críticos, 0 altos, 0 medios).
+## [3.0.0] · 25 de noviembre de 2026
+
+Hallazgos del pentest del 25 de noviembre de 2026 (0 críticos, 0 altos, 0 medios). Es versión
+mayor porque /api/cv.json deja de incluir profile.phone: lo que leyera ese dato deja de encontrarlo.
 
 ### Seguridad
 
