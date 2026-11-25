@@ -653,3 +653,6 @@ h4 { font-size: 0.74rem; }
   .revelar { opacity: 1 !important; transform: none !important; }
   .card, .grupo, .skills-grid .skillrow, .ficha { backdrop-filter: none; background: none; }
 }
+
+/* Versión publicada en el pie */
+.version { font-family: var(--mono); }

@@ -1,6 +1,6 @@
 // El CV completo de un idioma. Componente de servidor: no manda React al navegador;
 // las funciones interactivas las pone public/assets/cv.js (mejora progresiva).
-import { asset, assetSize, cvData, url } from '@/lib/cv.ts';
+import { asset, assetSize, cvData, url, VERSION } from '@/lib/cv.ts';
 import { mesAnio, type Lang } from '@/lib/cv-core.ts';
 import { Icono, IconoTecnologia } from '@/components/Iconos.tsx';
 
@@ -321,7 +321,9 @@ export default async function Cv({ lang }: { lang: Lang }) {
             <a href={'mailto:' + d.profile.email} aria-label={en ? 'Email' : 'Correo'} title={en ? 'Email' : 'Correo'}><Icono nombre="mail" /></a>
           </p>
           <p>{d.footer}</p>
-          <p>{d.updated_label}: <time dateTime={d.updated_iso}>{d.updated}</time> · <a href={'/api/cv.json?lang=' + lang}>/api/cv.json</a></p>
+          <p>{d.updated_label}: <time dateTime={d.updated_iso}>{d.updated}</time> · <a href={'/api/cv.json?lang=' + lang}>/api/cv.json</a>
+            {' · '}<a className="version" href={`https://github.com/Ryukert/CV/blob/v${VERSION}/CHANGELOG.md`} rel="noopener"
+              title={en ? 'Changelog' : 'Registro de cambios'}>{`v${VERSION}`}</a></p>
         </div>
       </footer>
 
