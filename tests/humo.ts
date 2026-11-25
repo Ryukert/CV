@@ -60,6 +60,11 @@ for (const [ruta, lang] of [['/', 'es'], ['/en', 'en']] as const) {
   ok(cspNonce(csp) !== '' && cspNonce(csp) !== cspNonce(otra.h.get('content-security-policy') ?? ''), `${ruta}: el nonce cambia en cada respuesta`);
   ok(r.h.get('x-frame-options') === 'DENY' && r.h.has('permissions-policy') && r.h.get('x-content-type-options') === 'nosniff', `${ruta} trae X-Frame-Options, Permissions-Policy y nosniff`);
   ok(!r.h.has('x-powered-by'), `${ruta} no anuncia con qué está hecho (sin X-Powered-By)`);
+  ok(csp.includes("require-trusted-types-for 'script'") && /trusted-types [^;]*\bcv\b/.test(csp), `${ruta}: la CSP exige Trusted Types`);
+  const pp = r.h.get('permissions-policy') ?? '';
+  ok(pp.includes('browsing-topics=()') && !pp.includes('interest-cohort'), `${ruta}: Permissions-Policy con browsing-topics (sin interest-cohort, ya obsoleto)`);
+  const telefono = compartido.profile.phone.replace(/\D/g, '').slice(-10);
+  ok(!r.body.includes('tel:') && !r.body.replace(/\D/g, '').includes(telefono), `${ruta}: el teléfono no aparece en la página (solo en el PDF)`);
   ok(r.h.get('content-language') === lang, `${ruta} declara Content-Language: ${lang}`);
 
   // React escribe algunos atributos en camelCase (hrefLang, dateTime…). En HTML da igual,
@@ -156,6 +161,7 @@ ok(r.h.get('access-control-allow-origin') === '*', '/api/cv.json se puede leer d
 ok((r.h.get('cache-control') ?? '').includes('s-maxage=86400'), '/api/cv.json se guarda un día en la CDN');
 ok(j.profile?.name === compartido.profile.name, '/api/cv.json trae el perfil');
 ok(!('ui' in j) && !('photo' in (j.profile ?? {})), '/api/cv.json sin textos de interfaz ni foto');
+ok(!('phone' in (j.profile ?? {})) && j.profile?.email, '/api/cv.json no publica el teléfono (sí el correo)');
 r = await pedir('/api/cv.json?lang=xx');
 ok(JSON.parse(r.body).lang === 'es', 'un idioma desconocido cae en español');
 

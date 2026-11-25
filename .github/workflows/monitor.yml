@@ -1,0 +1,39 @@
+name: Monitor
+
+# Revisa cada 30 minutos que el CV publicado responda. Si falla, GitHub Actions marca la
+# ejecución en rojo y avisa por correo a quien modificó este archivo por última vez.
+# (GitHub pausa los workflows programados si el repositorio pasa 60 días sin cambios;
+# se reactivan desde la pestaña Actions.)
+on:
+  schedule:
+    - cron: '7,37 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  salud:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      SITIO: https://cv-coral-pi.vercel.app
+    steps:
+      - name: /health responde ok (3 intentos)
+        run: |
+          for i in 1 2 3; do
+            if r=$(curl -fsS --max-time 20 "$SITIO/health") && echo "$r" | grep -q '"status":"ok"'; then
+              echo "$r"; exit 0
+            fi
+            echo "Intento $i falló; reintento en 30 s"; sleep 30
+          done
+          echo "::error::$SITIO/health no responde ok"; exit 1
+
+      - name: La página y el PDF cargan
+        run: |
+          for ruta in / /en /assets/cv-es.pdf; do
+            codigo=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$SITIO$ruta")
+            echo "$ruta -> $codigo"
+            [ "$codigo" = "200" ] || { echo "::error::$ruta respondió $codigo"; exit 1; }
+          done
+          curl -fsS --max-time 20 "$SITIO/" | grep -q 'id="monitor"' || { echo "::error::La página no trae el contenido esperado"; exit 1; }

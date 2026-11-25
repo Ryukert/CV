@@ -11,7 +11,8 @@ const SEGURIDAD: Record<string, string> = {
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'X-Frame-Options': 'DENY',
-  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()',
+  // browsing-topics reemplaza a interest-cohort (FLoC, que Chrome abandonó).
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()',
   'Cross-Origin-Opener-Policy': 'same-origin',
 };
 
@@ -37,6 +38,11 @@ export function proxy(request: NextRequest) {
     "base-uri 'self'",
     "form-action 'none'",
     "frame-ancestors 'none'",
+    // Trusted Types: el navegador rechaza meter HTML o URLs de script por innerHTML, src, etc.
+    // salvo a través de una política con nombre. Solo existen «cv» (components/ArrancarCv.tsx,
+    // que solo acepta scripts de /assets/) y las de Next.js.
+    "require-trusted-types-for 'script'",
+    "trusted-types cv nextjs nextjs#bundler",
   ].join('; ');
 
   const ruta = request.nextUrl.pathname;
