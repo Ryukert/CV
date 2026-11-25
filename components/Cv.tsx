@@ -9,7 +9,6 @@ function jsonSeguro(v: unknown): string {
   return JSON.stringify(v).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026');
 }
 
-const telHref = (t: string) => 'tel:' + t.replace(/[^0-9+]/g, '');
 const repoCorto = (u: string) => {
   const p = new URL(u);
   const ruta = p.pathname.replace(/^\/+|\/+$/g, '');
@@ -88,7 +87,6 @@ export default async function Cv({ lang }: { lang: Lang }) {
             <p className="links">
               <a href={'mailto:' + d.profile.email}><Icono nombre="mail" />{d.profile.email}</a>
               <button type="button" className="copiar" data-copiar={d.profile.email} aria-label={String(d.ui.copiar_correo)} hidden>{String(d.ui.copiar)}</button>
-              <a href={telHref(d.profile.phone)}><Icono nombre="phone" />{d.profile.phone}</a>
               <a href={d.profile.github} rel="me noopener"><Icono nombre="github" />GitHub</a>
               <a href={d.profile.linkedin} rel="me noopener"><Icono nombre="linkedin" />LinkedIn</a>
               <a href={d.profile.orcid} rel="me noopener"><Icono nombre="orcid" />ORCID</a>
@@ -305,7 +303,7 @@ export default async function Cv({ lang }: { lang: Lang }) {
             <a href={'mailto:' + d.profile.email}>{d.profile.email}</a>
             <button type="button" className="copiar" data-copiar={d.profile.email} aria-label={String(d.ui.copiar_correo)} hidden>{String(d.ui.copiar_correo)}</button>
           </p>
-          <p className="meta">{d.profile.phone} · {d.location}</p>
+          <p className="meta">{d.location}</p>
         </section>
       </main>
 

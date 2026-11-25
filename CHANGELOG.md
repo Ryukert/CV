@@ -13,6 +13,27 @@ versiones 1.0.0 a 2.3.0 se etiquetaron después, sobre los commits de `main` que
 
 ## [Sin publicar]
 
+Hallazgos del pentest del 25 de noviembre de 2026 (0 críticos, 0 altos, 0 medios).
+
+### Seguridad
+
+- **Trusted Types** en la CSP (`require-trusted-types-for 'script'`): el navegador rechaza meter
+  HTML con `innerHTML` o URLs de script sin pasar por una política con nombre. Solo existen la de
+  Next.js y `cv` (`components/ArrancarCv.tsx`), que únicamente acepta scripts propios de `/assets/`.
+- `Permissions-Policy`: `browsing-topics=()` en lugar de `interest-cohort=()` (FLoC, abandonado).
+- **Monitor de disponibilidad** (`.github/workflows/monitor.yml`): cada 30 minutos revisa
+  `/health`, la página en los dos idiomas y el PDF; si fallan, GitHub avisa por correo.
+
+### Quitado
+
+- El **teléfono** ya no aparece en la página ni en `/api/cv.json` (los bots lo recolectan para
+  spam); sigue en el PDF y en los datos.
+
+### Pruebas
+
+- Trusted Types bloquea de verdad `innerHTML` y `src` de script sin política; la CSP lo exige;
+  `Permissions-Policy` correcta; el teléfono no está en la página ni en la API (96 + 37 pruebas).
+
 ## [2.4.0] · 24 de noviembre de 2026
 
 Íconos rediseñados y versiones del proyecto.

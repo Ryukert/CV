@@ -26,6 +26,23 @@ Abre estas rutas en la vista previa de la rama antes de unirla a `main`:
 
 En las herramientas del navegador (consola) no debe aparecer ningún aviso de la CSP.
 
+## Proteger las vistas previas (una sola vez)
+
+Cada rama (`develop`, `feature/…`, `release/…`) genera una vista previa con su propia dirección.
+Para que solo tú puedas verlas y no se filtren versiones sin publicar:
+
+1. Vercel → el proyecto del CV → **Settings → Deployment Protection**.
+2. **Vercel Authentication**: activado, en **Standard Protection** (protege las vistas previas;
+   la dirección pública `cv-coral-pi.vercel.app` sigue abierta).
+3. Guardar y abrir la dirección de una vista previa en una ventana privada: debe pedir iniciar
+   sesión en Vercel.
+
+## Monitor de disponibilidad
+
+`.github/workflows/monitor.yml` revisa el sitio cada 30 minutos desde GitHub Actions. Si falla,
+GitHub manda un correo. Se puede correr a mano en GitHub → **Actions → Monitor → Run workflow**.
+GitHub lo pausa si el repositorio pasa 60 días sin cambios; se reactiva desde la misma pestaña.
+
 ## Volver a la versión anterior (si algo sale mal en producción)
 
 1. **Inmediato, sin tocar el código:** Vercel → el proyecto → *Deployments* → el último despliegue

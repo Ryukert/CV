@@ -3,8 +3,10 @@ import { cvData } from '@/lib/cv.ts';
 
 export function GET(request: Request) {
   const lang = new URL(request.url).searchParams.get('lang') === 'en' ? 'en' : 'es';
-  const { ui: _textosInterfaz, ...cv } = cvData(lang);   // los textos de la interfaz no son parte del CV
-  return new Response(JSON.stringify(cv, null, 4), {
+  const { ui: _textosInterfaz, profile, ...cv } = cvData(lang);   // los textos de la interfaz no son parte del CV
+  // El teléfono no se publica en la web ni en la API (lo recolectan bots para spam): solo va en el PDF.
+  const { phone: _telefono, ...perfil } = profile;
+  return new Response(JSON.stringify({ ...cv, profile: perfil }, null, 4), {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'Access-Control-Allow-Origin': '*',
