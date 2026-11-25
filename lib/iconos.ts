@@ -39,6 +39,7 @@ export const TECH_ICONS: Record<string, [string, string]> = {
   'Claude': ['#D97757', 't-claude'],
   'Tailwind CSS': ['#06B6D4', 't-tailwindcss'],
   'HTML': ['#E34F26', 't-html5'],
+  'CSS': ['#663399', 't-css'],
   'JSON': ['currentColor', 't-json'],
 };
 

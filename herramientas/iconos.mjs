@@ -55,6 +55,7 @@ const SLUGS = {
   'Claude': 'claude',
   'Tailwind CSS': 'tailwindcss',
   'HTML': 'html5',
+  'CSS': 'css',
   'JSON': 'json',
 };
 
