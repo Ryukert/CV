@@ -125,11 +125,42 @@ idiomas tengan la misma estructura. Las del navegador prueban el buscador, el fi
 se recuerde), copiar y compartir, que sin JavaScript no aparezcan controles rotos y el celular.
 GitHub Actions corre todo en cada push (`.github/workflows/pruebas.yml`).
 
-## Ramas
+## Ramas y versiones
 
-`main` es lo publicado (Vercel lo despliega). Los cambios se hacen en `feature/…` o `fix/…`, salen de
-`develop` y regresan a ella; `develop` pasa a `main` cuando la vista previa está bien. Las ramas no
-se borran.
+Versión actual: **2.4.0**. Los cambios de cada versión están en [`CHANGELOG.md`](CHANGELOG.md)
+(versionado semántico). La versión se ve en el pie de la página y en `/health`.
+
+| Rama | Para qué |
+| --- | --- |
+| `main` | Lo publicado: Vercel lo sirve en la dirección pública. Solo recibe ramas `release/…`. |
+| `develop` | Integración: aquí se juntan los cambios antes de publicarlos. |
+| `feature/<tema>`, `fix/<tema>` | Una función o una corrección. Sale de `develop` y vuelve a `develop`. |
+| `release/vX.Y.Z` | Una rama por versión. Sale de `develop`, ahí se sube la versión (`package.json` y `CHANGELOG.md`) y de ahí pasa a `main`. **No se borra**: queda como registro de lo que se publicó. |
+
+Las ramas no se borran. Cada versión publicada tiene su rama `release/vX.Y.Z` y su etiqueta anotada
+`vX.Y.Z`, desde la 1.0.0 (de la 1.0.0 a la 2.3.0 se etiquetaron después, sobre los commits de
+`main` que las publicaron):
+
+```bash
+git tag -l                                  # todas las versiones
+git switch --detach v1.4.0                  # ver el CV tal como era en la 1.4.0 (aún en PHP)
+```
+
+Publicar una versión:
+
+```bash
+git switch -c release/v2.5.0 develop
+npm version 2.5.0 --no-git-tag-version      # y pasar «Sin publicar» del CHANGELOG a [2.5.0]
+git commit -am "Versión 2.5.0"
+git switch main && git merge --no-ff release/v2.5.0 -m "Publica la versión 2.5.0"
+git tag -a v2.5.0 -m "Versión 2.5.0: …"
+git switch develop && git merge main
+git push origin main develop release/v2.5.0 v2.5.0
+```
+
+Qué número subir: **mayor** si cambia la tecnología del sitio o se quitan secciones o datos (de la
+página, del PDF o de `/api/cv.json`); **menor** si hay algo nuevo o visible; **parche** si son
+correcciones, rendimiento, seguridad o documentación sin cambios visibles.
 
 ## CV en PDF (RenderCV)
 

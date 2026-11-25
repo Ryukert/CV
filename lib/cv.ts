@@ -4,6 +4,7 @@ import compartido from '@/datos/compartido.json';
 import es from '@/datos/es.json';
 import en from '@/datos/en.json';
 import versiones from '@/lib/versiones.json';
+import paquete from '@/package.json';
 import { armarCv, siteUrl, type Compartido, type Cv, type Idioma, type Lang } from '@/lib/cv-core.ts';
 
 export function cvData(lang: Lang): Cv {
@@ -13,6 +14,9 @@ export function cvData(lang: Lang): Cv {
 }
 
 export const CV_UPDATED = (compartido as Compartido).updated;
+
+/** Versión publicada del sitio (package.json; ver CHANGELOG.md). */
+export const VERSION: string = paquete.version;
 
 /** URL absoluta (canonical, Open Graph, sitemap…). Ver siteUrl en cv-core. */
 export async function url(ruta = '/'): Promise<string> {

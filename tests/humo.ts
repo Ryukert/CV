@@ -16,6 +16,7 @@ import { compartido, cvData } from '../lib/datos-node.ts';
 import { cvRendercv, huella, rcvMd } from '../lib/rendercv-core.ts';
 
 const RAIZ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const paquete: { version: string } = JSON.parse(readFileSync(path.join(RAIZ, 'package.json'), 'utf8'));
 const PUERTO = Number(process.env.PUERTO || 8098);
 const BASE = `http://127.0.0.1:${PUERTO}`;
 
@@ -129,6 +130,8 @@ for (const [ruta, lang] of [['/', 'es'], ['/en', 'en']] as const) {
   const sinSimbolo = [...new Set(usos.map((u) => u.split('#')[1]))].filter((id) => !sprite.includes(`<symbol id="${id}"`));
   ok(usos.length > 50 && usos.every((u) => /^\/assets\/iconos\.svg\?v=[0-9a-f]{8}#[\w-]+$/.test(u)) && sinSimbolo.length === 0,
     `${ruta}: los ${usos.length} íconos usan el sprite y todos sus símbolos existen` + (sinSimbolo.length ? ` (faltan ${sinSimbolo.join(', ')})` : ''));
+  const sinIcono = q('li').filter((li) => li.querySelector('use[href$="#g-cubo"]')).map((li) => li.textContent?.trim());
+  ok(sinIcono.length === 0, `${ruta}: cada tecnología tiene logotipo o ícono propio` + (sinIcono.length ? ` (con el genérico: ${sinIcono.join(', ')})` : ''));
   // (El sol y la luna del botón de tema siguen en línea: son dos y solo aparecen una vez.)
   ok(q('svg.tico path, svg.ico path').length === 0, `${ruta}: el HTML no repite trazos de íconos`);
   const kb = Math.round(Buffer.byteLength(r.body) / 1024);
@@ -159,7 +162,18 @@ ok(JSON.parse(r.body).lang === 'es', 'un idioma desconocido cae en español');
 // ── Rutas auxiliares ──
 r = await pedir('/health');
 const h = JSON.parse(r.body);
-ok(r.status === 200 && h.status === 'ok' && h.cv_updated === compartido.updated && Object.keys(h).length === 2, '/health responde ok sin anunciar versiones');
+ok(r.status === 200 && h.status === 'ok' && h.cv_updated === compartido.updated && h.version === paquete.version
+  && JSON.stringify(Object.keys(h).sort()) === '["cv_updated","status","version"]',
+  `/health responde ok con la versión del sitio (${paquete.version}) y sin anunciar las de Node o Next.js`);
+
+// ── Versiones ──
+ok(/^\d+\.\d+\.\d+$/.test(paquete.version), `package.json tiene una versión semántica (${paquete.version})`);
+const changelog = readFileSync(path.join(RAIZ, 'CHANGELOG.md'), 'utf8');
+ok(changelog.includes('## [Sin publicar]') && changelog.includes(`## [${paquete.version}] · `),
+  `CHANGELOG.md tiene la sección [${paquete.version}] y la de cambios sin publicar`);
+r = await pedir('/');
+ok(r.body.includes(`>v${paquete.version}</a>`) && r.body.includes(`/blob/v${paquete.version}/CHANGELOG.md`),
+  `el pie muestra la versión v${paquete.version} con enlace a su registro de cambios`);
 r = await pedir('/sitemap.xml');
 ok(r.status === 200 && r.body.includes(`<lastmod>${compartido.updated}</lastmod>`), `/sitemap.xml usa la fecha real de actualización (${compartido.updated})`);
 ok(r.body.startsWith('<?xml') && (r.body.match(/<url>/g) ?? []).length === 2 && r.body.trimEnd().endsWith('</urlset>'), '/sitemap.xml es XML con las dos páginas');
