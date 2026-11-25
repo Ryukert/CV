@@ -13,6 +13,20 @@ versiones 1.0.0 a 2.3.0 se etiquetaron después, sobre los commits de `main` que
 
 ## [Sin publicar]
 
+## [3.1.0] · 25 de noviembre de 2026
+
+Imagen para compartir con el logotipo nuevo.
+
+### Cambiado
+
+- **Imagen para compartir** (`og.jpg`, la que muestran LinkedIn, WhatsApp, X, etc.): rehecha con
+  el logotipo nuevo a la izquierda y, sobre el azul marino con retícula, el nombre, el cargo en
+  dorado, la especialidad, las cinco áreas de enfoque y la dirección del sitio; abajo, la línea
+  azul-verde-dorada del logotipo. 1200×630, 128 KB.
+- `herramientas/og.mjs` la genera con Chrome desde el logotipo, la fuente del sitio y
+  `datos/es.json`: si cambia el cargo, basta con volver a correrlo.
+- Prueba: `og.jpg` es un JPEG de 1200×630 de menos de 300 KB.
+
 ## [3.0.0] · 25 de noviembre de 2026
 
 Hallazgos del pentest del 25 de noviembre de 2026 (0 críticos, 0 altos, 0 medios). Es versión
