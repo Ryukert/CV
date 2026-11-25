@@ -13,6 +13,10 @@ versiones 1.0.0 a 2.3.0 se etiquetaron después, sobre los commits de `main` que
 
 ## [Sin publicar]
 
+## [3.1.0] · 25 de noviembre de 2026
+
+Imagen para compartir con el logotipo nuevo.
+
 ### Cambiado
 
 - **Imagen para compartir** (`og.jpg`, la que muestran LinkedIn, WhatsApp, X, etc.): rehecha con
