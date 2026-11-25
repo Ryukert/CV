@@ -13,6 +13,32 @@ versiones 1.0.0 a 2.3.0 se etiquetaron después, sobre los commits de `main` que
 
 ## [Sin publicar]
 
+### Agregado
+
+- **Experiencia profesional** (antes «Experiencia en investigación y desarrollo», con una sola
+  entrada): ahora son tres, de la más reciente a la más antigua:
+  - **Desarrollador web** en el IEPC Guerrero (oct 2026 – actualidad): micrositio bilingüe
+    «Guerrero en el extranjero» y soporte de equipos, red y usuarios.
+  - **Desarrollador de software geoespacial** en colaboración con la FCITEC de la UABC
+    (may 2026 – actualidad): Ecosistema de riesgo sísmico de Tijuana, Infraestructura Verde BC y el
+    panel de la red FCITEC-UABC.
+  - **Investigador y desarrollador principal** del sistema SHM-IoT (UAGro), sin cambios.
+- Logotipo de CSS (la experiencia en el IEPC lo usa).
+
+### Cambiado
+
+- **Resumen** más corto y con el trabajo actual (IEPC Guerrero y colaboración con la UABC).
+- Primer **logro**: sin «a una fracción del costo» (no había cifra); ahora dice que se validó en
+  cinco entornos de campo y que es la base de la tesis y del artículo como autor principal.
+- Formación: ya no repite «Plan de estudios concluido».
+- PDF: los proyectos de la UABC salen de la lista de proyectos porque ya están en la experiencia;
+  sigue en 3 páginas.
+
+### Corregido
+
+- **Año de las publicaciones**: las tres son del Vol. 22 de 2025 de la Revista Vínculos (el
+  artículo como autor principal decía 2026). Se verificó en la página de cada artículo.
+
 ## [3.1.0] · 25 de noviembre de 2026
 
 Imagen para compartir con el logotipo nuevo.

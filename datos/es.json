@@ -27,7 +27,7 @@
             "label": "Analítica de datos"
         }
     ],
-    "meta_desc": "CV de Marco Antonio Adame Rodríguez, ingeniero en sistemas IoT y embebidos, procesamiento digital de señales y monitoreo de salud estructural.",
+    "meta_desc": "CV de Marco Antonio Adame Rodríguez, ingeniero en sistemas IoT y embebidos, procesamiento digital de señales, monitoreo de salud estructural y desarrollo web.",
     "nav": {
         "about": "Acerca de mí",
         "logros": "Logros",
@@ -42,7 +42,7 @@
     "cta_design": "Versión con diseño",
     "switch": "English",
     "switch_url": "/en",
-    "summary": "Construyo sistemas IoT de extremo a extremo: sensor MEMS, firmware embebido, adquisición en tiempo real, procesamiento de señales, backend en Linux, nube y dashboards. Diseñé desde cero un sistema de monitoreo de salud estructural de bajo costo y lo validé en campo contra instrumentación sísmica comercial (GEA y P-Alert); el trabajo derivó en tres artículos arbitrados y una ponencia internacional. También desarrollo aplicaciones web geoespaciales en producción (Supabase, Leaflet, funcionamiento sin internet) con pruebas automáticas y despliegue continuo. Ingeniero en Computación y egresado de la Maestría en Ingeniería para la Innovación y Desarrollo Tecnológico (UAGro), con promedio de 9.42 y titulación prevista para noviembre de 2026.",
+    "summary": "Ingeniero en Computación especializado en sistemas IoT y embebidos y en procesamiento digital de señales. Diseñé desde cero un sistema de monitoreo de salud estructural de bajo costo —del sensor MEMS y el firmware al backend en Linux y los dashboards—, lo validé en campo contra instrumentación sísmica comercial (GEA y P-Alert) y el trabajo derivó en tres artículos arbitrados y una ponencia internacional. Hoy soy desarrollador web en el IEPC Guerrero y colaboro con la UABC en plataformas web geoespaciales de riesgo sísmico, con pruebas automáticas y despliegue continuo. Maestría en Ingeniería para la Innovación y Desarrollo Tecnológico (UAGro), promedio 9.42, titulación prevista para noviembre de 2026.",
     "sections": {
         "about": "Acerca de mí",
         "langs": "Idiomas",
@@ -50,7 +50,7 @@
         "present": "actualidad",
         "social": "Redes",
         "logros": "Logros clave",
-        "exp": "Experiencia en investigación y desarrollo",
+        "exp": "Experiencia profesional",
         "pubs": "Publicaciones y ponencias",
         "projects": "Proyectos",
         "edu": "Formación académica",
@@ -62,7 +62,7 @@
     "achievements": [
         {
             "title": "Sistema SHM-IoT completo diseñado desde cero",
-            "text": "y validado en campo frente a los equipos comerciales GEA y P-Alert, a una fracción del costo de la instrumentación sísmica tradicional."
+            "text": "y validado en cinco entornos de campo frente a los equipos comerciales GEA y P-Alert; es la base de la tesis de maestría y de un artículo arbitrado como autor principal."
         },
         {
             "title": "Medición de vibraciones en mesa vibradora biaxial:",
@@ -82,6 +82,51 @@
         }
     ],
     "experience": [
+        {
+            "period": "Oct 2026 – Actualidad",
+            "org": "Instituto Electoral y de Participación Ciudadana del Estado de Guerrero (IEPC Guerrero) · Chilpancingo",
+            "title": "Desarrollador web",
+            "tech": "iepc",
+            "intro": "Desarrollo de sitios web institucionales y soporte de la infraestructura informática del instituto.",
+            "groups": [
+                {
+                    "name": "Sitios web",
+                    "items": [
+                        "Desarrollé la maqueta del micrositio bilingüe (español e inglés) «Guerrero en el extranjero», dirigido a la ciudadanía guerrerense en el extranjero, con página de eventos anteriores y enlaces a la normatividad oficial; publicada en Vercel para la revisión del diseño."
+                    ]
+                },
+                {
+                    "name": "Soporte e infraestructura",
+                    "items": [
+                        "Doy soporte técnico a los equipos, la red y los usuarios del instituto."
+                    ]
+                }
+            ]
+        },
+        {
+            "period": "May 2026 – Actualidad",
+            "org": "Facultad de Ciencias de la Ingeniería y Tecnología (FCITEC), Universidad Autónoma de Baja California · colaboración a distancia",
+            "title": "Desarrollador de software geoespacial (colaboración)",
+            "tech": "uabc",
+            "intro": "Desarrollo de plataformas web de riesgo sísmico e infraestructura verde para Baja California, con datos en Supabase, mapas interactivos y funcionamiento sin internet.",
+            "groups": [
+                {
+                    "name": "Riesgo sísmico",
+                    "items": [
+                        "Desarrollé el Ecosistema de riesgo sísmico de Tijuana: un tablero que une amenaza sísmica, suelo, estaciones, mapas de aceleración, inspección y difusión sobre una sola base de datos en Supabase.",
+                        "Implementé el cálculo de rutas por calles reales (OpenStreetMap, Dijkstra) hacia 370 establecimientos de salud del catálogo oficial CLUES en cinco ciudades de Baja California, con funcionamiento sin internet como app instalable.",
+                        "Desarrollé el panel de monitoreo de la red FCITEC-UABC (SHM + P-Alert): RMS, PGA, espectro y detección STA/LTA sobre una red simulada de 9 planteles en Tijuana y 32 edificios en Guerrero, con efecto de sitio por tipo de suelo."
+                    ]
+                },
+                {
+                    "name": "Infraestructura verde y calidad",
+                    "items": [
+                        "Desarrollé el dashboard de Infraestructura Verde de Baja California: 36 técnicas por municipio, consulta por punto sobre capas GeoJSON, panel de edición con inicio de sesión y reportes en PDF y CSV.",
+                        "Publico con versiones semánticas, 152 pruebas automáticas en cada cambio (GitHub Actions) y despliegue continuo en Vercel."
+                    ]
+                }
+            ]
+        },
         {
             "period": "Ago 2024 – Actualidad",
             "org": "Universidad Autónoma de Guerrero (UAGro) · Maestría MIIDT",
@@ -185,7 +230,7 @@
             "period": "Ago 2024 – 2026",
             "org": "Universidad Autónoma de Guerrero",
             "title": "Maestría en Ingeniería para la Innovación y Desarrollo Tecnológico",
-            "note": "Opción terminal: Tecnologías de la Información y Comunicación (Plan 2023). Plan de estudios concluido; en proceso de titulación, prevista para noviembre de 2026. Tesis: «Desarrollo e implementación de un sistema de bajo costo y tecnologías IoT para el monitoreo de la salud estructural en obras civiles».",
+            "note": "Opción terminal: Tecnologías de la Información y Comunicación (Plan 2023). En proceso de titulación, prevista para noviembre de 2026. Tesis: «Desarrollo e implementación de un sistema de bajo costo y tecnologías IoT para el monitoreo de la salud estructural en obras civiles».",
             "stats": [
                 "Promedio general 9.42 / 10",
                 "Plan de estudios concluido",
