@@ -43,7 +43,7 @@ Bilingüe (español e inglés), servido desde una única fuente de datos, con en
 ├── public/assets/         # CSS, cv.js, tema.js, fuente, PDFs e imágenes
 ├── herramientas/
 │   ├── rendercv.ts        # genera los PDF y los YAML por vacante
-│   ├── iconos.mjs         # genera el sprite iconos.svg y lib/iconos.ts
+│   ├── og.mjs             # genera public/assets/og.jpg (imagen al compartir el enlace)
 │   └── versiones.ts       # huella ?v= de cada archivo (corre antes de dev y build)
 ├── tests/humo.ts          # pruebas de humo contra la versión compilada
 ├── tests/navegador/       # pruebas en navegador de las funciones con JavaScript

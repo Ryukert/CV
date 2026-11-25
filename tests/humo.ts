@@ -201,6 +201,18 @@ for (const f of ['cv-es.pdf', 'cv-en.pdf', 'cv-es-diseno.pdf', 'cv-en-design.pdf
   if (!existsSync(path.join(assets, f))) ok(false, `existe public/assets/${f}`);
 }
 ok(!readdirSync(assets).some((f) => f.startsWith('foto')), 'no hay archivos de foto en public/assets/');
+// og.jpg (la imagen al compartir el enlace): JPEG de 1200×630 y ligero. Se lee el tamaño del
+// marcador SOF del JPEG; herramientas/og.mjs la genera.
+const og = readFileSync(path.join(assets, 'og.jpg'));
+let ogAncho = 0, ogAlto = 0;
+for (let i = 2; i < og.length - 9;) {
+  if (og[i] !== 0xff) { i++; continue; }
+  const m = og[i + 1];
+  if (m >= 0xc0 && m <= 0xc3) { ogAlto = og.readUInt16BE(i + 5); ogAncho = og.readUInt16BE(i + 7); break; }
+  i += 2 + og.readUInt16BE(i + 2);
+}
+ok(og[0] === 0xff && og[1] === 0xd8 && ogAncho === 1200 && ogAlto === 630 && og.length < 300 * 1024,
+  `og.jpg es un JPEG de 1200×630 de menos de 300 KB (${ogAncho}×${ogAlto}, ${Math.round(og.length / 1024)} KB)`);
 // Lo que style.css pide con url(…?v=hash) se guarda un año: la huella debe ser la del archivo actual.
 const css = readFileSync(path.join(assets, 'style.css'), 'utf8');
 const urlsCss = [...css.matchAll(/url\("([\w./-]+)\?v=([0-9a-f]{8})"\)/g)];
